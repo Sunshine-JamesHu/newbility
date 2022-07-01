@@ -1,0 +1,10 @@
+{
+  "port": 28000,
+  "log": {
+    "logLevel": "debug"
+  },
+  "apiPrefix": "api",
+  "cors": {
+    "enable": true
+  }
+}
