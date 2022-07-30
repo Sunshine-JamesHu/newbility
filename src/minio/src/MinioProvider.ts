@@ -1,13 +1,12 @@
 import { Client as MinioClient } from 'minio';
-import { Guid } from '../../core/Guid';
-import { SimpleKoaError } from '../../error/SimpleKoaError';
-import { Singleton, Injectable, Inject } from '../../di/Dependency';
-import { GetInjectToken } from '../OssOptions';
-import { GetProviderInjectToken, OssProvider } from '../OssProvider';
+import { GetInjectToken, Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
+import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
+import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
+import { StreamHelper } from '../../core/src/util/StreamHelper';
+import { SimpleKoaError } from '../../core/src/error/SimpleKoaError';
+import { Guid } from '../../core/src/util/Guid';
+import { OSS_KEY } from './MinioConst';
 import { MinioOptions } from './MinioOptions';
-import { StreamHelper } from '../../core/StreamHelper';
-
-const PROVIDER_KEY = 'minio';
 
 interface MinioFileInfo {
   fileName: string;
@@ -15,12 +14,12 @@ interface MinioFileInfo {
 }
 
 @Injectable()
-@Singleton(GetProviderInjectToken(PROVIDER_KEY))
+@Singleton(GetProviderInjectToken(OSS_KEY))
 export class MinioProvider extends OssProvider {
   private readonly _options: MinioOptions;
   private readonly _client: MinioClient;
 
-  constructor(@Inject(GetInjectToken(PROVIDER_KEY)) options: MinioOptions) {
+  constructor(@Inject(GetOssOptionsInjectToken(OSS_KEY)) options: MinioOptions) {
     super();
     this._options = options;
     this._client = GetClient(options);

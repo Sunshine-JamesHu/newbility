@@ -4,18 +4,17 @@ import moment from 'moment';
 import { Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
 import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
 import { LocalOssOptions } from './LocalOssOptions';
-import { GetOssInjectToken } from '../../oss-core/src/OssOptions';
+import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
 import { Guid } from '../../core/src/util/Guid';
 import { StreamHelper } from '../../core/src/util/StreamHelper';
 import { SimpleKoaError } from '../../core/src/error/SimpleKoaError';
-
-const PROVIDER_KEY = 'local';
+import { OSS_KEY } from './LocalOssConst';
 
 @Injectable()
-@Singleton(GetProviderInjectToken(PROVIDER_KEY))
+@Singleton(GetProviderInjectToken(OSS_KEY))
 export class LocalOssProvider extends OssProvider {
   private readonly _options: LocalOssOptions;
-  constructor(@Inject(GetOssInjectToken(PROVIDER_KEY)) options: LocalOssOptions) {
+  constructor(@Inject(GetOssOptionsInjectToken(OSS_KEY)) options: LocalOssOptions) {
     super();
     this._options = options;
   }

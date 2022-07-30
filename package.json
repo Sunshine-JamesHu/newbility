@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.182",
     "@types/mime-types": "^2.1.1",
+    "@types/minio": "^7.0.13",
     "handlebars": "^4.7.7",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
@@ -28,6 +29,7 @@
     "lodash": "^4.17.21",
     "log4js": "^6.5.2",
     "mime-types": "^2.1.35",
+    "minio": "^7.0.29",
     "moment": "^2.29.3",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.7.0",
