@@ -9,5 +9,17 @@
   "apiPrefix": "api",
   "cors": {
     "enable": true
+  },
+  "oss": {
+    "minio": {
+      "addr": "127.0.0.1",
+      "port": 9000,
+      "userName": "admin",
+      "password": "Admin@123456",
+      "useSSL": false
+    },
+    "local": {
+      "dir": "data"
+    }
   }
 }

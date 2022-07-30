@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import moment from 'moment';
-import { Inject, Injectable, Singleton } from '../../../core/src/di/Dependency';
-import { GetProviderInjectToken, OssProvider } from '../OssProvider';
+import { Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
+import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
 import { LocalOssOptions } from './LocalOssOptions';
-import { GetOssInjectToken } from '../OssOptions';
-import { Guid } from '../../../core/src/util/Guid';
-import { StreamHelper } from '../../../core/src/util/StreamHelper';
-import { SimpleKoaError } from '../../../core/src/error/SimpleKoaError';
+import { GetOssInjectToken } from '../../oss-core/src/OssOptions';
+import { Guid } from '../../core/src/util/Guid';
+import { StreamHelper } from '../../core/src/util/StreamHelper';
+import { SimpleKoaError } from '../../core/src/error/SimpleKoaError';
 
 const PROVIDER_KEY = 'local';
 
@@ -68,7 +68,11 @@ export class LocalOssProvider extends OssProvider {
 
   protected GenFileName(fileName: string) {
     const f = this.GetFileType(fileName);
-    return `${Guid.Create()}${f}`;
+
+    let newFileName = Guid.Create();
+    if (f) newFileName = `${newFileName}${f}`;
+
+    return newFileName;
   }
 
   private MkdirSync(dirname: string): boolean {
