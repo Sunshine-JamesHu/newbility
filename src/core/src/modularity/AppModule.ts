@@ -14,6 +14,8 @@ import {
 import { GetDependModules } from './DependsOn';
 import { ILogger, LOGGER_INJECT_TOKEN } from '../logger/Logger';
 import { DefineMetadata, GetMetadata, GetMetadataKey } from '../metadata/Metadata';
+import { IServiceCollection, SC_INJECT_TOKEN } from '../di/ServiceCollection';
+import { IServiceLoader, SVC_LOADER_INJECT_TOKEN } from '../di/ServiceLoader';
 
 export const MODULE_INJECT_TOKEN = GetInjectToken('Sys:IModule');
 
@@ -52,15 +54,20 @@ export function GetModulePath(target: any): string | undefined {
  */
 export async function StartModule(moduleType: any) {
   const logger = Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
-  const allModule = GetModuleDepends(moduleType);
+  const services = Container.resolve<IServiceCollection>(SC_INJECT_TOKEN);
+  const serviceLoader = Container.resolve<IServiceLoader>(SVC_LOADER_INJECT_TOKEN);
 
-  allModule.forEach((m) => {
-    const modulePath = GetModulePath(m);
+  const allModule = GetModuleDepends(moduleType);
+  allModule.forEach((module) => {
+    const modulePath = GetModulePath(module);
     if (modulePath) {
-      RegisterModuleByPath(modulePath);
-      logger.LogDebug(`Start Module -> ${m.name}`);
+      logger.LogDebug(`Start Module -> ${module.name}`);
+      RegisterModuleByPath(modulePath, services);
     }
   });
+
+  // 注册所有Service
+  serviceLoader.RegisterServices();
 
   const allModuleArr = Container.resolveAll<IAppModule>(MODULE_INJECT_TOKEN);
 
@@ -133,7 +140,7 @@ export function GetModuleDepends(moduleType: any) {
   return moduleDepends;
 }
 
-export function RegisterModuleByPath(modulePath: string) {
+export function RegisterModuleByPath(modulePath: string, services: IServiceCollection) {
   let files: any[] = [];
   try {
     files = fs.readdirSync(modulePath);
@@ -145,7 +152,7 @@ export function RegisterModuleByPath(modulePath: string) {
   files.forEach((filePath) => {
     const fullFilePath = path.join(modulePath, filePath);
     if (fs.statSync(fullFilePath).isDirectory()) {
-      RegisterModuleByPath(fullFilePath);
+      RegisterModuleByPath(fullFilePath, services);
     } else {
       const extName = path.extname(fullFilePath);
       if (fullFilePath.endsWith('.d.ts')) return; // 单独去掉.d.ts这个描述文件
@@ -158,7 +165,7 @@ export function RegisterModuleByPath(modulePath: string) {
           if (Object.prototype.hasOwnProperty.call(modules, key)) {
             const module = modules[key];
             if (module.prototype) {
-              RegisterModule(module);
+              RegisterModule(module, services);
             }
           }
         }
@@ -167,26 +174,12 @@ export function RegisterModuleByPath(modulePath: string) {
   });
 }
 
-export function RegisterModule(module: Function) {
+export function RegisterModule(module: Function, services: IServiceCollection) {
   const injectInfo = GetInjectInfo(module);
   if (!injectInfo) return; // 没有注册信息的不进行注册
 
   const isAbstract = IsAbstract(module);
   if (isAbstract) return; // 抽象类不进行注册
 
-  const isRegistered = Container.isRegistered(injectInfo.token);
-  const isMultipleRegister = IsMultipleRegister(module);
-
-  if (isRegistered && !isMultipleRegister) return;
-
-  const lifetime = injectInfo.lifetime;
-  if (lifetime == ServiceLifetime.Singleton) {
-    Container.registerSingleton(injectInfo.token, module as any);
-  } else if (lifetime == ServiceLifetime.Scoped) {
-    // TODO:暂时不支持此种注册方式
-  } else if (lifetime == ServiceLifetime.Transient) {
-    Container.register(injectInfo.token, {
-      useClass: module as any,
-    });
-  }
+  services.Add(module);
 }

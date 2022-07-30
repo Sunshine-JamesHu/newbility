@@ -2,6 +2,7 @@ import { Context } from 'koa';
 import { GetMetadata, GetMetadataKey, Metadata } from '../../../core/src/metadata/Metadata';
 import { Abstract, Container, GetInjectToken, Transient } from '../../../core/src/di/Dependency';
 import { ILogger, LOGGER_INJECT_TOKEN } from '../../../core/src/logger/Logger';
+import { SC_INJECT_TOKEN, IServiceCollection } from '../../../core/src/di/ServiceCollection';
 
 export const CONTROLLER_METADATA = GetMetadataKey('Sys:Controller');
 export const CONTROLLER_INJECT_TOKEN = GetInjectToken('Sys:Controller');
@@ -15,7 +16,6 @@ export abstract class Controller implements IController {
   private readonly _logger: ILogger;
 
   constructor() {
-    console.log('初始化Controller');
     this._logger = Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
   }
 
@@ -41,14 +41,14 @@ export function GetControllerName(controller: any): string {
   return controller.name.replace('Controller', '');
 }
 
-export const CTL_MODULE_INJECT_TOKEN = GetInjectToken('Sys:AllControllerModule');
-export function GetAllControllerModule() {
-  if (Container.isRegistered(CTL_MODULE_INJECT_TOKEN)) {
-    return Container.resolveAll<any>(CTL_MODULE_INJECT_TOKEN);
-  }
-  return [];
-}
+export function GetAllControllers() {
+  const sc = Container.resolve<IServiceCollection>(SC_INJECT_TOKEN);
+  const services = sc.GetServices();
 
-export function SetControllerModule(module: any) {
-  Container.registerInstance(CTL_MODULE_INJECT_TOKEN, module);
+  const controllers: any[] = [];
+  services.forEach((element) => {
+    if (IsController(element)) controllers.push(element);
+  });
+
+  return controllers;
 }

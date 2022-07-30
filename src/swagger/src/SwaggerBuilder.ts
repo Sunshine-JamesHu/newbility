@@ -4,14 +4,14 @@ import koaStatic from 'koa-static';
 import { join } from 'path';
 import { koaSwagger } from './koa2-swagger-ui/index';
 import { GetControllerName, IsController } from '../../koa-core/src/controller/Controller';
-import { Inject, Injectable, Singleton, Container } from '../../core/src/di/Dependency';
+import { Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
 import { GetActionInfo, GetHttpMethodStr } from '../../koa-core/src/router/Request';
 import { GetActionParamsMetadata } from '../../koa-core/src/router/RequestData';
-import { GetRouterInfo, GetRouterPath } from '../../koa-core/src/router/Router';
+import { GetRouterInfo } from '../../koa-core/src/router/Router';
 import { ISettingManager, SETTING_INJECT_TOKEN as SETTING_INJECT_TOKEN } from '../../core/src/setting/SettingManager';
-import { GetAllControllerModule } from '../..//koa-core/src/controller/Controller';
+import { GetAllControllers } from '../..//koa-core/src/controller/Controller';
 
-export const INJECT_TOKEN = 'ISwaggerBuilder';
+export const SWAGGER_BUILDER_INJECT_TOKEN = 'ISwaggerBuilder';
 
 interface SwaggerTag {
   name: string;
@@ -74,7 +74,7 @@ export interface ISwaggerBuilder {
 }
 
 @Injectable()
-@Singleton(INJECT_TOKEN)
+@Singleton(SWAGGER_BUILDER_INJECT_TOKEN)
 export class SwaggerBuilder implements ISwaggerBuilder {
   private readonly _settingManager: ISettingManager;
   private readonly _apiPrefix: string;
@@ -110,7 +110,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
   }
 
   public GenSwaggerJson(): any {
-    var controllers = GetAllControllerModule();
+    const controllers = GetAllControllers();
     const tags: Array<SwaggerTag> = [];
     const paths: {
       [key: string]: { [key: string]: ISwaggerPath };

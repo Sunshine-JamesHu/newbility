@@ -3,6 +3,9 @@
   "log": {
     "logLevel": "debug"
   },
+  "swagger": {
+    "enabled": true
+  },
   "apiPrefix": "api",
   "cors": {
     "enable": true

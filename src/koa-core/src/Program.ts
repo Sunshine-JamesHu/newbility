@@ -6,6 +6,8 @@ import { IProgram } from '../../core/src/program/Program';
 import { ILogger, InitLogger, LOGGER_INJECT_TOKEN } from '../../core/src/logger/Logger';
 import { StartModule, StopModule } from '../../core/src/modularity/AppModule';
 import { InitGlobalError } from './error/Error';
+import { InitServiceCollection } from '../../core/src/di/ServiceCollection';
+import { InitServiceLoader } from '../../core/src/di/ServiceLoader';
 
 export class Program implements IProgram {
   private readonly _app: Koa;
@@ -71,6 +73,8 @@ export class Program implements IProgram {
 
     InitSettingManager(); // 初始化配置
     InitLogger(); // 初始化日志
+    InitServiceCollection(); // 初始化服务
+    InitServiceLoader();
     InitGlobalError(this.GetApp()); // 全局异常捕获
   }
 
@@ -93,6 +97,8 @@ export class Program implements IProgram {
     const app = this.GetApp();
     Container.register(GetInjectToken('Sys:App'), { useValue: app });
   }
+
+  private RegisterAllModule() {}
 
   //#endregion
 }

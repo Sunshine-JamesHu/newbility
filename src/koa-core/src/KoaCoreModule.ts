@@ -10,9 +10,10 @@ import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
 import { DependsOn } from '../../core/src/modularity/DependsOn';
 import { CoreModule } from '../../core/src/CoreModule';
 import { IControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './controller/ControllerBuilder';
+import { SwaggerModule } from '../../swagger/src/SwaggerModule';
 
 @Injectable()
-@DependsOn(CoreModule)
+@DependsOn(CoreModule, SwaggerModule)
 @ModulePath(__dirname)
 export class KoaCoreModule extends AppModule {
   private readonly _app: Koa;
@@ -29,9 +30,10 @@ export class KoaCoreModule extends AppModule {
     this._ctlBuilder = ctlBuilder;
   }
 
-  public async OnApplicationInitialization(): Promise<void> {
+  public OnApplicationInitialization(): void {
     this.InitSysMiddlewares(); // 初始化系统中间件
-    this._ctlBuilder.CreateControllerByModule(this._app, __dirname);
+
+    this._ctlBuilder.CreateControllers(); // 创建Controller
   }
 
   //#region  初始化Koa中间件

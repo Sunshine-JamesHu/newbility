@@ -3,7 +3,6 @@ import { DefineMetadata, GetMetadata, GetMetadataKey } from '../metadata/Metadat
 
 export enum ServiceLifetime {
   Singleton = 0,
-  Scoped = 1,
   Transient = 2,
 }
 
@@ -28,12 +27,6 @@ export function Transient(token?: string) {
 export function Singleton(token?: string) {
   return (target: Function) => {
     DefineMetadataInjectInfo(target, ServiceLifetime.Singleton, token);
-  };
-}
-
-export function Scoped(token?: string) {
-  return (target: Function) => {
-    DefineMetadataInjectInfo(target, ServiceLifetime.Scoped, token);
   };
 }
 

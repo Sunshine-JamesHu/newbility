@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import Router from 'koa-router';
 import Koa, { Context, Next } from 'koa';
 import { container } from 'tsyringe';
-import { IController, IsController, SetControllerModule } from './Controller';
-import { Container, GetInjectToken, Inject, Injectable, IsAbstract, Singleton } from '../../../core/src/di/Dependency';
+import { GetAllControllers, IController, IsController } from './Controller';
+import { GetInjectToken, Inject, Injectable, IsAbstract, Singleton } from '../../../core/src/di/Dependency';
 import { GetActionParamsMetadata } from '../router/RequestData';
 import { GetRouterPath } from '../router/Router';
 import { GetActionInfo, GetHttpMethodStr } from '../router/Request';
@@ -20,8 +20,7 @@ interface ActionDescriptor {
 }
 
 export interface IControllerBuilder {
-  CreateController(module: Function): void;
-  CreateControllerByModule(app: Koa, modulePath: string): void;
+  CreateControllers(): void;
 }
 
 @Injectable()
@@ -30,28 +29,50 @@ export class ControllerBuilder implements IControllerBuilder {
   private readonly _settingManager: ISettingManager;
   private readonly _logger: ILogger;
   private readonly _apiPrefix: string;
+  private readonly _app: Koa;
 
-  constructor(@Inject(SETTING_INJECT_TOKEN) settingManager: ISettingManager, @Inject(LOGGER_INJECT_TOKEN) logger: ILogger) {
+  constructor(
+    @Inject(SETTING_INJECT_TOKEN) settingManager: ISettingManager,
+    @Inject(LOGGER_INJECT_TOKEN) logger: ILogger,
+    @Inject(GetInjectToken('Sys:App')) app: Koa
+  ) {
     this._settingManager = settingManager;
     this._logger = logger;
     this._apiPrefix = settingManager.GetConfig<string>('apiPrefix') || 'api';
+    this._app = app;
   }
 
-  public CreateController(module: Function): ActionDescriptor[] | undefined {
-    const routerPath = GetRouterPath(module);
-    if (!IsController(module) || !routerPath) {
+  public CreateControllers(): void {
+    const controllers = GetAllControllers();
+    if (controllers && controllers.length) {
+      const router = new Router(); // 定义路由容器
+      controllers.forEach((controller) => {
+        const actions = this.GetControllerActionDescriptors(controller);
+        if (actions && actions.length) {
+          actions.forEach((action) => {
+            this._logger.LogDebug(`Action:${action.fullPath}`);
+            router.register(action.fullPath, [action.httpMethod], action.func);
+          });
+        }
+      });
+      this._app.use(router.routes());
+      this._app.use(router.allowedMethods());
+    }
+  }
+
+  protected GetControllerActionDescriptors(controller: Function): ActionDescriptor[] | undefined {
+    const routerPath = GetRouterPath(controller);
+    if (!IsController(controller) || !routerPath) {
       return;
     }
 
-    SetControllerModule(module); // 放入总容器中,供其他模块使用
-
     const actions: ActionDescriptor[] = [];
-    this._logger.LogDebug(`Create Controller: ${module.name} -> ${routerPath}`);
-    const propKeys = Object.getOwnPropertyNames(module.prototype);
+    this._logger.LogDebug(`Create Controller: ${controller.name} -> ${routerPath}`);
+    const propKeys = Object.getOwnPropertyNames(controller.prototype);
     propKeys.forEach((propKey) => {
       if (propKey === 'constructor') return; // 跳过构造函数
 
-      const property = module.prototype[propKey];
+      const property = controller.prototype[propKey];
       if (!property || typeof property !== 'function') return;
 
       const actionInfo = GetActionInfo(property);
@@ -95,9 +116,9 @@ export class ControllerBuilder implements IControllerBuilder {
             if (data != null) args[element.index] = data;
           });
         }
-        const controller: any = container.resolve<IController>(module as any);
-        controller.SetContext(ctx); // 将Ctx丢进去
-        const result = property.apply(controller, args); // 执行函数
+        const controllerIns: any = container.resolve<IController>(controller as any);
+        controllerIns.SetContext(ctx); // 将Ctx丢进去
+        const result = property.apply(controllerIns, args); // 执行函数
 
         if (result instanceof Promise) {
           ctx.response.body = await result; // 处理异步
@@ -115,63 +136,5 @@ export class ControllerBuilder implements IControllerBuilder {
       actions.push(action);
     });
     return actions;
-  }
-
-  public CreateControllerByModule(app: Koa, modulePath: string): void {
-    const controllers = this.GetControllerByPath(modulePath);
-
-    if (!controllers || !controllers.length) return;
-
-    const router = new Router(); // 定义路由容器
-    controllers.forEach((element) => {
-      const actions = this.CreateController(element);
-      if (actions && actions.length) {
-        actions.forEach((action) => {
-          this._logger.LogDebug(`Action:${action.fullPath}`);
-          router.register(action.fullPath, [action.httpMethod], action.func);
-        });
-      }
-    });
-
-    app.use(router.routes());
-    app.use(router.allowedMethods());
-  }
-
-  private GetControllerByPath(modulePath: string): any[] {
-    let files: any[] = [];
-    try {
-      files = fs.readdirSync(modulePath);
-    } catch (error) {
-      console.error('Module路径配置错误,请检查配置后重试.');
-      files = [];
-    }
-    let controllers: any[] = [];
-    files.forEach((filePath) => {
-      const fullFilePath = path.join(modulePath, filePath);
-      if (fs.statSync(fullFilePath).isDirectory()) {
-        const tmp = this.GetControllerByPath(fullFilePath);
-        controllers = controllers.concat(tmp);
-      } else {
-        const extName = path.extname(fullFilePath);
-        if (fullFilePath.endsWith('.d.ts')) return; // 单独去掉.d.ts这个描述文件
-
-        if (extName === '.ts' || extName === '.js') {
-          const modules: any[] = require(fullFilePath);
-          if (!modules) return;
-
-          for (const key in modules) {
-            if (Object.prototype.hasOwnProperty.call(modules, key)) {
-              const module = modules[key];
-
-              if (module.prototype && !IsAbstract(module) && IsController(module)) {
-                controllers.push(module);
-              }
-            }
-          }
-        }
-      }
-    });
-
-    return controllers;
   }
 }
