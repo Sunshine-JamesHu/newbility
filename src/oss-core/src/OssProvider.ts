@@ -1,4 +1,5 @@
-import { GetInjectToken } from '../../core/src/di/Dependency';
+import { Container, GetInjectToken } from '../../core/src/di/Dependency';
+import { ConfigureOssOptions, OssOptions } from './OssOptions';
 
 export const OSS_PROVIDER_INJECT_TOKEN = GetInjectToken('Sys:IOssProvider');
 
@@ -27,4 +28,17 @@ export abstract class OssProvider implements IOssProvider {
 export function GetProviderInjectToken(providerKey: string) {
   if (!providerKey) return OSS_PROVIDER_INJECT_TOKEN;
   return `${OSS_PROVIDER_INJECT_TOKEN}:${providerKey}`;
+}
+
+export function GetOssProvider(providerKey: string) {
+  return Container.resolve(GetProviderInjectToken(providerKey));
+}
+
+export function UseOssProvider(type: string, options?: OssOptions) {
+  ConfigureOssOptions(type, options);
+  Container.register(OSS_PROVIDER_INJECT_TOKEN, {
+    useFactory: () => {
+      return GetOssProvider(type);
+    },
+  });
 }

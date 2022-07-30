@@ -1,12 +1,9 @@
 import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
 import { Injectable } from '../../core/src/di/Dependency';
-import { ConfigureOssOptions } from './OssOptions';
-import { OSS_KEY } from './local-oss/LocalOssConst';
+import { DependsOn } from '../../core/src/modularity/DependsOn';
+import { CoreModule } from '../../core/src/CoreModule';
 
 @ModulePath(__dirname)
 @Injectable()
-export class OssCoreModule extends AppModule {
-  public OnPreApplicationInitialization(): void {
-    ConfigureOssOptions(OSS_KEY);
-  }
-}
+@DependsOn(CoreModule)
+export class OssCoreModule extends AppModule {}

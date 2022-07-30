@@ -1,4 +1,4 @@
-import { OssOptions } from '../OssOptions';
+import { OssOptions } from '../../oss-core/src/OssOptions';
 
 export interface MinioOptions extends OssOptions {
   /**
