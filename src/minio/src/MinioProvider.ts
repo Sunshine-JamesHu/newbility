@@ -3,7 +3,7 @@ import { GetInjectToken, Inject, Injectable, Singleton } from '../../core/src/di
 import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
 import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
 import { StreamHelper } from '../../core/src/util/StreamHelper';
-import { SimpleKoaError } from '../../core/src/error/SimpleKoaError';
+import { NewbilityError } from '../../core/src/error/NewbilityError';
 import { Guid } from '../../core/src/util/Guid';
 import { OSS_KEY } from './MinioConst';
 import { MinioOptions } from './MinioOptions';
@@ -39,7 +39,7 @@ export class MinioProvider extends OssProvider {
       await this._client.putObject(bucketName, newFileName, data);
       return this.FullTag(newFileName, bucketName);
     } catch (error) {
-      throw new SimpleKoaError('文件上传Minio失败', error);
+      throw new NewbilityError('文件上传Minio失败', error);
     }
   }
 
@@ -85,7 +85,7 @@ export class MinioProvider extends OssProvider {
 }
 
 function GetClient(options: MinioOptions): MinioClient {
-  if (!options) throw new SimpleKoaError('缺少Minio配置,请初始化Minio配置');
+  if (!options) throw new NewbilityError('缺少Minio配置,请初始化Minio配置');
   const client = new MinioClient({
     endPoint: options.addr,
     port: options.port,

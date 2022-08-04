@@ -1,4 +1,4 @@
-import { SimpleKoaError } from './SimpleKoaError';
+import { NewbilityError } from './NewbilityError';
 
 interface UserFriendlyErrorData {
   code?: string;
@@ -6,7 +6,7 @@ interface UserFriendlyErrorData {
   detail?: any;
 }
 
-export class UserFriendlyError extends SimpleKoaError {
+export class UserFriendlyError extends NewbilityError {
   constructor(msg: string, data?: UserFriendlyErrorData, public status?: number) {
     super(msg, data);
   }

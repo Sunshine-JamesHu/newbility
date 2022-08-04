@@ -7,7 +7,7 @@ import { LocalOssOptions } from './LocalOssOptions';
 import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
 import { Guid } from '../../core/src/util/Guid';
 import { StreamHelper } from '../../core/src/util/StreamHelper';
-import { SimpleKoaError } from '../../core/src/error/SimpleKoaError';
+import { NewbilityError } from '../../core/src/error/NewbilityError';
 import { OSS_KEY } from './LocalOssConst';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class LocalOssProvider extends OssProvider {
 
   async GetAsync(path: string): Promise<Buffer> {
     if (!fs.existsSync(path)) {
-      throw new SimpleKoaError(`File not find. filePath->${path}`);
+      throw new NewbilityError(`File not find. filePath->${path}`);
     }
 
     const reader = fs.createReadStream(path);

@@ -21,5 +21,21 @@
     "local": {
       "dir": "data"
     }
+  },
+  "queues": {
+    "default": {
+      "type": "kafka",
+      "options": {
+        "brokers": ["server.dev.ai-care.top:9092"],
+        "clientId": "koa_kafka_test"
+      }
+    },
+    "dev": {
+      "type": "kafka",
+      "options": {
+        "brokers": ["server.dev.ai-care.top:9092"],
+        "clientId": "koa_kafka_test2"
+      }
+    }
   }
 }

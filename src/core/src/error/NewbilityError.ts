@@ -1,4 +1,4 @@
-export class SimpleKoaError extends Error {
+export class NewbilityError extends Error {
   data?: any;
   constructor(msg: string, data?: any) {
     super(msg);
