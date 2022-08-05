@@ -4,23 +4,35 @@ import { QueueOptions, QueueSetting } from './QueueOptions';
 import { Abstract, Container } from '../../core/src/di/Dependency';
 import { GetQueueInjectToken, QueueSubType } from './Queue';
 import { ISubscriber } from './subscriber/Subscriber';
+import { ILogger, LOGGER_INJECT_TOKEN } from '../../core/src/logger/Logger';
 
 @Abstract()
 export abstract class QueueModule extends AppModule {
+  private readonly _logger: ILogger;
   private readonly _settings: ISettingManager;
   private readonly _queueType: string;
   constructor(queueType: string) {
     super();
     this._queueType = queueType;
     this._settings = Container.resolve<ISettingManager>(SETTING_INJECT_TOKEN);
+    this._logger = Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
   }
 
   public OnPreApplicationInitialization(): void {
     this.InitQueue();
   }
 
-  public async OnPostApplicationInitialization(): Promise<void> {
-    await this.StartQueue();
+  public OnPostApplicationInitialization(): void {
+    // await this.StartSubscriber();
+    // 放进后台进行启动,不占用主线程
+    this.StartSubscriber().then(
+      () => {
+        this._logger.LogDebug('Queue started');
+      },
+      (err) => {
+        this._logger.LogError('Queue start error', err);
+      }
+    );
   }
 
   protected InitQueue() {
@@ -37,7 +49,7 @@ export abstract class QueueModule extends AppModule {
     });
   }
 
-  protected async StartQueue(): Promise<void> {
+  protected async StartSubscriber(): Promise<void> {
     const queueSettings = this._settings.GetConfig<QueueSetting>('queues');
     if (!queueSettings) return;
     const queueKeys = Object.getOwnPropertyNames(queueSettings);
