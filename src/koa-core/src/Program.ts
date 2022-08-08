@@ -98,7 +98,5 @@ export class Program implements IProgram {
     Container.register(GetInjectToken('Sys:App'), { useValue: app });
   }
 
-  private RegisterAllModule() {}
-
   //#endregion
 }
