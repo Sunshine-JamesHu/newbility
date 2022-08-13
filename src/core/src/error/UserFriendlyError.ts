@@ -1,6 +1,6 @@
 import { NewbilityError } from './NewbilityError';
 
-interface UserFriendlyErrorData {
+export interface UserFriendlyErrorData {
   code?: string;
 
   detail?: any;

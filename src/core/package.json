@@ -1,0 +1,26 @@
+{
+  "name": "@newbility/core",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "keywords": [
+    "newbility"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "pub": "gulp && npm publish --registry https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "log4js": "^6.6.1",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "del": "^7.0.0",
+    "gulp": "^4.0.2",
+    "typescript": "^4.7.4"
+  }
+}

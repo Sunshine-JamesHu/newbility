@@ -5,20 +5,20 @@
         "lib": ["es2020"],
         "module": "commonjs",
         "target": "es2020",
-        "baseUrl": ".",
-        "outDir": "dist",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "suppressImplicitAnyIndexErrors": true,
-
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "declaration": true
     },
-    "include": ["src/**/*", "test/**/*", "index.ts"],
-    "exclude": ["node_modules", "**/*.spec.ts", "dist/**/*"]
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "build/**/*"
+    ]
 }
