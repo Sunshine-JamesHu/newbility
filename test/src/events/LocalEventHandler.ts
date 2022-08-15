@@ -1,6 +1,4 @@
-import { Singleton } from '../../src/core/src/di/Dependency';
-import { IEventData } from '../../src/core/src/event/EventBus';
-import { EventHandler, EventKey } from '../../src/core/src/event/EventHandler';
+import { Singleton, IEventData, EventHandler, EventKey } from '@newbility/core';
 
 @EventKey('local.test')
 @Singleton()

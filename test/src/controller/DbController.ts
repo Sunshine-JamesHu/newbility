@@ -1,8 +1,5 @@
-import { HttpGet, HttpPost } from '../../src/koa-core/src/router/Request';
-import { Controller } from '../../src/koa-core/src/controller/Controller';
-import { RequestBody, RequestQuery } from '../../src/koa-core/src/router/RequestData';
-import { Router } from '../../src/koa-core/src/router/Router';
-import { Injectable, Transient } from '../../src/core/src/di/Dependency';
+import { Injectable, Transient } from '@newbility/core';
+import { HttpGet, HttpPost, Controller, RequestBody, RequestQuery, Router } from '@newbility/koa-core';
 
 @Injectable()
 @Transient()

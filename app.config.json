@@ -1,0 +1,41 @@
+{
+  "port": 28000,
+  "log": {
+    "logLevel": "debug"
+  },
+  "swagger": {
+    "enabled": true
+  },
+  "apiPrefix": "api",
+  "cors": {
+    "enable": true
+  },
+  "oss": {
+    "minio": {
+      "addr": "127.0.0.1",
+      "port": 9000,
+      "userName": "Admin",
+      "password": "Admin@123456",
+      "useSSL": false
+    },
+    "local": {
+      "dir": "data"
+    }
+  },
+  "queues": {
+    "default": {
+      "type": "kafka",
+      "options": {
+        "brokers": ["server.dev.ai-care.top:9092"],
+        "clientId": "koa_kafka_test"
+      }
+    },
+    "dev": {
+      "type": "kafka",
+      "options": {
+        "brokers": ["server.dev.ai-care.top:9092"],
+        "clientId": "koa_kafka_test2"
+      }
+    }
+  }
+}

@@ -1,9 +1,5 @@
-import { HttpGet } from '../../src/koa-core/src/router/Request';
-import { Controller } from '../../src/koa-core/src/controller/Controller';
-import { RequestQuery } from '../../src/koa-core/src/router/RequestData';
-import { Router } from '../../src/koa-core/src/router/Router';
-import { Inject, Injectable, Transient } from '../../src/core/src/di/Dependency';
-import { EVENT_BUS_INJECT_TOKEN, IEventBus } from '../../src/core/src/event/EventBus';
+import { HttpGet, HttpPost, Controller, RequestBody, RequestQuery, Router } from '@newbility/koa-core';
+import { Inject, Injectable, Transient, EVENT_BUS_INJECT_TOKEN, IEventBus } from '@newbility/core';
 
 @Injectable()
 @Transient()
