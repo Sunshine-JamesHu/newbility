@@ -3,6 +3,7 @@ import { KoaCoreModule } from '@newbility/koa-core';
 import { OssCoreModule, UseOssProvider } from '@newbility/oss-core';
 import { LocalOssModule, OSS_KEY as LOCAL_OSS_KEY } from '@newbility/oss-local';
 import { MinioModule, OSS_KEY as MINIO_OSS_KEY } from '@newbility/minio';
+import { NacosModule } from './modules/nacos/NacosModule';
 
 // import { OssCoreModule } from '../src/oss-core/src/OssCoreModule';
 // import { UseOssProvider } from '../src/oss-core/src/OssProvider';
@@ -18,7 +19,7 @@ import { MinioModule, OSS_KEY as MINIO_OSS_KEY } from '@newbility/minio';
 @Injectable()
 @ModulePath(__dirname)
 // @DependsOn(KoaCoreModule, , , , QueueCoreModule, QueueKafkaModule)
-@DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule)
+@DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, NacosModule)
 export class Startup extends AppModule {
   public OnApplicationInitialization(): void {
     UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储

@@ -2,11 +2,12 @@
     "extends": "../tsconfig.json",
     "compileOnSave": true,
     "compilerOptions": {
-        "rootDir": ".",
+        // "rootDir": ".",
+        "baseUrl": ".",
         "outDir": "build"
     },
-    "include": [
-        "src/**/*",
-        "index.ts"
-    ]
+    // "include": [
+    //     "src/**/*",
+    //     "index.ts"
+    // ]
 }

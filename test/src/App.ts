@@ -1,6 +1,14 @@
 import 'reflect-metadata';
 import { Program } from '@newbility/koa-core';
 import { Startup } from './Startup';
+import { UseNascos } from './modules/nacos/NacosExtensions';
 
-const app = new Program(Startup);
+class App extends Program {
+  protected InitSettingManager(): void {
+    super.InitSettingManager();
+    UseNascos();
+  }
+}
+
+const app = new App(Startup);
 app.Main();

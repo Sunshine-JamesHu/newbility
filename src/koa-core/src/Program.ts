@@ -33,12 +33,47 @@ export class Program implements IProgram {
 
   protected async Initialize() {
     this.InitSysModule(); // 初始化系统模块
-    await StartModule(this._startup); // 启动程序应用模块
-    await this.Init();
+
+    //#region 启动应用程序
+
+    const preTask = this.PostStartModule();
+    if (preTask && preTask instanceof Promise) {
+      await preTask;
+    }
+
+    await this.StartModule(this._startup);
+
+    const postTask = this.PostStartModule();
+    if (postTask && postTask instanceof Promise) {
+      await postTask;
+    }
+
+    //#endregion
   }
 
-  protected async Init(): Promise<void> {}
+  /**
+   * 模块启动前
+   */
+  protected PreStartModule(): Promise<void> | void {}
 
+  /**
+   * 启动模块
+   * @param startup Startup
+   * @returns
+   */
+  protected StartModule(startup: any): Promise<void> | void {
+    const task = StartModule(startup); // 启动程序应用模块
+    return task;
+  }
+
+  /**
+   * 模块启动后
+   */
+  protected PostStartModule(): Promise<void> | void {}
+
+  /**
+   * 服务启动后
+   */
   protected OnServerStarted(): any {}
 
   protected async OnApplicationShutdown(): Promise<void> {
@@ -49,6 +84,9 @@ export class Program implements IProgram {
     return this._app;
   }
 
+  /**
+   * 启动服务
+   */
   protected StartServer() {
     const app = this.GetApp();
     const port = this.GetPortSetting();
@@ -74,13 +112,22 @@ export class Program implements IProgram {
     });
   }
 
+  protected InitSettingManager() {
+    InitSettingManager();
+  }
+
+  protected InitLogger() {
+    InitLogger(); // 初始化日志
+  }
+
   //#region 私有拓展
 
   private InitSysModule() {
     this.RegisterAppIns(); // 将APP塞入容器
 
-    InitSettingManager(); // 初始化配置
-    InitLogger(); // 初始化日志
+    this.InitSettingManager(); // 初始化配置
+    this.InitLogger();
+
     InitServiceCollection(); // 初始化服务
     InitServiceLoader();
     InitGlobalError(this.GetApp()); // 全局异常捕获

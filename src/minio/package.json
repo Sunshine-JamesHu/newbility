@@ -1,6 +1,6 @@
 {
   "name": "@newbility/minio",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/oss-core": "^0.0.8",
+    "@newbility/oss-core": "^0.0.11",
     "minio": "^7.0.30"
   },
   "devDependencies": {
