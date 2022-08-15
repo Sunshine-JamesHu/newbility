@@ -12,6 +12,8 @@ import {
 import { IControllerBuilder, ActionDescriptor, ControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './src/controller/ControllerBuilder';
 import { AddCors } from './src/cors/Cors';
 import { InitGlobalError } from './src/error/Error';
+import { KoaCoreModule } from './src/KoaCoreModule';
+import { Program } from './src/Program';
 import {
   HttpMethod,
   ActionInfo,
@@ -25,7 +27,7 @@ import {
   GetHttpMethodStr,
   GetActionInfo,
 } from './src/router/Request';
-import { RequestParamType, RequestQuery, RequestBody, GetActionParamsMetadata } from './src/router/RequestData';
+import { RequestQuery, RequestBody, GetActionParamsMetadata } from './src/router/RequestData';
 import { RouterInfo, GetRouterPath, GetRouterInfo } from './src/router/Router';
 import { SWAGGER_BUILDER_INJECT_TOKEN, ISwaggerBuilder, SwaggerBuilder } from './src/swagger/SwaggerBuilder';
 
@@ -63,5 +65,7 @@ export {
   GetRouterInfo,
   SWAGGER_BUILDER_INJECT_TOKEN,
   ISwaggerBuilder,
-  SwaggerBuilder
+  SwaggerBuilder,
+  KoaCoreModule,
+  Program,
 };

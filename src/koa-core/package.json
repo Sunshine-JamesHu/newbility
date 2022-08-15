@@ -16,11 +16,25 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.0.6"
+    "@newbility/core": "^0.0.6",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
+    "koa-compress": "^5.1.0",
+    "handlebars": "^4.7.7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.5",
+    "@types/koa-compress": "^4.0.3",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
+    "@types/koa2-cors": "^2.0.2",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "@types/lodash": "^4.14.181"
   }
 }
