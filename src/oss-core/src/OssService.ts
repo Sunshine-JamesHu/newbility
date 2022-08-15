@@ -1,4 +1,4 @@
-import { GetInjectToken, Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
+import { GetInjectToken, Inject, Injectable, Singleton } from '@newbility/core';
 import { IOssProvider, OSS_PROVIDER_INJECT_TOKEN } from './OssProvider';
 
 export const OSS_SVC_INJECT_TOKEN = GetInjectToken('Sys:IOssService');

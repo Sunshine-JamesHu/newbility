@@ -1,5 +1,4 @@
-import { Container, GetInjectToken } from '../../core/src/di/Dependency';
-import { ISettingManager, SETTING_INJECT_TOKEN } from '../../core/src/setting/SettingManager';
+import { ISettingManager, SETTING_INJECT_TOKEN, Container, GetInjectToken } from '@newbility/core';
 
 export const OSS_OPTIONS_INJECT_TOKEN = GetInjectToken('Sys:OssOptions');
 

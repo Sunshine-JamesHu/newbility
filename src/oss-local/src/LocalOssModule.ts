@@ -1,8 +1,5 @@
-import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
-import { Injectable } from '../../core/src/di/Dependency';
-import { DependsOn } from '../../core/src/modularity/DependsOn';
-import { ConfigureOssOptions } from '../../oss-core/src/OssOptions';
-import { OssCoreModule } from '../../oss-core/src/OssCoreModule';
+import { AppModule, ModulePath, Injectable, DependsOn } from '@newbility/core';
+import { ConfigureOssOptions, OssCoreModule } from '@newbility/oss-core';
 import { OSS_KEY } from './LocalOssConst';
 
 @ModulePath(__dirname)

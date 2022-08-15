@@ -1,13 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import moment from 'moment';
-import { Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
-import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
+import { Singleton, Inject, Injectable, Guid, StreamHelper, NewbilityError } from '@newbility/core';
+import { GetProviderInjectToken, OssProvider, GetOssOptionsInjectToken } from '@newbility/oss-core';
 import { LocalOssOptions } from './LocalOssOptions';
-import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
-import { Guid } from '../../core/src/util/Guid';
-import { StreamHelper } from '../../core/src/util/StreamHelper';
-import { NewbilityError } from '../../core/src/error/NewbilityError';
 import { OSS_KEY } from './LocalOssConst';
 
 @Injectable()

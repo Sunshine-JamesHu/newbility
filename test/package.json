@@ -15,9 +15,14 @@
     "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
   },
   "dependencies": {
-    "@newbility/koa-core": "^0.0.8"
+    "@newbility/koa-core": "^0.0.8",
+    "@newbility/minio": "^0.0.9",
+    "@newbility/oss-core": "^0.0.8",
+    "@newbility/oss-local": "^0.0.8",
+    "mime-types": "^2.1.35"
   },
   "devDependencies": {
+    "@types/mime-types": "^2.1.1",
     "nodemon": "^2.0.19",
     "typescript": "^4.7.4"
   }

@@ -1,14 +1,10 @@
 import { Client as MinioClient } from 'minio';
-import { GetInjectToken, Inject, Injectable, Singleton } from '../../core/src/di/Dependency';
-import { GetProviderInjectToken, OssProvider } from '../../oss-core/src/OssProvider';
-import { GetOssOptionsInjectToken } from '../../oss-core/src/OssOptions';
-import { StreamHelper } from '../../core/src/util/StreamHelper';
-import { NewbilityError } from '../../core/src/error/NewbilityError';
-import { Guid } from '../../core/src/util/Guid';
+import { Inject, Injectable, Singleton, StreamHelper, NewbilityError, Guid } from '@newbility/core';
+import { GetProviderInjectToken, OssProvider, GetOssOptionsInjectToken } from '@newbility/oss-core';
 import { OSS_KEY } from './MinioConst';
 import { MinioOptions } from './MinioOptions';
 
-interface MinioFileInfo {
+export interface MinioFileInfo {
   fileName: string;
   bucketName: string;
 }

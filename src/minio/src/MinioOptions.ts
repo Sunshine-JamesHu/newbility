@@ -1,4 +1,4 @@
-import { OssOptions } from '../../oss-core/src/OssOptions';
+import { OssOptions } from '@newbility/oss-core';
 
 export interface MinioOptions extends OssOptions {
   /**

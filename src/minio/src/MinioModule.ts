@@ -1,8 +1,5 @@
-import { DependsOn } from '../../core/src/modularity/DependsOn';
-import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
-import { Injectable } from '../../core/src/di/Dependency';
-import { OssCoreModule } from '../../oss-core/src/OssCoreModule';
-import { ConfigureOssOptions } from '../../oss-core/src/OssOptions';
+import { OssCoreModule, ConfigureOssOptions } from '@newbility/oss-core';
+import { DependsOn, AppModule, ModulePath, Injectable } from '@newbility/core';
 import { OSS_KEY } from './MinioConst';
 
 @Injectable()

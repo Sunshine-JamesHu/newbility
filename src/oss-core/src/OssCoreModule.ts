@@ -1,7 +1,4 @@
-import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
-import { Injectable } from '../../core/src/di/Dependency';
-import { DependsOn } from '../../core/src/modularity/DependsOn';
-import { CoreModule } from '../../core/src/CoreModule';
+import { Injectable, AppModule, ModulePath, DependsOn, CoreModule } from '@newbility/core';
 
 @ModulePath(__dirname)
 @Injectable()

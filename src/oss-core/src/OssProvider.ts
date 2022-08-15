@@ -1,4 +1,4 @@
-import { Container, GetInjectToken } from '../../core/src/di/Dependency';
+import { Abstract, Container, GetInjectToken } from '@newbility/core';
 import { ConfigureOssOptions, OssOptions } from './OssOptions';
 
 export const OSS_PROVIDER_INJECT_TOKEN = GetInjectToken('Sys:IOssProvider');
@@ -9,6 +9,7 @@ export interface IOssProvider {
   RemoveAsync(path: string): Promise<void>;
 }
 
+@Abstract()
 export abstract class OssProvider implements IOssProvider {
   protected readonly _defaultGroup: string = 'files';
 

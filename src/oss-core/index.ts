@@ -1,70 +1,21 @@
-import 'reflect-metadata';
-import {
-  Controller,
-  CONTROLLER_INJECT_TOKEN,
-  CONTROLLER_METADATA,
-  GetAllControllers,
-  GetControllerName,
-  IController,
-  IsController,
-} from './src/controller/Controller';
-import { IControllerBuilder, ActionDescriptor, ControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './src/controller/ControllerBuilder';
-import { AddCors } from './src/cors/Cors';
-import { InitGlobalError } from './src/error/Error';
-import { KoaCoreModule } from './src/KoaCoreModule';
-import { Program } from './src/Program';
-import {
-  HttpMethod,
-  ActionInfo,
-  FullActionInfo,
-  HttpGet,
-  HttpPost,
-  HttpPut,
-  HttpDelete,
-  HttpOptions,
-  HttpRequest,
-  GetHttpMethodStr,
-  GetActionInfo,
-} from './src/router/Request';
-import { RequestQuery, RequestBody, GetActionParamsMetadata } from './src/router/RequestData';
-import { RouterInfo, GetRouterPath, GetRouterInfo, Router } from './src/router/Router';
-import { SWAGGER_BUILDER_INJECT_TOKEN, ISwaggerBuilder, SwaggerBuilder } from './src/swagger/SwaggerBuilder';
+import { OssCoreModule } from './src/OssCoreModule';
+import { OSS_OPTIONS_INJECT_TOKEN, OssOptions, GetOssOptionsInjectToken, ConfigureOssOptions } from './src/OssOptions';
+import { IOssProvider, OSS_PROVIDER_INJECT_TOKEN, OssProvider, GetProviderInjectToken, GetOssProvider, UseOssProvider } from './src/OssProvider';
+import { OSS_SVC_INJECT_TOKEN, IOssService, OssService } from './src/OssService';
 
 export {
-  CONTROLLER_METADATA,
-  CONTROLLER_INJECT_TOKEN,
-  IController,
-  Controller,
-  IsController,
-  GetControllerName,
-  GetAllControllers,
-  CTL_BUILDER_INJECT_TOKEN,
-  IControllerBuilder,
-  ActionDescriptor,
-  ControllerBuilder,
-  AddCors,
-  InitGlobalError,
-  HttpMethod,
-  ActionInfo,
-  FullActionInfo,
-  HttpGet,
-  HttpPost,
-  HttpPut,
-  HttpDelete,
-  HttpOptions,
-  HttpRequest,
-  GetHttpMethodStr,
-  GetActionInfo,
-  RequestQuery,
-  RequestBody,
-  GetActionParamsMetadata,
-  RouterInfo,
-  Router,
-  GetRouterPath,
-  GetRouterInfo,
-  SWAGGER_BUILDER_INJECT_TOKEN,
-  ISwaggerBuilder,
-  SwaggerBuilder,
-  KoaCoreModule,
-  Program,
+  OssCoreModule,
+  OSS_OPTIONS_INJECT_TOKEN,
+  OssOptions,
+  GetOssOptionsInjectToken,
+  ConfigureOssOptions,
+  IOssProvider,
+  OSS_PROVIDER_INJECT_TOKEN,
+  OssProvider,
+  GetProviderInjectToken,
+  GetOssProvider,
+  UseOssProvider,
+  OSS_SVC_INJECT_TOKEN,
+  IOssService,
+  OssService,
 };
