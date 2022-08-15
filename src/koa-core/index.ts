@@ -63,5 +63,5 @@ export {
   GetRouterInfo,
   SWAGGER_BUILDER_INJECT_TOKEN,
   ISwaggerBuilder,
-  SwaggerBuilder,
+  SwaggerBuilder
 };
