@@ -1,4 +1,4 @@
-import { GetMetadataKey, GetMetadata, DefineMetadata } from '../../../core/src/metadata/Metadata';
+import { GetMetadataKey, GetMetadata, DefineMetadata } from '@newbility/core';
 import { GetControllerName } from '../controller/Controller';
 
 const METADATA_ROUTER_INFO = GetMetadataKey('Sys:RouterInfo');

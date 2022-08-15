@@ -1,19 +1,24 @@
-import * as path from 'path';
-import * as fs from 'fs';
 import Router from 'koa-router';
 import Koa, { Context, Next } from 'koa';
-import { container } from 'tsyringe';
+import {
+  GetInjectToken,
+  Container,
+  Inject,
+  Injectable,
+  Singleton,
+  ILogger,
+  LOGGER_INJECT_TOKEN,
+  SETTING_INJECT_TOKEN,
+  ISettingManager,
+} from '@newbility/core';
 import { GetAllControllers, IController, IsController } from './Controller';
-import { GetInjectToken, Inject, Injectable, IsAbstract, Singleton } from '../../../core/src/di/Dependency';
 import { GetActionParamsMetadata } from '../router/RequestData';
 import { GetRouterPath } from '../router/Router';
 import { GetActionInfo, GetHttpMethodStr } from '../router/Request';
-import { ILogger, LOGGER_INJECT_TOKEN } from '../../../core/src/logger/Logger';
-import { SETTING_INJECT_TOKEN, ISettingManager } from '../../../core/src/setting/SettingManager';
 
 export const CTL_BUILDER_INJECT_TOKEN = GetInjectToken('Sys:IControllerBuilder');
 
-interface ActionDescriptor {
+export interface ActionDescriptor {
   fullPath: string;
   httpMethod: 'get' | 'post' | 'put' | 'delete' | 'options';
   func: (context: Context, next: Next) => Promise<any>;
@@ -116,7 +121,7 @@ export class ControllerBuilder implements IControllerBuilder {
             if (data != null) args[element.index] = data;
           });
         }
-        const controllerIns: any = container.resolve<IController>(controller as any);
+        const controllerIns: any = Container.resolve<IController>(controller as any);
         controllerIns.SetContext(ctx); // 将Ctx丢进去
         const result = property.apply(controllerIns, args); // 执行函数
 

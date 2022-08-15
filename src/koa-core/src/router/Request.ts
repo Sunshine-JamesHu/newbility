@@ -1,4 +1,4 @@
-import { GetMetadataKey, DefineMetadata, GetMetadata } from '../../../core/src/metadata/Metadata';
+import { GetMetadataKey, DefineMetadata, GetMetadata } from '@newbility/core';
 
 export enum HttpMethod {
   GET = 0,

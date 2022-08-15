@@ -1,5 +1,5 @@
 import log4js from 'log4js';
-import { Singleton, Container } from '../../src/di/Dependency';
+import { Singleton, Container } from '../di/Dependency';
 import { ISettingManager, SETTING_INJECT_TOKEN } from '../setting/SettingManager';
 
 export const LOGGER_INJECT_TOKEN = 'Sys:ILogger';

@@ -4,36 +4,50 @@ import koaCompress from 'koa-compress';
 import koaStatic from 'koa-static';
 import { AddCors, CorsOptions } from './cors/Cors';
 
-import { ISettingManager, SETTING_INJECT_TOKEN } from '../../core/src/setting/SettingManager';
-import { GetInjectToken, Inject, Injectable } from '../../core/src/di/Dependency';
-import { AppModule, ModulePath } from '../../core/src/modularity/AppModule';
-import { DependsOn } from '../../core/src/modularity/DependsOn';
-import { CoreModule } from '../../core/src/CoreModule';
+import {
+  ISettingManager,
+  SETTING_INJECT_TOKEN,
+  GetInjectToken,
+  Inject,
+  Injectable,
+  AppModule,
+  ModulePath,
+  DependsOn,
+  CoreModule,
+} from '@newbility/core';
+
 import { IControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './controller/ControllerBuilder';
-import { SwaggerModule } from '../../swagger/src/SwaggerModule';
+import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN } from './swagger/SwaggerBuilder';
 
 @Injectable()
-@DependsOn(CoreModule, SwaggerModule)
+@DependsOn(CoreModule)
 @ModulePath(__dirname)
 export class KoaCoreModule extends AppModule {
   private readonly _app: Koa;
   private readonly _setting: ISettingManager;
   private readonly _ctlBuilder: IControllerBuilder;
+  private readonly _swaggerBuilder: ISwaggerBuilder;
   constructor(
     @Inject(GetInjectToken('Sys:App')) app: Koa,
     @Inject(SETTING_INJECT_TOKEN) setting: ISettingManager,
-    @Inject(CTL_BUILDER_INJECT_TOKEN) ctlBuilder: IControllerBuilder
+    @Inject(CTL_BUILDER_INJECT_TOKEN) ctlBuilder: IControllerBuilder,
+    @Inject(SWAGGER_BUILDER_INJECT_TOKEN) swaggerBuilder: ISwaggerBuilder
   ) {
     super();
     this._app = app;
     this._setting = setting;
     this._ctlBuilder = ctlBuilder;
+    this._swaggerBuilder = swaggerBuilder;
   }
 
   public OnApplicationInitialization(): void {
     this.InitSysMiddlewares(); // 初始化系统中间件
 
     this._ctlBuilder.CreateControllers(); // 创建Controller
+  }
+
+  public OnPostApplicationInitialization(): void {
+    this.InitSwagger();
   }
 
   //#region  初始化Koa中间件
@@ -77,7 +91,7 @@ export class KoaCoreModule extends AppModule {
    */
   protected InitStaticResource() {
     const app = this._app;
-    app.use(koaStatic(`${__dirname}/../../../public`, { maxage: 1000 * 60 * 60 }));
+    app.use(koaStatic(`${__dirname}/../public`, { maxage: 1000 * 60 * 60 }));
   }
 
   /**
@@ -97,6 +111,17 @@ export class KoaCoreModule extends AppModule {
         },
       })
     );
+  }
+
+  //#endregion
+
+  //#region  初始化Swagger
+
+  protected InitSwagger() {
+    const enabled = this._setting.GetConfig<boolean | undefined>('swagger:enabled');
+    if (enabled === undefined || enabled === true) {
+      this._swaggerBuilder.CreateSwaggerApi(this._app);
+    }
   }
 
   //#endregion

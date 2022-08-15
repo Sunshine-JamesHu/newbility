@@ -36,7 +36,7 @@ export abstract class AppModule implements IAppModule {
   public OnApplicationShutdown(): void | Promise<void> {}
 }
 
-const MODULE_PATH_METADATA_TOKEN = GetMetadataKey('Sys:ModulePath');
+export const MODULE_PATH_METADATA_TOKEN = GetMetadataKey('Sys:ModulePath');
 
 export function ModulePath(modulePath: string) {
   return (target: Function) => {

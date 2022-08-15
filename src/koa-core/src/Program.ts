@@ -1,13 +1,21 @@
 import Koa from 'koa';
 
-import { InitSettingManager, ISettingManager, SETTING_INJECT_TOKEN } from '../../core/src/setting/SettingManager';
-import { Container, GetInjectToken } from '../../core/src/di/Dependency';
-import { IProgram } from '../../core/src/program/Program';
-import { ILogger, InitLogger, LOGGER_INJECT_TOKEN } from '../../core/src/logger/Logger';
-import { StartModule, StopModule } from '../../core/src/modularity/AppModule';
+import {
+  Container,
+  GetInjectToken,
+  IProgram,
+  ILogger,
+  LOGGER_INJECT_TOKEN,
+  InitLogger,
+  InitSettingManager,
+  InitServiceCollection,
+  InitServiceLoader,
+  ISettingManager,
+  SETTING_INJECT_TOKEN,
+  StartModule,
+  StopModule,
+} from '@newbility/core';
 import { InitGlobalError } from './error/Error';
-import { InitServiceCollection } from '../../core/src/di/ServiceCollection';
-import { InitServiceLoader } from '../../core/src/di/ServiceLoader';
 
 export class Program implements IProgram {
   private readonly _app: Koa;

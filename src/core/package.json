@@ -1,6 +1,6 @@
 {
   "name": "@newbility/core",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -8,9 +8,12 @@
   "keywords": [
     "newbility"
   ],
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "gulp",
-    "pub": "gulp && npm publish --registry https://registry.npmjs.org"
+    "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
     "log4js": "^6.6.1",
@@ -19,7 +22,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "del": "^7.0.0",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "typescript": "^4.7.4"
   }

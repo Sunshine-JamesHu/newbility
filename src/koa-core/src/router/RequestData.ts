@@ -1,4 +1,4 @@
-import { GetMetadataKey, GetMetadata, DefineMetadata } from '../../../core/src/metadata/Metadata';
+import { GetMetadataKey, GetMetadata, DefineMetadata } from '@newbility/core';
 
 const METADATA_ACTION_PARAMS = GetMetadataKey('Sys:ActionParams');
 

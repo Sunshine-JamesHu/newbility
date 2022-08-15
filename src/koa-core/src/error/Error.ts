@@ -1,10 +1,8 @@
 import Koa, { Context, Next } from 'koa';
-import { container } from 'tsyringe';
-import { ILogger, LOGGER_INJECT_TOKEN } from '../../../core/src/logger/Logger';
-import { UserFriendlyError } from '../../../core/src/error/UserFriendlyError';
+import { ILogger, LOGGER_INJECT_TOKEN, Container, UserFriendlyError } from '@newbility/core';
 
 export function InitGlobalError(app: Koa) {
-  const logger = container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
+  const logger = Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
 
   // 处理常规错误
   app.on('error', (err: Error) => {
