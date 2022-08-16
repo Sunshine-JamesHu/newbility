@@ -4,7 +4,6 @@ import { OssCoreModule, UseOssProvider } from '@newbility/oss-core';
 import { LocalOssModule, OSS_KEY as LOCAL_OSS_KEY } from '@newbility/oss-local';
 import { MinioModule, OSS_KEY as MINIO_OSS_KEY } from '@newbility/minio';
 import { NacosModule } from './modules/nacos/NacosModule';
-
 // import { OssCoreModule } from '../src/oss-core/src/OssCoreModule';
 // import { UseOssProvider } from '../src/oss-core/src/OssProvider';
 // import { LocalOssModule } from '../src/oss-local/src/LocalOssModule';

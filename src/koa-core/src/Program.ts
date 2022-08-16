@@ -32,7 +32,11 @@ export class Program implements IProgram {
   }
 
   protected async Initialize() {
-    this.InitSysModule(); // 初始化系统模块
+    //#region 初始化系统模块
+
+    await this.InitSysModule();
+
+    //#endregion
 
     //#region 启动应用程序
 
@@ -112,21 +116,32 @@ export class Program implements IProgram {
     });
   }
 
-  protected InitSettingManager() {
+  protected InitSettingManager(): Promise<void> | void {
     InitSettingManager();
   }
 
-  protected InitLogger() {
+  protected InitLogger(): Promise<void> | void {
     InitLogger(); // 初始化日志
   }
 
   //#region 私有拓展
 
-  private InitSysModule() {
+  private async InitSysModule(): Promise<void> {
     this.RegisterAppIns(); // 将APP塞入容器
 
-    this.InitSettingManager(); // 初始化配置
-    this.InitLogger();
+    //#region 初始化配置文件
+    const initSettingTask = this.InitSettingManager(); // 初始化配置
+    if (initSettingTask && initSettingTask instanceof Promise) {
+      await initSettingTask;
+    }
+    //#endregion
+
+    //#region 初始化日志
+    const initLoggerTask = this.InitLogger();
+    if (initLoggerTask && initLoggerTask instanceof Promise) {
+      await initLoggerTask;
+    }
+    //#endregion
 
     InitServiceCollection(); // 初始化服务
     InitServiceLoader();

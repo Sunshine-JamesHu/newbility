@@ -1,7 +1,22 @@
 {
   "port": 28000,
+  "nacos": {
+    "serverAddr": "127.0.0.1:8848",
+    // "accessKey": "nacos",
+    // "secretKey": "nacos",
+    "namespace": "test",
+    "requestTimeout": 6000,
+    "configKeys": [
+      "newbility-test",
+      {
+        "dataId": "newbility-test2",
+        "needSubscribe": true
+      }
+    ],
+    "appName": "newbility"
+  },
   "log": {
-    "logLevel": "debug"
+    "logLevel2": "debug"
   },
   "swagger": {
     "enabled": true

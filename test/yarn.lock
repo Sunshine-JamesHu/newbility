@@ -13,10 +13,10 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/koa-core@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.0.11.tgz#10fc65c5c21078969c8ab063b805ccf0a3e60e7b"
-  integrity sha512-2Gt6L3PxGkSzSDOizLDPqI1/k0K31ZbcL4OT9ZEhzGKIAofOPABNMKpu5Bxs2ajOdef9gPcR8ZNfb4ACUgI0yg==
+"@newbility/koa-core@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.0.12.tgz#db0e98cd890ae19a8ff7711c9e3e09c81daaeda0"
+  integrity sha512-avwOR1COA4heTGEWwilcxEpJZ6Z5Yonzls9Wq/1T8RNpRxx7wBL0JzkHJdNDQe/e2aNo4P4kRz9WXsag4WY3mA==
   dependencies:
     "@newbility/core" "^0.0.10"
     handlebars "^4.7.7"
