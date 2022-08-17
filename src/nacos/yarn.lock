@@ -2,11 +2,12 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmmirror.com/@newbility/core/-/core-0.0.7.tgz#6b817b07666ce8b890fa555a2aba33fa974dc5fe"
-  integrity sha512-QbCaj2Wnrn2KaZ+ETvQVR8UMbxauED76zzAEZzSn0GcZjHW08BolMylN6hjt3ZL2S6y4njSzucqyn5NgOxYuQA==
+"@newbility/core@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.npmmirror.com/@newbility/core/-/core-0.0.10.tgz#c65c254a513c6446db6d43a320fa3122712c65ee"
+  integrity sha512-lUVfeDiJCTpr4s4svntXgFvLECLy+U1L7Em+qEosQoLpAEvt13vXSX+LILBbp6C1MQ0ArDzySEpnfGB7uhuIYQ==
   dependencies:
+    json5 "^2.2.1"
     log4js "^6.6.1"
     reflect-metadata "^0.1.13"
     tsyringe "^4.7.0"
@@ -37,18 +38,6 @@
   version "1.1.2"
   resolved "https://registry.npmmirror.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
-
-"@types/minio@^7.0.13":
-  version "7.0.13"
-  resolved "https://registry.npmmirror.com/@types/minio/-/minio-7.0.13.tgz#53c97e1b8382a1cdb3a846bfab45ba9a81e1795c"
-  integrity sha512-Warrx6uN4KEpBCAWiTh7ngrPoaNIckawtBXqWbFzaatG/NPRZToAv/fa9yAPA7a2FHAGhe154KqaVIqacIn2pQ==
-  dependencies:
-    "@types/node" "*"
-
-"@types/node@*":
-  version "18.7.3"
-  resolved "https://registry.npmmirror.com/@types/node/-/node-18.7.3.tgz#432c89796eab539b7a30b7b8801a727b585238a4"
-  integrity sha512-LJgzOEwWuMTBxHzgBR/fhhBOWrvBjvO+zPteUgbbuQi80rYIZHrk1mNbRUqPZqSLP2H7Rwt1EFLL/tNLD1Xx/w==
 
 acorn-walk@^8.2.0:
   version "8.2.0"
@@ -1705,6 +1694,11 @@ json-stringify-safe@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmmirror.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==
+
+json5@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmmirror.com/json5/-/json5-2.2.1.tgz#655d50ed1e6f95ad1a3caababd2b0efda10b395c"
+  integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
 
 jsonfile@^4.0.0:
   version "4.0.0"

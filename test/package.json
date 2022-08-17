@@ -17,6 +17,7 @@
   "dependencies": {
     "@newbility/koa-core": "^0.0.12",
     "@newbility/minio": "^0.0.11",
+    "@newbility/nacos": "^0.0.13",
     "@newbility/oss-core": "^0.0.11",
     "@newbility/oss-local": "^0.0.11",
     "mime-types": "^2.1.35",
