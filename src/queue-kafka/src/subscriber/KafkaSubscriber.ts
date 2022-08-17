@@ -1,9 +1,8 @@
 import { Consumer } from 'kafkajs';
-import { IQueueClient } from '../../../queue-core/src/QueueClient';
+import { Injectable } from '@newbility/core';
+import { IQueueClient, Subscriber } from '@newbility/queue-core';
 import { KafkaOptions } from '../KafkaOptions';
 import { KafkaConsumer } from './KafkaConsumer';
-import { Injectable } from '../../../core/src/di/Dependency';
-import { Subscriber } from '../../../queue-core/src/subscriber/Subscriber';
 
 @Injectable()
 export class KafkaSubscriber extends Subscriber {

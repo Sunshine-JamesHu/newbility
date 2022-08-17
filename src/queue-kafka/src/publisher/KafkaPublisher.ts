@@ -1,9 +1,8 @@
 import { Producer } from 'kafkajs';
-import { IQueueClient } from '../../../queue-core/src/QueueClient';
-import { Publisher } from '../../../queue-core/src/publisher/Publisher';
+import { IQueueClient, Publisher } from '@newbility/queue-core';
+import { Injectable } from '@newbility/core';
 import { KafkaOptions } from '../KafkaOptions';
 import { KafkaProducer } from './KafkaProducer';
-import { Injectable } from '../../../core/src/di/Dependency';
 
 @Injectable()
 export class KafkaPublisher extends Publisher {

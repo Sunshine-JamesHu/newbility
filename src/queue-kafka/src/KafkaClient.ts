@@ -1,8 +1,7 @@
-import { QueueClient } from '../../queue-core/src/QueueClient';
 import { Kafka, logLevel as LogLevel } from 'kafkajs';
+import { QueueClient } from '@newbility/queue-core';
+import { Abstract, ILogger } from '@newbility/core';
 import { KafkaOptions } from './KafkaOptions';
-import { Abstract } from '../../core/src/di/Dependency';
-import { ILogger } from '../../core/src/logger/Logger';
 
 @Abstract()
 export abstract class KafkaClient<TClient> extends QueueClient<TClient> {

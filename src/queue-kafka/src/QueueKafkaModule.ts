@@ -1,11 +1,6 @@
-import { ModulePath } from '../../core/src/modularity/AppModule';
-import { Container, Inject, Injectable } from '../../core/src/di/Dependency';
-import { DependsOn } from '../../core/src/modularity/DependsOn';
-import { CoreModule } from '../../core/src/CoreModule';
-import { QueueCoreModule } from '../../queue-core/src/QueueCoreModule';
-import { QueueModule } from '../../queue-core/src/QueueModule';
+import { ModulePath, Container, Injectable, DependsOn, CoreModule } from '@newbility/core';
+import { QueueCoreModule, QueueModule, GetQueueInjectToken, QueueSubType } from '@newbility/queue-core';
 import { KafkaPublisher } from './publisher/KafkaPublisher';
-import { GetQueueInjectToken, QueueSubType } from '../../queue-core/src/Queue';
 import { KafkaSubscriber } from './subscriber/KafkaSubscriber';
 
 @ModulePath(__dirname)

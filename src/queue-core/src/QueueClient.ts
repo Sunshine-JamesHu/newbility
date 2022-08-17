@@ -1,7 +1,5 @@
 import AsyncLock from 'async-lock';
-import { IAsyncDisposable } from '../../core/src/sys/Disposable';
-import { ILogger, LOGGER_INJECT_TOKEN } from '../../core/src/logger/Logger';
-import { Abstract, Container } from '../../core/src/di/Dependency';
+import { IAsyncDisposable, ILogger, LOGGER_INJECT_TOKEN, Abstract, Container } from '@newbility/core';
 
 export interface IQueueClient<TClient> extends IAsyncDisposable {
   GetClient(): Promise<TClient>;

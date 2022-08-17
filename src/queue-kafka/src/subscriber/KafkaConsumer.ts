@@ -1,5 +1,5 @@
 import { Consumer } from 'kafkajs';
-import { NewbilityError } from '../../../core/src/error/NewbilityError';
+import { NewbilityError } from '@newbility/core';
 import { KafkaClient } from '../KafkaClient';
 import { KafkaOptions } from '../KafkaOptions';
 

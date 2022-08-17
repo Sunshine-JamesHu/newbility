@@ -8,10 +8,10 @@ import {
   ISettingManager,
   CoreModule,
   NewbilityError,
+  OsHelper,
 } from '@newbility/core';
 import { NacosConfigClient, NacosNamingClient } from 'nacos';
 import JSON5 from 'json5';
-import os from 'os';
 import { NacosConfigKey, NacosOptions } from './NacosOptions';
 import { CFG_KEY } from './NacosCont';
 import { CreateConfigClient, CreateNamingClient } from './client/NacosClient';
@@ -77,7 +77,6 @@ export class NacosModule extends AppModule {
   }
 
   private async RegisterInstance() {
-    console.log('注册服务');
     const client = this._namingClient;
     await client.ready();
     await client.registerInstance(
@@ -124,23 +123,9 @@ export class NacosModule extends AppModule {
     return configKey;
   }
 
-  private GetAppIP(): string {
-    const interfaces = os.networkInterfaces();
-    for (var devName in interfaces) {
-      const iface: any = interfaces[devName];
-      for (var i = 0; i < iface.length; i++) {
-        var alias = iface[i];
-        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-          return alias.address;
-        }
-      }
-    }
-    return '127.0.0.1';
-  }
-
   private GetRegisterIns(config: NacosOptions): RegisterIns {
     if (!config.appName) throw new NewbilityError(`缺少[${CFG_KEY}.appName]配置`);
-    const ip = config.appIP ?? this.GetAppIP();
+    const ip = config.appIP ?? OsHelper.GetOsIPV4();
     const port = config.appPort ?? this._setting.GetConfig<number>('port') ?? 30000;
     return {
       name: config.appName,

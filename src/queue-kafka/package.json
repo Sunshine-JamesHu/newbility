@@ -1,5 +1,5 @@
 {
-  "name": "@newbility/nacos",
+  "name": "@newbility/queue-kafka",
   "version": "0.1.0",
   "main": "build/index.js",
   "author": "jameshu",
@@ -16,8 +16,8 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.1.0",
-    "nacos": "^2.4.2"
+    "@newbility/queue-core": "^0.1.0",
+    "kafkajs": "^2.2.0"
   },
   "devDependencies": {
     "del": "^6.0.0",

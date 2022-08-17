@@ -1,3 +1,5 @@
 ### @newbility/minio
 
-minio 实现库,使用 minio 实现 Oss 服务的基本抽象
+Oss 存储的 Minio 实现
+
+### 使用方式

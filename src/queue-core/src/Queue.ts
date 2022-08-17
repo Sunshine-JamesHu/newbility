@@ -1,6 +1,4 @@
-import { EventKey, EVENT_HANDLER_METADATA } from '../../core/src/event/EventHandler';
-import { GetInjectToken } from '../../core/src/di/Dependency';
-import { DefineMetadata, GetMetadata } from '../../core/src/metadata/Metadata';
+import { EventKey, EVENT_HANDLER_METADATA, GetInjectToken, DefineMetadata, GetMetadata } from '@newbility/core';
 
 export enum QueueSubType {
   Publisher = 0,
@@ -15,7 +13,6 @@ export function GetQueueInjectToken(key: string, subType: QueueSubType) {
 }
 
 export const QUEUE_EVENT_HANDLER_METADATA = `${EVENT_HANDLER_METADATA}:Queue`;
-
 export function QueueEventKey(topic: string, eventKey?: string) {
   if (!eventKey) eventKey = topic;
   const eventFunc = EventKey(eventKey);

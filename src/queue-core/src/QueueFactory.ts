@@ -1,6 +1,6 @@
+import { Container, GetInjectToken, Singleton } from '@newbility/core';
 import { ISubscriber } from './subscriber/Subscriber';
 import { IPublisher } from './publisher/Publisher';
-import { Container, GetInjectToken, Singleton } from '../../core/src/di/Dependency';
 import { GetQueueInjectToken, QueueSubType } from './Queue';
 
 export const QUEUE_FACTORY_INJECT_TOKEN = GetInjectToken('IQueueFactory');

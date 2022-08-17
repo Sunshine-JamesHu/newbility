@@ -1,5 +1,4 @@
-import { ILogger, LOGGER_INJECT_TOKEN } from '../../../core/src/logger/Logger';
-import { Abstract, Container } from '../../../core/src/di/Dependency';
+import { ILogger, LOGGER_INJECT_TOKEN, Abstract, Container } from '@newbility/core';
 
 export interface IPublisher {
   /**

@@ -45,10 +45,10 @@
         "clientId": "koa_kafka_test"
       }
     },
-    "dev": {
+    "test": {
       "type": "kafka",
       "options": {
-        "brokers": ["server.dev.ai-care.top:9092"],
+        "brokers": ["server.test.ai-care.top:9092"],
         "clientId": "koa_kafka_test2"
       }
     }

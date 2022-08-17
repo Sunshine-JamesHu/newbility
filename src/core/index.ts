@@ -42,6 +42,8 @@ import { StreamHelper } from './src/util/StreamHelper';
 import { DependsOn } from './src/modularity/DependsOn';
 import { InitServiceLoader } from './src/di/ServiceLoader';
 import { CoreModule } from './src/CoreModule';
+import { OsHelper } from './src/util/OsHelper';
+import { IRunnable } from './src/sys/Runnable';
 
 export {
   Container,
@@ -102,8 +104,10 @@ export {
   IDisposable,
   IAsyncDisposable,
   UsingAsync,
+  IRunnable,
   ArrayHelper,
   Guid,
+  OsHelper,
   StreamHelper,
   CoreModule,
 };

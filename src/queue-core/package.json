@@ -1,5 +1,5 @@
 {
-  "name": "@newbility/nacos",
+  "name": "@newbility/queue-core",
   "version": "0.1.0",
   "main": "build/index.js",
   "author": "jameshu",
@@ -17,9 +17,10 @@
   },
   "dependencies": {
     "@newbility/core": "^0.1.0",
-    "nacos": "^2.4.2"
+    "async-lock": "^1.3.2"
   },
   "devDependencies": {
+    "@types/async-lock": "^1.1.5",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "typescript": "^4.7.4"

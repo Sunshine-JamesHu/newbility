@@ -1,10 +1,7 @@
-import { ISettingManager, SETTING_INJECT_TOKEN } from '../../core/src/setting/SettingManager';
-import { AppModule } from '../../core/src/modularity/AppModule';
+import { ISettingManager, SETTING_INJECT_TOKEN, AppModule, Abstract, Container, ILogger, LOGGER_INJECT_TOKEN } from '@newbility/core';
 import { QueueOptions, QueueSetting } from './QueueOptions';
-import { Abstract, Container } from '../../core/src/di/Dependency';
 import { GetQueueInjectToken, QueueSubType } from './Queue';
 import { ISubscriber } from './subscriber/Subscriber';
-import { ILogger, LOGGER_INJECT_TOKEN } from '../../core/src/logger/Logger';
 
 @Abstract()
 export abstract class QueueModule extends AppModule {
