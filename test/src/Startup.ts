@@ -4,6 +4,7 @@ import { OssCoreModule, UseOssProvider } from '@newbility/oss-core';
 import { LocalOssModule, OSS_KEY as LOCAL_OSS_KEY } from '@newbility/oss-local';
 import { MinioModule, OSS_KEY as MINIO_OSS_KEY } from '@newbility/minio';
 import { NacosModule } from '@newbility/nacos';
+// import { NacosModule } from './modules/nacos/NacosModule';
 // import { OssCoreModule } from '../src/oss-core/src/OssCoreModule';
 // import { UseOssProvider } from '../src/oss-core/src/OssProvider';
 // import { LocalOssModule } from '../src/oss-local/src/LocalOssModule';
@@ -21,6 +22,7 @@ import { NacosModule } from '@newbility/nacos';
 @DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, NacosModule)
 export class Startup extends AppModule {
   public OnApplicationInitialization(): void {
+    console.log('执行器')
     UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储
     // UseOssProvider(MINIO_OSS_KEY); // 使用Minio作做为默认存储
     // // 订阅

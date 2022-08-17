@@ -16,33 +16,45 @@ import { NacosConfigKey, NacosOptions } from './NacosOptions';
 import { CFG_KEY } from './NacosCont';
 import { CreateConfigClient, CreateNamingClient } from './client/NacosClient';
 
+interface RegisterIns {
+  name: string;
+  ip: string;
+  port: number;
+  group?: string;
+  metadata?: any;
+}
+
 @Injectable()
 @ModulePath(__dirname)
 @DependsOn(CoreModule)
 export class NacosModule extends AppModule {
   private readonly _setting: ISettingManager;
+  private readonly _nacosConfig: NacosOptions;
   private readonly _configClient: NacosConfigClient;
   private readonly _namingClient: NacosNamingClient;
+
+  private readonly _registerIns: RegisterIns;
+
   constructor(@Inject(SETTING_INJECT_TOKEN) setting: ISettingManager) {
     super();
     this._setting = setting;
-    this._configClient = CreateConfigClient();
-    this._namingClient = CreateNamingClient();
+
+    const nacosConfig = this.GetNacosConfig();
+    this._nacosConfig = nacosConfig as any;
+
+    this._registerIns = this.GetRegisterIns(this._nacosConfig);
+
+    this._configClient = CreateConfigClient(nacosConfig);
+    this._namingClient = CreateNamingClient(nacosConfig);
   }
 
   public async OnApplicationInitialization(): Promise<void> {
-    const config = this.GetNacosConfig();
-    if (config) {
-      this.SubConfigChange(config);
-      await this.RegisterInstance(config);
-    }
+    this.SubConfigChange(this._nacosConfig);
+    await this.RegisterInstance();
   }
 
   public async OnApplicationShutdown(): Promise<void> {
-    const config = this.GetNacosConfig();
-    if (config) {
-      await this.DeregisterInstance(config);
-    }
+    await this.DeregisterInstance();
   }
 
   private SubConfigChange(config: NacosOptions) {
@@ -64,30 +76,41 @@ export class NacosModule extends AppModule {
     }
   }
 
-  private async RegisterInstance(config: NacosOptions) {
-    if (!config.appName) throw new NewbilityError(`缺少[${CFG_KEY}.appName]配置`);
-
+  private async RegisterInstance() {
+    console.log('注册服务');
     const client = this._namingClient;
     await client.ready();
-    await client.registerInstance(config.appName, {
-      ip: config.appIP ?? this.GetAppIP(),
-      port: config.appPort ?? this._setting.GetConfig<number>('port') ?? 30000,
-    });
+    await client.registerInstance(
+      this._registerIns.name,
+      {
+        ip: this._registerIns.ip,
+        port: this._registerIns.port,
+        metadata: this._registerIns.metadata,
+      } as any,
+      this._registerIns.group
+    );
   }
 
-  private async DeregisterInstance(config: NacosOptions) {
-    if (!config.appName) throw new NewbilityError(`缺少[${CFG_KEY}.appName]配置`);
-
+  private async DeregisterInstance() {
     const client = this._namingClient;
     await client.ready();
-    await client.deregisterInstance(config.appName, {
-      ip: config.appIP ?? this.GetAppIP(),
-      port: config.appPort ?? this._setting.GetConfig<number>('port') ?? 30000,
-    });
+    await client.deregisterInstance(
+      this._registerIns.name,
+      {
+        ip: this._registerIns.ip,
+        port: this._registerIns.port,
+        metadata: this._registerIns.metadata,
+      } as any,
+      this._registerIns.group
+    );
   }
 
-  private GetNacosConfig(): NacosOptions | undefined {
-    return this._setting.GetConfig<NacosOptions>(CFG_KEY);
+  private GetNacosConfig(): NacosOptions {
+    const config = this._setting.GetConfig<NacosOptions>(CFG_KEY);
+    if (!config) {
+      throw new NewbilityError(`缺少[${CFG_KEY}]配置`);
+    }
+    return config;
   }
 
   private GetConfigKey(key: string | NacosConfigKey) {
@@ -113,5 +136,19 @@ export class NacosModule extends AppModule {
       }
     }
     return '127.0.0.1';
+  }
+
+  private GetRegisterIns(config: NacosOptions): RegisterIns {
+    if (!config.appName) throw new NewbilityError(`缺少[${CFG_KEY}.appName]配置`);
+    const ip = config.appIP ?? this.GetAppIP();
+    const port = config.appPort ?? this._setting.GetConfig<number>('port') ?? 30000;
+    return {
+      name: config.appName,
+      ip,
+      port,
+      metadata: {
+        framework: 'newbility',
+      },
+    };
   }
 }

@@ -30,17 +30,29 @@ export function CreateNamingClient(options?: ClientOptions): NacosNamingClient {
     throw new NewbilityError(`缺少[${CFG_KEY}.serverAddr]配置`);
   }
 
-  // const nacoslogger: any = {
-  //   log: logger.LogDebug,
-  //   debug: logger.LogDebug,
-  //   info: logger.LogDebug,
-  //   warn: logger.LogDebug,
-  //   error: logger.LogDebug,
-  //   trace: logger.LogFatal,
-  // };
+  const nacoslogger: any = {
+    log: (msg: string, ...args: any[]) => {
+      logger.LogDebug(msg, args);
+    },
+    debug: (msg: string, ...args: any[]) => {
+      logger.LogDebug(msg, args);
+    },
+    info: (msg: string, ...args: any[]) => {
+      logger.LogInfo(msg, args);
+    },
+    warn: (msg: string, ...args: any[]) => {
+      logger.LogWarn(msg, args);
+    },
+    error: (msg: string, ...args: any[]) => {
+      logger.LogError(msg, args);
+    },
+    trace: (msg: string, ...args: any[]) => {
+      logger.LogFatal(msg, args);
+    },
+  };
 
   const client = new NacosNamingClient({
-    logger: console,
+    logger: nacoslogger,
     serverList: options.serverAddr,
     namespace: options.namespace,
   });

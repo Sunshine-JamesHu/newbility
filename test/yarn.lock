@@ -36,10 +36,10 @@
     "@newbility/oss-core" "^0.0.11"
     minio "^7.0.30"
 
-"@newbility/nacos@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.npmjs.org/@newbility/nacos/-/nacos-0.0.13.tgz#a600580cae81fad0b169f3014dc2dcc4a691678e"
-  integrity sha512-O01tl9I4ELx6EXF7nLGs8+G2CkirGHeYJgqvNxTS+bsCGpxLkeK1no26LtMjkr3W6EqAzlSxN5q8yi5D/PcG/g==
+"@newbility/nacos@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.npmjs.org/@newbility/nacos/-/nacos-0.0.15.tgz#20409754769a3073809759ee48045d8ac85ed7a7"
+  integrity sha512-+yiPCDY4xpj2df7Qv/gc2J6NmAJjMzrMTVYiapnQb7GTCD62KASwUDEZUlKSvkhqb4xbpS+b5DOM+NeUGRe6ZQ==
   dependencies:
     "@newbility/core" "^0.0.10"
     nacos "^2.4.2"
