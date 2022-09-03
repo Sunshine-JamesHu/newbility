@@ -1,0 +1,30 @@
+{
+  "name": "@newbility/axios",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "keywords": [
+    "newbility"
+  ],
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@newbility/http-client-core": "^0.0.1",
+    "axios": "^0.27.2",
+    "qs": "^6.11.0"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "typescript": "^4.7.4",
+    "@types/axios": "^0.14.0",
+    "@types/qs": "^6.9.7"
+  }
+}
