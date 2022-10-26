@@ -15,8 +15,8 @@ import { AxiosModule } from '@newbility/axios';
 @DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, QueueCoreModule, QueueKafkaModule, AxiosModule)
 export class Startup extends AppModule {
   public OnApplicationInitialization(): void {
-    UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储
-    // UseOssProvider(MINIO_OSS_KEY); // 使用Minio作做为默认存储
+    // UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储
+    UseOssProvider(MINIO_OSS_KEY); // 使用Minio作做为默认存储
 
     // // 订阅
     // const queueFactory = Container.resolve<IQueueFactory>(QUEUE_FACTORY_INJECT_TOKEN);

@@ -55,7 +55,9 @@ export class MinioProvider extends OssProvider {
 
   protected NewFileName(fileName: string) {
     const f = this.GetFileType(fileName);
-    return `${Guid.Create()}${f}`;
+    const guid = Guid.Create();
+    if (!f) return guid;
+    return `${guid}${f}`;
   }
 
   protected FullTag(fileName: string, bucketName?: string) {

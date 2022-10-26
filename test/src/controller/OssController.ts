@@ -33,8 +33,25 @@ export default class OssController extends Controller {
     throw new UserFriendlyError('请选择一个文件进行上传');
   }
 
+  @HttpPost()
+  async PerfTest(@RequestBody() data: { count: number }) {
+    for (let i = 0; i < data.count; i++) {
+      const arr: number[] = [];
+      for (let j = 0; j < 1024 * 1024; j++) {
+        const val = this.RandomRange(0, 256);
+        arr.push(val);
+      }
+      const buffer = Buffer.from(arr);
+      await this._ossService.SaveAsync(buffer, `${Guid.Create()}.t`, 'test');
+    }
+  }
+
   @HttpDelete()
   async DeleteFile(@RequestQuery('path') path: string): Promise<void> {
     await this._ossService.RemoveAsync(path);
+  }
+
+  private RandomRange(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }
