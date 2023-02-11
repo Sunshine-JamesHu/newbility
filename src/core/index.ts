@@ -44,6 +44,7 @@ import { InitServiceLoader } from './src/di/ServiceLoader';
 import { CoreModule } from './src/CoreModule';
 import { OsHelper } from './src/util/OsHelper';
 import { IRunnable } from './src/sys/Runnable';
+import { IService, Service } from './src/service/Service';
 
 export {
   Container,
@@ -110,4 +111,6 @@ export {
   OsHelper,
   StreamHelper,
   CoreModule,
+  IService,
+  Service
 };
