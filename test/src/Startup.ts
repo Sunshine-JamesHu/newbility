@@ -9,10 +9,11 @@ import { QueueCoreModule, IQueueFactory, QUEUE_FACTORY_INJECT_TOKEN } from '@new
 import { QueueKafkaModule } from '@newbility/queue-kafka';
 import { Queue2EventHandler } from './events/QueueEventHandler';
 import { AxiosModule } from '@newbility/axios';
+import { CronBackgroundWorkerModule } from '../modules/background-worker-cron/CronBackgroundWorkerModule';
 
 @Injectable()
 @ModulePath(__dirname)
-@DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, QueueCoreModule, QueueKafkaModule, AxiosModule)
+@DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, QueueCoreModule, QueueKafkaModule, AxiosModule, CronBackgroundWorkerModule)
 export class Startup extends AppModule {
   public OnApplicationInitialization(): void {
     // UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储

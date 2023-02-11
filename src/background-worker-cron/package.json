@@ -1,5 +1,5 @@
 {
-  "name": "@newbility/oss-local",
+  "name": "@newbility/background-worker-cron",
   "version": "0.2.0",
   "main": "build/index.js",
   "author": "jameshu",
@@ -16,10 +16,11 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/oss-core": "^0.2.0",
-    "moment": "^2.29.4"
+    "@newbility/background-worker-core": "^0.2.0",
+    "cron": "^2.2.0"
   },
   "devDependencies": {
+    "@types/cron": "^2.0.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "typescript": "^4.7.4"

@@ -82,6 +82,7 @@ export class KoaCoreModule extends AppModule {
           return /html|text|javascript|css|json/i.test(content_type);
         },
         threshold: 128 * 1024, // 超过128k就压缩
+        br: false, // br性能有问题
       })
     );
   }
