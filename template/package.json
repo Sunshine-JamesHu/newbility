@@ -1,0 +1,22 @@
+{
+  "name": "newbility-template",
+  "version": "0.2.0",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "scripts": {
+    "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\"",
+    "build": "gulp"
+  },
+  "dependencies": {
+    "@newbility/koa-core": "^0.2.0"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}

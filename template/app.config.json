@@ -1,0 +1,13 @@
+{
+  "port": 28124,
+  "apiPrefix": "api",
+  "log": {
+    "logLevel": "debug"
+  },
+  "swagger": {
+    "enabled": true
+  },
+  "cors": {
+    "enable": true
+  }
+}
