@@ -27,4 +27,13 @@ export default class RequestController extends Controller {
       detail: '呀呀呀',
     });
   }
+
+  @HttpPost()
+  async AsyncErrorTest(@RequestBody() data: any) {
+    const text = await Promise.resolve('AsyncTestError');
+    console.log(text);
+    throw new UserFriendlyError('主动抛出错误', {
+      detail: text,
+    });
+  }
 }

@@ -22,7 +22,7 @@ export class CronBackgroundWorkerManager extends BackgroundWorkerManager {
   }
 
   StopAsync(): Promise<void> {
-    this.Logger.LogDebug('停止所有BackgroundWorker');
+    this.Logger.LogDebug('Stop All Background Worker');
     this.StartedWorker.forEach((worker) => {
       worker.stop();
     });
@@ -37,8 +37,12 @@ export class CronBackgroundWorkerManager extends BackgroundWorkerManager {
     const cronWorker = new cron.CronJob(
       schedulerInfo.cron,
       async () => {
-        const workerIns = Container.resolve<IBackgroundWorker>(worker as any);
-        await workerIns.DoWorkAsync();
+        try {
+          const workerIns = Container.resolve<IBackgroundWorker>(worker as any);
+          await workerIns.DoWorkAsync();
+        } catch (error: any) {
+          this.Logger.LogError(error?.message, error);
+        }
       },
       null,
       false,
