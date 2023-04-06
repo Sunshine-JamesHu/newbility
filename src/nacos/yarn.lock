@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.2.tgz#3694d6919e50c78dc8ae716721ee97ce722c742d"
-  integrity sha512-y1ORxk54HidoSvmrPYgxOXtX6XJwDRXKw4pHxvzsFzJGY3mw/VxU6g/4TACdGYO1NrkHdfa4GE/baIVgMt005Q==
+"@newbility/core@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.7.tgz#a2ab3c6792d59e1217bfb5a0153de59b8e1c6daf"
+  integrity sha512-i/3rhBHzh2RcfHvv012QBM1e+DwO5OZj2pUoApdL7GPgjWo/Sk1CtSN7g/kBrPFgNQRa5N/o6Dp0A/cucNF7tQ==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"

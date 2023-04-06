@@ -1,5 +1,5 @@
 {
-  "port": 6666,
+  "port": 28000,
   "apiPrefix": "api",
   "log": {
     "logLevel": "debug"

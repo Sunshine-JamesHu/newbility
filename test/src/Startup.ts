@@ -10,10 +10,24 @@ import { QueueKafkaModule } from '@newbility/queue-kafka';
 import { Queue2EventHandler } from './events/QueueEventHandler';
 import { AxiosModule } from '@newbility/axios';
 import { CronBackgroundWorkerModule } from '../modules/background-worker-cron/CronBackgroundWorkerModule';
+import { PostgresModule } from '../modules/postgres/PostgresModule';
+import { MysqlModule } from '../modules/mysql/MysqlModule';
+// import { PostgresModule } from '@newbility/postgres';
 
 @Injectable()
 @ModulePath(__dirname)
-@DependsOn(KoaCoreModule, OssCoreModule, LocalOssModule, MinioModule, QueueCoreModule, QueueKafkaModule, AxiosModule, CronBackgroundWorkerModule)
+@DependsOn(
+  KoaCoreModule,
+  OssCoreModule,
+  LocalOssModule,
+  MinioModule,
+  QueueCoreModule,
+  QueueKafkaModule,
+  AxiosModule,
+  CronBackgroundWorkerModule,
+  PostgresModule,
+  MysqlModule
+)
 export class Startup extends AppModule {
   public OnApplicationInitialization(): void {
     // UseOssProvider(LOCAL_OSS_KEY); // 使用本地存储作为默认存储

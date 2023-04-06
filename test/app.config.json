@@ -52,5 +52,34 @@
         "clientId": "koa_kafka_test2"
       }
     }
+  },
+  "databases": {
+    "default": {
+      "type": "postgres",
+      "options": {
+        "address": "192.168.1.159",
+        "port": 5432,
+        "database": "koa_test",
+        "userName": "postgres",
+        "password": "Rozh123srv",
+        "pool": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    },
+    "mysql": {
+      "type": "mysql",
+      "options": {
+        "address": "127.0.0.1",
+        "port": 3306,
+        "database": "koa_test",
+        "userName": "root",
+        "password": "123456",
+        "pool": {
+          "max": 20
+        }
+      }
+    }
   }
 }

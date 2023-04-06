@@ -1,0 +1,28 @@
+{
+  "name": "@newbility/mysql",
+  "version": "0.2.7",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "keywords": [
+    "newbility"
+  ],
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@newbility/database": "^0.2.7",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.21",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "typescript": "^4.7.4"
+  }
+}
