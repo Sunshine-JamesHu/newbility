@@ -10,9 +10,11 @@ import { QueueKafkaModule } from '@newbility/queue-kafka';
 import { Queue2EventHandler } from './events/QueueEventHandler';
 import { AxiosModule } from '@newbility/axios';
 import { CronBackgroundWorkerModule } from '../modules/background-worker-cron/CronBackgroundWorkerModule';
-import { PostgresModule } from '../modules/postgres/PostgresModule';
-import { MysqlModule } from '../modules/mysql/MysqlModule';
-// import { PostgresModule } from '@newbility/postgres';
+// import { PostgresModule } from '../modules/postgres/PostgresModule';
+// import { MysqlModule } from '../modules/mysql/MysqlModule';
+
+import { PostgresModule } from '@newbility/postgres';
+import { MysqlModule } from '@newbility/mysql';
 
 @Injectable()
 @ModulePath(__dirname)

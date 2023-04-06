@@ -61,7 +61,7 @@
         "port": 5432,
         "database": "koa_test",
         "userName": "postgres",
-        "password": "Rozh123srv",
+        "password": "123456",
         "pool": {
           "min": 0,
           "max": 20

@@ -59,6 +59,14 @@
     "@newbility/oss-core" "^0.2.7"
     minio "^7.0.30"
 
+"@newbility/mysql@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.npmjs.org/@newbility/mysql/-/mysql-0.2.7.tgz#21d1697e49d2125cc420e8c735bda0c522670512"
+  integrity sha512-WZ/jF7Gwyd2FdYBiPaK5cyT/CM0tRA6DFKSCCvpA91u16/n/p78+8Pq55kb2Hdkh6u3lZzPCiZeNRkqWpwii9g==
+  dependencies:
+    "@newbility/database" "^0.2.7"
+    mysql "^2.18.1"
+
 "@newbility/nacos@^0.2.7":
   version "0.2.7"
   resolved "https://registry.npmjs.org/@newbility/nacos/-/nacos-0.2.7.tgz#8866f873c9925e2877757c8fe4d654d5fb04f295"
