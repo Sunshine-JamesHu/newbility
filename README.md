@@ -18,6 +18,22 @@
 
 请参照 `template` 文件夹中的 `README.md`
 
+如果你使用的typescript5的话,需要将在项目的根目录加入如下文件,用来消除一个错误.
+这是由于tsyringe库暂时并没有发布新版本来支持ts5
+加入`tsyringe.types.d.ts`文件来临时消除错误
+```
+import * as tsyringe from 'tsyringe';
+
+// Overwrite wrong declaration from tryringe, support typescript 5.x
+// Remove this when library will update
+declare module 'tsyringe' {
+  declare function inject(
+    token: tsyringe.InjectionToken<any>
+  ): (target: any, propertyKey: string | symbol | undefined, parameterIndex: number) => any;
+}
+
+```
+
 ## 功能
 
 ### 发布订阅
