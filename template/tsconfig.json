@@ -10,7 +10,7 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "suppressImplicitAnyIndexErrors": true,
+        // "suppressImplicitAnyIndexErrors": true,
         "moduleResolution": "node",
         "sourceMap": true,
         "experimentalDecorators": true,

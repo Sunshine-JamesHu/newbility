@@ -1,0 +1,56 @@
+version: "3.8"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - TZ=Asia/Shanghai
+      - SA_PASSWORD=Admin1234567_
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+  postgres:
+    image: jcr.ronds.com/ronds-docker/postgres:13.5
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=Admin1234567_
+      - shm-size=512MB
+    command: "-c shared_buffers=256MB -c max_connections=800"
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin1234567_
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+volumes:
+  mssql_data:
+    driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /data/mssql/_data
+  postgres_data:
+    driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /data/postgres/_data
+  mysql_data:
+    driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: /data/mysql/_data

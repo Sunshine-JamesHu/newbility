@@ -12,7 +12,7 @@ export class MysqlClient extends DatabaseClient {
     this._client = client;
   }
 
-  async ExecuteAsync<TResult = any>(sql: string, ...args: any): Promise<ExecuteResult<TResult>> {
+  protected ExecuteByArrArgsAsync<TResult = any>(sql: string, args: any[]): Promise<ExecuteResult<TResult>> {
     const fullSql = mysql.format(sql, args);
     return new Promise((resolve, reject) => {
       this.Client.query(fullSql, (err, result) => {
@@ -34,6 +34,10 @@ export class MysqlClient extends DatabaseClient {
         }
       });
     });
+  }
+
+  protected GetSqlArgPlaceholder(argKey: string, argIndex: number): string {
+    return '?';
   }
 
   BeginTransaction(): Promise<void> {

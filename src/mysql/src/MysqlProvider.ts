@@ -9,7 +9,7 @@ export class MysqlProvider extends DatabaseProvider {
   protected Options: MysqlOptions;
 
   constructor(options: MysqlOptions) {
-    super();
+    super('mysql');
     this.Options = options;
     this.ConnPool = this.GetConnPool(options);
   }

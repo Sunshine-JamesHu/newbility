@@ -1,4 +1,4 @@
-import { Container, IDisposable, ILogger, LOGGER_INJECT_TOKEN } from '@newbility/core';
+import { Container, IDisposable, ILogger, LOGGER_INJECT_TOKEN, NewbilityError } from '@newbility/core';
 
 export interface ExecuteResult<T> {
   rowCount: number;
@@ -41,7 +41,39 @@ export abstract class DatabaseClient implements IDatabaseClient {
 
   abstract Commit(): Promise<void>;
 
-  abstract ExecuteAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<ExecuteResult<TResult>>;
+  async ExecuteAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<ExecuteResult<TResult>> {
+    if (args.length === 1 && typeof args[0] === 'object') {
+      return await this.ExecuteByObjArgsAsync(sql, args[0]);
+    } else {
+      return await this.ExecuteByArrArgsAsync(sql, args);
+    }
+  }
 
   abstract Dispose(): void;
+
+  protected abstract ExecuteByArrArgsAsync<TResult = any>(sql: string, args: Array<any>): Promise<ExecuteResult<TResult>>;
+
+  protected async ExecuteByObjArgsAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>> {
+    let relaSql = sql;
+    const relaSqlArgs: any[] = [];
+    const reg = this.SqlArgsRegExp();
+
+    const matchResult = relaSql.matchAll(reg);
+    for (const match of matchResult) {
+      const argKey = match['0'].replace(':', '');
+      const argVal = args[argKey];
+      if (argVal === undefined) throw new NewbilityError(`Missing value for parameter ${argKey}`);
+
+      relaSqlArgs.push(argVal);
+      relaSql = relaSql.replace(`:${argKey}`, this.GetSqlArgPlaceholder(argKey, relaSqlArgs.length - 1));
+    }
+
+    return await this.ExecuteByArrArgsAsync(relaSql, relaSqlArgs);
+  }
+
+  protected abstract GetSqlArgPlaceholder(argKey: string, argIndex: number): string;
+
+  protected SqlArgsRegExp(): RegExp {
+    return new RegExp(`(?<!['":]):\\w+(?!['"])`, 'g');
+  }
 }

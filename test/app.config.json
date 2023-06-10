@@ -57,11 +57,11 @@
     "default": {
       "type": "postgres",
       "options": {
-        "address": "192.168.1.159",
+        "address": "127.0.0.1",
         "port": 5432,
-        "database": "koa_test",
+        "database": "newbility",
         "userName": "postgres",
-        "password": "123456",
+        "password": "Admin1234567_",
         "pool": {
           "min": 0,
           "max": 20
@@ -73,9 +73,9 @@
       "options": {
         "address": "127.0.0.1",
         "port": 3306,
-        "database": "koa_test",
+        "database": "newbility",
         "userName": "root",
-        "password": "123456",
+        "password": "Admin1234567_",
         "pool": {
           "max": 20
         }

@@ -18,9 +18,12 @@
 
 请参照 `template` 文件夹中的 `README.md`
 
-如果你使用的typescript5的话,需要将在项目的根目录加入如下文件,用来消除一个错误.
-这是由于tsyringe库暂时并没有发布新版本来支持ts5
+如果你使用的 typescript5 的话,需要将在项目的根目录加入如下文件,用来消除一个错误.
+
+这是由于 tsyringe 库暂时并没有发布新版本来支持 ts5
+
 加入`tsyringe.types.d.ts`文件来临时消除错误
+
 ```
 import * as tsyringe from 'tsyringe';
 
@@ -35,6 +38,96 @@ declare module 'tsyringe' {
 ```
 
 ## 功能
+
+### 数据库连接相关
+
+#### 配置文件
+
+需要在`app.config.json`中加入如下配置
+
+```
+{
+  "databases": {
+    "default": { // 这里的default是标识使用哪个Key做为唯一的Key,可以是任意值
+      "type": "postgres", // 这里代表是数据库类型,目前已实现的有 mysql 和 postgres
+      "options": {
+        "address": "127.0.0.1", // 连接地址
+        "port": 5432, // 连接端口
+        "database": "newbility", // 数据库名称
+        "userName": "postgres", // 用户名
+        "password": "Admin1234567_", // 密码
+        "pool": {
+          "min": 0, // 连接池最小连接数
+          "max": 20 // 连接池最大连接数量
+        }
+      }
+    },
+    "mysql": {
+      "type": "mysql",
+      "options": {
+        "address": "127.0.0.1",
+        "port": 3306,
+        "database": "newbility",
+        "userName": "root",
+        "password": "Admin1234567_",
+        "pool": {
+          "max": 20
+        }
+      }
+    }
+  }
+}
+```
+
+#### 使用说明
+
+首先需要使用`npm`或者`yarn`加载依赖包
+
+```
+npm install  @newbility/postgres # pg使用
+npm install  @newbility/mysql # mysql使用
+
+yarn add @newbility/postgres# pg使用
+yarn add @newbility/mysql# mysql使用
+```
+
+然后在 Startup.ts 中将相关需要的模块加载进来(如果你是多模块的项目,在你需要使用的模块中加载即可)
+
+```
+
+@DependsOn(PostgresModule,MysqlModule)
+export class Startup extends AppModule {
+  // 代码
+}
+
+```
+
+目前 database 包中提供了默认的 `IDatabaseProvider` 和 `IDatabaseProviderFactory`来提供支持
+
+```
+
+import {
+  IDatabaseProvider, DB_PROVIDER_INJECT_TOKEN,
+  IDatabaseProviderFactory, DB_PROVIDER_FAC_INJECT_TOKEN
+} from '@newbility/database';
+
+```
+
+用法(建议使用对象的方式进行传参)
+
+```
+    const dbProvider = dbProviderFactory.GetProvider('default');
+
+    // 使用对象传参
+    const sql = `SELECT * FROM test WHERE id = :id and age < :age`;
+    const res = await dbProvider.ExecuteAsync<any>(sql, { id, age });
+
+    // 使用数组传参
+    const sql = `SELECT * FROM test WHERE id = $0 and age < $1`; // pg
+    // const sql = `SELECT * FROM test WHERE id = ? and age < ?`; // mysql
+    const res = await dbProvider.ExecuteAsync<any>(sql, id, age);
+
+```
 
 ### 发布订阅
 
@@ -116,7 +209,7 @@ export class QueueTestService extends Service implements IQueueTestService {
 
 ```
 
-#### Oss 存储支持
+### Oss 存储支持
 
 Oss 存储由 服务`IOssService`与提供者`IOssProvider`组成，框架中已经实现`minio`与`local`的 Oss 存储
 

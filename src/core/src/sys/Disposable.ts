@@ -20,7 +20,7 @@ export async function UsingAsync<TResult = void>(ins: IAsyncDisposable | IDispos
   } finally {
     // 主函数执行错误也要执行Dispose,防止堆栈溢出
     if (ins) {
-      if (ins['DisposeAsync']) {
+      if ((ins as any)['DisposeAsync']) {
         await (ins as IAsyncDisposable).DisposeAsync();
       } else {
         (ins as IDisposable).Dispose();

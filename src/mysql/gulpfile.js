@@ -12,5 +12,4 @@ function build(cb) {
     cb(error);
   });
 }
-
 exports.default = series(clean, build);

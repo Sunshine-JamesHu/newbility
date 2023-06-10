@@ -10,7 +10,7 @@ export class PostgresProvider extends DatabaseProvider {
   protected Options: PostgresOptions;
 
   constructor(options: PostgresOptions) {
-    super();
+    super('postgres');
     this.Options = options;
     this.ConnPool = this.GetConnPool(options);
   }

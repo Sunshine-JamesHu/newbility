@@ -12,12 +12,16 @@ export class PostgresClient extends DatabaseClient {
     this._client = client;
   }
 
-  async ExecuteAsync<TResult = any>(sql: string, ...args: any): Promise<ExecuteResult<TResult>> {
+  protected async ExecuteByArrArgsAsync<TResult = any>(sql: string, args: Array<any>): Promise<ExecuteResult<TResult>> {
     const execRes = await this.Client.query(sql, args);
     return {
       rowCount: execRes.rowCount,
       rows: execRes.rows as TResult[],
     };
+  }
+
+  protected GetSqlArgPlaceholder(argKey: string, argIndex: number): string {
+    return `$${argIndex + 1}`;
   }
 
   async BeginTransaction(): Promise<void> {

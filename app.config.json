@@ -29,7 +29,7 @@
     "minio": {
       "addr": "127.0.0.1",
       "port": 9000,
-      "userName": "admin",
+      "userName": "Admin",
       "password": "Admin@123456",
       "useSSL": false
     },
@@ -50,6 +50,35 @@
       "options": {
         "brokers": ["server.test.ai-care.top:9092"],
         "clientId": "koa_kafka_test2"
+      }
+    }
+  },
+  "databases": {
+    "default": {
+      "type": "postgres",
+      "options": {
+        "address": "127.0.0.1",
+        "port": 5432,
+        "database": "newbility",
+        "userName": "postgres",
+        "password": "Admin1234567_",
+        "pool": {
+          "min": 0,
+          "max": 20
+        }
+      }
+    },
+    "mysql": {
+      "type": "mysql",
+      "options": {
+        "address": "127.0.0.1",
+        "port": 3306,
+        "database": "newbility",
+        "userName": "root",
+        "password": "Admin1234567_",
+        "pool": {
+          "max": 20
+        }
       }
     }
   }

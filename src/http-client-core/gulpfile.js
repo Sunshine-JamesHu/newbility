@@ -9,8 +9,7 @@ function clean(cb) {
 
 function build(cb) {
   child_process.exec('tsc', (error) => {
-    if (!error) cb();
+    cb(error);
   });
 }
-
 exports.default = series(clean, build);

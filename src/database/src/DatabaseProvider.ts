@@ -24,9 +24,11 @@ export interface IDatabaseProvider {
 }
 
 export abstract class DatabaseProvider implements IDatabaseProvider {
+  public readonly ProviderType: string;
   protected Logger: ILogger;
-  constructor() {
+  constructor(providerType: string) {
     this.Logger = Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
+    this.ProviderType = providerType;
   }
 
   abstract ExecuteAsync<TResult = any>(sql: string, ...args: any): Promise<ExecuteResult<TResult>>;
