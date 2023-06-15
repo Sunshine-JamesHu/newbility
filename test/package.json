@@ -12,22 +12,34 @@
     "build"
   ],
   "scripts": {
-    "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
+    "start": "nodemon --inspect --watch \"./src/**/*.ts\" --watch \"./modules/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
   },
   "dependencies": {
     "@newbility/axios": "^0.2.8",
+    "@newbility/core": "^0.2.8",
     "@newbility/http-client-core": "^0.2.8",
     "@newbility/koa-core": "^0.2.8",
     "@newbility/minio": "^0.2.8",
+    "@newbility/mysql": "^0.2.8",
     "@newbility/nacos": "^0.2.8",
     "@newbility/oss-core": "^0.2.8",
     "@newbility/oss-local": "^0.2.8",
     "@newbility/postgres": "^0.2.8",
-    "@newbility/mysql": "^0.2.8",
     "@newbility/queue-core": "^0.2.8",
     "@newbility/queue-kafka": "^0.2.8",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/koa": "^2.13.6",
+    "@types/koa-compress": "^4.0.3",
+    "@types/koa-jwt": "^3.3.0",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
+    "@types/koa2-cors": "^2.0.2",
+    "@types/lodash": "^4.14.195",
     "axios": "^0.27.2",
     "cron": "^2.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "koa-jwt": "^4.0.4",
+    "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
     "mysql": "^2.18.1",
     "qs": "^6.11.0"
