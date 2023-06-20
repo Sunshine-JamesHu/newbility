@@ -19,8 +19,10 @@ var newbility = newbility || {};
     const dataJson = localStorage.getItem(ACCESS_TOKEN_KEY);
     if (dataJson) {
       const data = JSON.parse(dataJson);
-      if (data && data.token && Math.floor(Date.now()) + expiresIn * 1000 > Date.now()) {
+      if (data && data.token && Math.floor(Date.now()) + data.expiresIn * 1000 > Date.now()) {
         return data.token;
+      }else{
+        newbility.auth.clearToken();
       }
     }
     return null;

@@ -4,6 +4,8 @@ import { Authorize } from '../../modules/koa-core/auth/Authorize';
 import { AllowAnonymous } from '../../modules/koa-core/auth/AllowAnonymous';
 import jwt from 'jsonwebtoken';
 import { GetAuthOptions } from '../../modules/koa-core/auth/Auth';
+import { Interceptor } from '../interceptor/Interceptor';
+import { TestInterceptor } from '../interceptor/TestInterceptor';
 
 @Injectable()
 @Transient()
@@ -16,8 +18,17 @@ export default class AuthController extends Controller {
   }
 
   @HttpGet()
-  @Authorize()
+  @Authorize({ roles: ['admin2'] })
   Auth2(@RequestQuery('key') key: string) {
+    return {
+      name: 'Auth2',
+      data: key,
+    };
+  }
+
+  @HttpGet()
+  @Authorize({ roles: ['admin'] })
+  RoleAuth(@RequestQuery('key') key: string) {
     return {
       name: 'Auth2',
       data: key,
@@ -33,6 +44,16 @@ export default class AuthController extends Controller {
     };
   }
 
+  @HttpGet()
+  @AllowAnonymous()
+  @Interceptor(TestInterceptor)
+  NotAuth2(@RequestQuery('key') key: string) {
+    return {
+      name: 'NotAuth',
+      data: key,
+    };
+  }
+
   @AllowAnonymous()
   @HttpPost()
   Login(@RequestBody() data: any) {
@@ -42,6 +63,7 @@ export default class AuthController extends Controller {
       const token = jwt.sign(
         {
           userName: 'admin',
+          roles: ['admin'],
         },
         options.secret,
         { expiresIn: expiresIn }

@@ -15,9 +15,10 @@ import { GetAllControllers, IController, IsController } from './Controller';
 import { GetActionParamsMetadata } from '../router/RequestData';
 import { GetRouterPath } from '../router/Router';
 import { GetActionInfo, GetHttpMethodStr } from '../router/Request';
-import { GetAuthInfo } from '../auth/Authorize';
+import { AuthorizeInfo, GetAuthInfo } from '../auth/Authorize';
 import { IsAllowAnonymous } from '../auth/AllowAnonymous';
 import { AUTHENTICATION_INJECT_TOKEN, IAuthentication } from '../auth/Authentication';
+import { IPermissionChecker, PERMISSION_CHECKER_INJECT_TOKEN } from '../auth/PermissionChecker';
 
 export const CTL_BUILDER_INJECT_TOKEN = GetInjectToken('Sys:IControllerBuilder');
 
@@ -40,6 +41,9 @@ export class ControllerBuilder implements IControllerBuilder {
   private readonly _apiPrefix: string;
   private readonly _app: Koa;
 
+  private readonly _authentication: IAuthentication | undefined;
+  private readonly _permissionChecker: IPermissionChecker | undefined;
+
   constructor(
     @Inject(SETTING_INJECT_TOKEN) settingManager: ISettingManager,
     @Inject(LOGGER_INJECT_TOKEN) logger: ILogger,
@@ -49,6 +53,18 @@ export class ControllerBuilder implements IControllerBuilder {
     this._logger = logger;
     this._apiPrefix = settingManager.GetConfig<string>('apiPrefix') || 'api';
     this._app = app;
+
+    try {
+      this._authentication = Container.resolve<IAuthentication>(AUTHENTICATION_INJECT_TOKEN);
+    } catch (error) {
+      this._logger.LogWarn('尚未配置[IAuthentication]组件');
+    }
+
+    try {
+      this._permissionChecker = Container.resolve<IPermissionChecker>(PERMISSION_CHECKER_INJECT_TOKEN);
+    } catch (error) {
+      this._logger.LogWarn('尚未配置[IPermissionChecker]组件');
+    }
   }
 
   public CreateControllers(): void {
@@ -75,14 +91,10 @@ export class ControllerBuilder implements IControllerBuilder {
       this._app.use(notAuthRouter.allowedMethods());
 
       // 鉴权中间件
-      try {
-        const auth = Container.resolve<IAuthentication>(AUTHENTICATION_INJECT_TOKEN);
-        if (auth) {
-          this._app.use((ctx, next) => auth.UnAuthorized(ctx, next)); // 未授权自定义返回
-          this._app.use((ctx, next) => auth.Authentication(ctx, next));
-        }
-      } catch (error) {
-        this._logger.LogWarn('尚未配置Auth组件');
+
+      if (this._authentication) {
+        this._app.use((ctx, next) => this._authentication?.UnAuthorized(ctx, next)); // 未授权自定义返回
+        this._app.use((ctx, next) => this._authentication?.Authentication(ctx, next));
       }
 
       // 需要鉴权的接口
@@ -125,7 +137,7 @@ export class ControllerBuilder implements IControllerBuilder {
         needAuth = false;
       }
 
-      const mainFunc = async (ctx: Context, next: Next) => {
+      let mainFunc = async (ctx: Context, next: Next) => {
         const actionParams = GetActionParamsMetadata(ctlAction);
         const args: any = [];
         if (actionParams && actionParams.length) {
@@ -171,6 +183,10 @@ export class ControllerBuilder implements IControllerBuilder {
         }
       };
 
+      if (needAuth) {
+        mainFunc = this.GetPermissionCheckerAction(actionAuthInfo || ctlAuthInfo, mainFunc);
+      }
+
       const action: ActionDescriptor = {
         fullPath,
         httpMethod: GetHttpMethodStr(actionInfo.httpMethod) as any,
@@ -181,5 +197,29 @@ export class ControllerBuilder implements IControllerBuilder {
       actions.push(action);
     });
     return actions;
+  }
+
+  protected GetPermissionCheckerAction(authInfo: AuthorizeInfo, func: (context: Context, next: Next) => Promise<any>) {
+    return async (context: Context, next: Next) => {
+      let isGranted: boolean;
+
+      if (!this._permissionChecker) {
+        isGranted = true;
+      } else {
+        const isGrantedTask = this._permissionChecker.IsGranted(context.state.user, authInfo);
+        if (isGrantedTask instanceof Promise) {
+          isGranted = await isGrantedTask;
+        } else {
+          isGranted = isGrantedTask;
+        }
+      }
+
+      if (!isGranted) {
+        context.response.status = 401;
+        throw new Error('Authentication Error');
+      } else {
+        return await func(context, next);
+      }
+    };
   }
 }

@@ -7,22 +7,9 @@ export interface AuthorizeInfo {
   roles?: string[];
 }
 
-export function Authorize(policies?: string | string[], roles?: string | string[]) {
+export function Authorize(authInfo?: AuthorizeInfo) {
   const func: any = (target: any, key?: string, descriptor?: PropertyDescriptor) => {
-    let authInfo: AuthorizeInfo = {};
-    if (policies) {
-      if (typeof policies === 'string') authInfo.policies = [policies];
-      else {
-        authInfo.policies = policies;
-      }
-    }
-
-    if (roles) {
-      if (typeof roles === 'string') authInfo.roles = [roles];
-      else {
-        authInfo.roles = roles;
-      }
-    }
+    if (!authInfo) authInfo = {};
     if (descriptor && descriptor.value) {
       SetAuthInfo(descriptor.value, authInfo);
     } else {

@@ -1,6 +1,6 @@
 import { GetMetadataKey, GetMetadata, DefineMetadata } from '@newbility/core';
 
-const METADATA_ACTION_PARAMS = GetMetadataKey('Sys:ActionParams');
+export const METADATA_ACTION_PARAMS = GetMetadataKey('Sys:ActionParams');
 
 export enum RequestParamType {
   Body = 0,

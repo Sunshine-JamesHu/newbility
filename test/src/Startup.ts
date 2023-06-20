@@ -88,10 +88,11 @@ export class Startup extends AppModule {
         auth: {
           url: '/api/auth/login',
           responseConverter: (data: any) => {
-            return {
-              token: '12345678',
-              expiresIn: 2 * 60 * 60,
-            };
+            return data;
+            // return {
+            //   token: '12345678',
+            //   expiresIn: 2 * 60 * 60,
+            // };
           },
         },
       });
