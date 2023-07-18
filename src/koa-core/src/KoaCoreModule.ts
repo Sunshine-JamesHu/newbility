@@ -17,7 +17,6 @@ import {
 } from '@newbility/core';
 
 import { IControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './controller/ControllerBuilder';
-import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN } from './swagger/SwaggerBuilder';
 
 @Injectable()
 @DependsOn(CoreModule)
@@ -26,28 +25,23 @@ export class KoaCoreModule extends AppModule {
   private readonly _app: Koa;
   private readonly _setting: ISettingManager;
   private readonly _ctlBuilder: IControllerBuilder;
-  private readonly _swaggerBuilder: ISwaggerBuilder;
   constructor(
     @Inject(GetInjectToken('Sys:App')) app: Koa,
     @Inject(SETTING_INJECT_TOKEN) setting: ISettingManager,
     @Inject(CTL_BUILDER_INJECT_TOKEN) ctlBuilder: IControllerBuilder,
-    @Inject(SWAGGER_BUILDER_INJECT_TOKEN) swaggerBuilder: ISwaggerBuilder
+    
   ) {
     super();
     this._app = app;
     this._setting = setting;
     this._ctlBuilder = ctlBuilder;
-    this._swaggerBuilder = swaggerBuilder;
+    
   }
 
   public OnApplicationInitialization(): void {
     this.InitSysMiddlewares(); // 初始化系统中间件
 
     this._ctlBuilder.CreateControllers(); // 创建Controller
-  }
-
-  public OnPostApplicationInitialization(): void {
-    this.InitSwagger();
   }
 
   //#region  初始化Koa中间件
@@ -112,17 +106,6 @@ export class KoaCoreModule extends AppModule {
         },
       })
     );
-  }
-
-  //#endregion
-
-  //#region  初始化Swagger
-
-  protected InitSwagger() {
-    const enabled = this._setting.GetConfig<boolean | undefined>('swagger:enabled');
-    if (enabled === undefined || enabled === true) {
-      this._swaggerBuilder.CreateSwaggerApi(this._app);
-    }
   }
 
   //#endregion

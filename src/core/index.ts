@@ -45,6 +45,8 @@ import { CoreModule } from './src/CoreModule';
 import { OsHelper } from './src/util/OsHelper';
 import { IRunnable } from './src/sys/Runnable';
 import { IService, Service } from './src/service/Service';
+import { IInterceptor, InterceptorBase, Interceptor } from './src/interceptor/Interceptor';
+import { PromiseHelper } from './src/util/PromiseHelper';
 
 export {
   Container,
@@ -112,5 +114,9 @@ export {
   StreamHelper,
   CoreModule,
   IService,
-  Service
+  Service,
+  IInterceptor,
+  InterceptorBase,
+  Interceptor,
+  PromiseHelper,
 };

@@ -72,55 +72,83 @@
 
 <script src="./swagger-ui/{{swaggerVersion}}/swagger-ui-bundle.js"></script>
 <script src="./swagger-ui/{{swaggerVersion}}/swagger-ui-standalone-preset.js"></script>
+<script src="./swagger-ui/{{swaggerVersion}}/newbility-swagger.js"></script>
+
 <script>
-function HideTopbarPlugin() {
-  // this plugin overrides the Topbar component to return nothing
-  return {
-    components: {
-      Topbar: function() { return null }
+  function HideTopbarPlugin() {
+    // this plugin overrides the Topbar component to return nothing
+    return {
+      components: {
+        Topbar: function() { return null }
+      }
     }
   }
-}
 
-window.onload = function() {
-  const options = {{{json swaggerOptions}}};
-  {{#isset swaggerOptions.onComplete}}
-  options.onComplete = {{{strfnc swaggerOptions.onComplete}}};
-  {{/isset}}
-  {{#isset swaggerOptions.requestInterceptor}}
-  options.requestInterceptor = {{{strfnc swaggerOptions.requestInterceptor}}};
-  {{/isset}}
-  {{#isset swaggerOptions.responseInterceptor}}
-  options.responseInterceptor = {{{strfnc swaggerOptions.responseInterceptor}}};
-  {{/isset}}
-  {{#isset swaggerOptions.responseInterceptor}}
-  options.modelPropertyMacro = {{{strfnc swaggerOptions.modelPropertyMacro}}};
-  {{/isset}}
-  {{#isset swaggerOptions.parameterMacro}}
-  options.parameterMacro = {{{strfnc swaggerOptions.parameterMacro}}};
-  {{/isset}}
-  options.presets = [
-    SwaggerUIBundle.presets.apis,
-    // yay ES6 modules ↘
-    Array.isArray(SwaggerUIStandalonePreset) ? SwaggerUIStandalonePreset : SwaggerUIStandalonePreset.default,
-    {{{swaggerOptions.presets}}}
-  ];
-  options.plugins = [
-    SwaggerUIBundle.plugins.DownloadUrl,
+  window.onload = function() {
+    const options = {{{json swaggerOptions}}};
+    {{#isset swaggerOptions.onComplete}}
+    options.onComplete = {{{strfnc swaggerOptions.onComplete}}};
+    {{/isset}}
+    {{#isset swaggerOptions.requestInterceptor}}
+    options.requestInterceptor = {{{strfnc swaggerOptions.requestInterceptor}}};
+    {{/isset}}
+    {{#isset swaggerOptions.responseInterceptor}}
+    options.responseInterceptor = {{{strfnc swaggerOptions.responseInterceptor}}};
+    {{/isset}}
+    {{#isset swaggerOptions.modelPropertyMacro}}
+    options.modelPropertyMacro = {{{strfnc swaggerOptions.modelPropertyMacro}}};
+    {{/isset}}
+    {{#isset swaggerOptions.parameterMacro}}
+    options.parameterMacro = {{{strfnc swaggerOptions.parameterMacro}}};
+    {{/isset}}
+    options.presets = [
+      SwaggerUIBundle.presets.apis,
+      // yay ES6 modules ↘
+      Array.isArray(SwaggerUIStandalonePreset) ? SwaggerUIStandalonePreset : SwaggerUIStandalonePreset.default,
+      {{{swaggerOptions.presets}}}
+    ];
+    options.plugins = [SwaggerUIBundle.plugins.DownloadUrl, {{{swaggerOptions.plugins}}}];
     {{#if hideTopbar}}
-      HideTopbarPlugin
-    {{/if}},
-    {{{swaggerOptions.plugins}}}
-  ];
-  // Build a system
-  const ui = SwaggerUIBundle(options)
-  {{#if oauthOptions}}
-  if (ui.hasOwnProperty("initOAuth")) {
-    ui.initOAuth({{{json oauthOptions}}})
+      options.plugins.push(HideTopbarPlugin);
+    {{/if}}
+
+    {{#isset swaggerOptions.auth}}
+      newbility.swagger.authInfo = options.auth;
+
+      // 自定义拦截器
+      if(!options.requestInterceptor){
+        options.requestInterceptor =  (request) => {
+          const token = newbility.auth.getToken();
+          if(token){
+            request.headers['Authorization'] = `Bearer ${token}`;
+          }
+          return request;
+        };
+      }
+      
+      if(!newbility.swagger.authInfo.fields || newbility.swagger.authInfo.fields.length < 1){
+        newbility.swagger.authInfo.fields=[
+        {id: 'userName', displayName: '用户名' },
+        {id: 'password', displayName: '密码', type: 'password'}];
+      }
+
+      {{#isset swaggerOptions.auth.responseConverter}}
+        newbility.swagger.responseConverter = {{{strfnc swaggerOptions.auth.responseConverter}}};
+      {{/isset}}
+
+      options.plugins.push(newbility.swagger.getAuthPlugin());
+      delete options.auth; // 该字段无须塞入到程序中去
+    {{/isset}}
+
+    // Build a system
+    const ui = SwaggerUIBundle(options);
+    {{#if oauthOptions}}
+    if (ui.hasOwnProperty("initOAuth")) {
+      ui.initOAuth({{{json oauthOptions}}});
+    }
+    {{/if}}
+    window.ui = ui;
   }
-  {{/if}}
-  window.ui = ui
-}
 </script>
 </body>
 

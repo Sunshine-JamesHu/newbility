@@ -2,15 +2,27 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import koaStatic from 'koa-static';
 import { join } from 'path';
-import { Inject, Injectable, Singleton, ISettingManager, SETTING_INJECT_TOKEN } from '@newbility/core';
-import { koaSwagger } from './koa2-swagger-ui/index';
-import { GetControllerName, IsController } from '../controller/Controller';
-import { GetActionInfo, GetHttpMethodStr } from '../router/Request';
-import { GetActionParamsMetadata } from '../router/RequestData';
-import { GetRouterInfo } from '../router/Router';
-import { GetAllControllers } from '../controller/Controller';
+import { Inject, Injectable, GetInjectToken, Singleton, ISettingManager, SETTING_INJECT_TOKEN } from '@newbility/core';
+import {
+  AuthorizeInfo,
+  GetAuthInfo,
+  IsAllowAnonymous,
+  GetAuthOptions,
+  GetRouterInfo,
+  GetAllControllers,
+  GetActionParamsMetadata,
+  GetActionInfo,
+  GetHttpMethodStr,
+  GetControllerName,
+  IsController,
+} from '@newbility/koa-core';
+import {} from '@newbility/koa-core';
 
-export const SWAGGER_BUILDER_INJECT_TOKEN = 'ISwaggerBuilder';
+import { koaSwagger } from './koa2-swagger-ui/index';
+import { SwaggerOptions } from './SwaggerOptions';
+
+export const SWAGGER_BUILDER_INJECT_TOKEN = GetInjectToken('Sys:ISwaggerBuilder');
+const SWAGGER_AUTH_KEY = 'Authorization';
 
 interface SwaggerTag {
   name: string;
@@ -37,6 +49,7 @@ interface ISwaggerPath {
   produces: string[];
   parameters: Array<SwaggerParameter>;
   responses: { [key: number]: SwaggerResponse };
+  security?: any;
 }
 
 class SwaggerPath implements ISwaggerPath {
@@ -46,6 +59,7 @@ class SwaggerPath implements ISwaggerPath {
   produces: string[];
   parameters: SwaggerParameter[];
   responses: { [key: number]: SwaggerResponse };
+  security?: any;
 
   constructor(tag: string, parameters?: Array<SwaggerParameter>, responses?: { [key: number]: SwaggerResponse }) {
     this.tags = [tag];
@@ -68,8 +82,8 @@ class SwaggerPath implements ISwaggerPath {
 }
 
 export interface ISwaggerBuilder {
-  CreateSwaggerApi(app: Koa): void;
-  GenSwaggerJson(): void;
+  CreateSwaggerApi(app: Koa, options?: SwaggerOptions): void;
+  GenSwaggerJson(authKey?: string): void;
 }
 
 @Injectable()
@@ -82,24 +96,52 @@ export class SwaggerBuilder implements ISwaggerBuilder {
     this._apiPrefix = settingManager.GetConfig<string>('apiPrefix') || 'api';
   }
 
-  public CreateSwaggerApi(app: Koa): void {
-    const router = new Router();
-    const swagger = this.GenSwaggerJson();
+  public CreateSwaggerApi(app: Koa, options?: SwaggerOptions): void {
+    if (!options) options = {}; // Options默认值
 
-    app.use(koaStatic(join(__dirname, 'koa2-swagger-ui'), { maxage: 1000 * 60 * 60 })); // 允许浏览器进行304持久化,提升界面打开性能
+    const authOptions = GetAuthOptions();
+
+    const router = new Router();
+    const swagger = this.GenSwaggerJson(!!authOptions ? SWAGGER_AUTH_KEY : undefined);
+
+    if (options?.info) {
+      if (options?.info?.description) swagger.info.description = options?.info?.description;
+      if (options?.info?.title) swagger.info.title = options?.info?.title;
+    }
+
+    // Auth相关
+    if (authOptions && options.auth) {
+      swagger.securityDefinitions = {
+        [SWAGGER_AUTH_KEY]: {
+          description: 'Token授权,将Token放入Header中去授权验证,例子:Authorization:{Token}',
+          name: 'Authorization',
+          in: 'header',
+          type: 'apiKey',
+        },
+      };
+    }
+
+    app.use(koaStatic(join(__dirname, 'koa2-swagger-ui'), { maxage: options.cacheMaxAge ?? 1000 * 60 * 60 })); // 允许浏览器进行304持久化,提升界面打开性能
 
     router.register('/swagger.json', ['get'], (ctx) => {
       ctx.set('Content-Type', 'application/json');
       ctx.body = swagger;
     });
 
+    let swaggerPath = options.path ?? '/swagger';
+    if (!swaggerPath.startsWith('/')) swaggerPath = `/${swaggerPath}`;
     router.register(
-      '/swagger',
+      swaggerPath,
       ['get'],
       koaSwagger({
         routePrefix: false,
         swaggerOptions: {
           url: '/swagger.json',
+          schemes: ['https', 'http'],
+          requestInterceptor: options.requestInterceptor,
+          responseInterceptor: options.responseInterceptor,
+          plugins: options.plugins,
+          auth: options.auth,
         },
       })
     );
@@ -108,7 +150,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
     app.use(router.allowedMethods());
   }
 
-  public GenSwaggerJson(): any {
+  public GenSwaggerJson(authKey?: string): any {
     const controllers = GetAllControllers();
     const tags: Array<SwaggerTag> = [];
     const paths: {
@@ -129,19 +171,21 @@ export class SwaggerBuilder implements ISwaggerBuilder {
       });
 
       const propKeys = Object.getOwnPropertyNames(controller.prototype);
+      const ctlAuthInfo: AuthorizeInfo | undefined = authKey ? GetAuthInfo(controller) : undefined;
+
       propKeys.forEach((propKey) => {
         if (propKey === 'constructor') return; // 跳过构造函数
 
-        const property = controller.prototype[propKey];
-        if (!property || typeof property !== 'function') return;
+        const action = controller.prototype[propKey];
+        if (!action || typeof action !== 'function') return;
 
-        const actionInfo = GetActionInfo(property);
+        const actionInfo = GetActionInfo(action);
         if (!actionInfo) return;
 
         const actionName = actionInfo.name;
         const fullPath = `/${this._apiPrefix}/${routerPath}/${actionName}`.replace(/\/{2,}/g, '/');
         const parameters: Array<SwaggerParameter> = [];
-        const actionParams = GetActionParamsMetadata(property);
+        const actionParams = GetActionParamsMetadata(action);
         if (actionParams) {
           actionParams.forEach((actionParam) => {
             const actionParamType = actionParam.type.name.toLowerCase();
@@ -171,6 +215,16 @@ export class SwaggerBuilder implements ISwaggerBuilder {
           swaggerPath.summary = actionInfo.desc;
         }
 
+        if (authKey) {
+          // 加上鉴权
+          const skipAuth = IsAllowAnonymous(action);
+          if (!skipAuth) {
+            const actAuthInfo = GetAuthInfo(action);
+            if (ctlAuthInfo || actAuthInfo) {
+              swaggerPath.security = [{ [authKey]: [] }];
+            }
+          }
+        }
         paths[fullPath] = { [GetHttpMethodStr(actionInfo.httpMethod)]: swaggerPath };
       });
     });
@@ -182,7 +236,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
         version: '1.0.0',
         title: 'Newbility Swagger',
       },
-      schemes: ['http'],
+      schemes: ['http', 'https'],
       tags: tags,
       paths: paths,
     };

@@ -15,6 +15,10 @@ import { GetAllControllers, IController, IsController } from './Controller';
 import { GetActionParamsMetadata } from '../router/RequestData';
 import { GetRouterPath } from '../router/Router';
 import { GetActionInfo, GetHttpMethodStr } from '../router/Request';
+import { AuthorizeInfo, GetAuthInfo } from '../auth/Authorize';
+import { IsAllowAnonymous } from '../auth/AllowAnonymous';
+import { AUTHENTICATION_INJECT_TOKEN, IAuthentication } from '../auth/Authentication';
+import { IPermissionChecker, PERMISSION_CHECKER_INJECT_TOKEN } from '../auth/PermissionChecker';
 
 export const CTL_BUILDER_INJECT_TOKEN = GetInjectToken('Sys:IControllerBuilder');
 
@@ -22,6 +26,7 @@ export interface ActionDescriptor {
   fullPath: string;
   httpMethod: 'get' | 'post' | 'put' | 'delete' | 'options';
   func: (context: Context, next: Next) => Promise<any>;
+  needAuth: boolean;
 }
 
 export interface IControllerBuilder {
@@ -36,6 +41,9 @@ export class ControllerBuilder implements IControllerBuilder {
   private readonly _apiPrefix: string;
   private readonly _app: Koa;
 
+  private readonly _authentication: IAuthentication | undefined;
+  private readonly _permissionChecker: IPermissionChecker | undefined;
+
   constructor(
     @Inject(SETTING_INJECT_TOKEN) settingManager: ISettingManager,
     @Inject(LOGGER_INJECT_TOKEN) logger: ILogger,
@@ -45,23 +53,53 @@ export class ControllerBuilder implements IControllerBuilder {
     this._logger = logger;
     this._apiPrefix = settingManager.GetConfig<string>('apiPrefix') || 'api';
     this._app = app;
+
+    try {
+      this._authentication = Container.resolve<IAuthentication>(AUTHENTICATION_INJECT_TOKEN);
+    } catch (error) {
+      this._logger.LogWarn('尚未配置[IAuthentication]组件');
+    }
+
+    try {
+      this._permissionChecker = Container.resolve<IPermissionChecker>(PERMISSION_CHECKER_INJECT_TOKEN);
+    } catch (error) {
+      this._logger.LogWarn('尚未配置[IPermissionChecker]组件');
+    }
   }
 
   public CreateControllers(): void {
     const controllers = GetAllControllers();
     if (controllers && controllers.length) {
-      const router = new Router(); // 定义路由容器
+      const notAuthRouter = new Router();
+      const authRouter = new Router();
       controllers.forEach((controller) => {
         const actions = this.GetControllerActionDescriptors(controller);
         if (actions && actions.length) {
           actions.forEach((action) => {
             this._logger.LogDebug(`Action:${action.fullPath}`);
-            router.register(action.fullPath, [action.httpMethod], action.func);
+            if (action.needAuth) {
+              authRouter.register(action.fullPath, [action.httpMethod], action.func);
+            } else {
+              notAuthRouter.register(action.fullPath, [action.httpMethod], action.func);
+            }
           });
         }
       });
-      this._app.use(router.routes());
-      this._app.use(router.allowedMethods());
+
+      // 无须鉴权的接口
+      this._app.use(notAuthRouter.routes());
+      this._app.use(notAuthRouter.allowedMethods());
+
+      // 鉴权中间件
+
+      if (this._authentication) {
+        this._app.use((ctx, next) => this._authentication?.UnAuthorized(ctx, next)); // 未授权自定义返回
+        this._app.use((ctx, next) => this._authentication?.Authentication(ctx, next));
+      }
+
+      // 需要鉴权的接口
+      this._app.use(authRouter.routes());
+      this._app.use(authRouter.allowedMethods());
     }
   }
 
@@ -74,20 +112,33 @@ export class ControllerBuilder implements IControllerBuilder {
     const actions: ActionDescriptor[] = [];
     this._logger.LogDebug(`Create Controller: ${controller.name} -> ${routerPath}`);
     const propKeys = Object.getOwnPropertyNames(controller.prototype);
+
+    const ctlAuthInfo = GetAuthInfo(controller);
+
     propKeys.forEach((propKey) => {
       if (propKey === 'constructor') return; // 跳过构造函数
 
-      const property = controller.prototype[propKey];
-      if (!property || typeof property !== 'function') return;
+      const ctlAction = controller.prototype[propKey];
+      if (!ctlAction || typeof ctlAction !== 'function') return;
 
-      const actionInfo = GetActionInfo(property);
+      const actionInfo = GetActionInfo(ctlAction);
       if (!actionInfo) return;
 
       const actionName = actionInfo.name;
       const fullPath = `/${this._apiPrefix}/${routerPath}/${actionName}`.replace(/\/{2,}/g, '/');
 
-      const mainFunc = async (ctx: Context, next: Next) => {
-        const actionParams = GetActionParamsMetadata(property);
+      let needAuth = false;
+      const actionAuthInfo = GetAuthInfo(ctlAction);
+      if (ctlAuthInfo || actionAuthInfo) {
+        needAuth = true;
+      }
+      const allowAnonymous = IsAllowAnonymous(ctlAction);
+      if (allowAnonymous) {
+        needAuth = false;
+      }
+
+      let mainFunc = async (ctx: Context, next: Next) => {
+        const actionParams = GetActionParamsMetadata(ctlAction);
         const args: any = [];
         if (actionParams && actionParams.length) {
           actionParams.forEach((element) => {
@@ -123,7 +174,7 @@ export class ControllerBuilder implements IControllerBuilder {
         }
         const controllerIns: any = Container.resolve<IController>(controller as any);
         controllerIns.SetContext(ctx); // 将Ctx丢进去
-        const result = property.apply(controllerIns, args); // 执行函数
+        const result = ctlAction.apply(controllerIns, args); // 执行函数
 
         if (result instanceof Promise) {
           ctx.response.body = await result; // 处理异步
@@ -132,14 +183,43 @@ export class ControllerBuilder implements IControllerBuilder {
         }
       };
 
+      if (needAuth) {
+        mainFunc = this.GetPermissionCheckerAction(actionAuthInfo || ctlAuthInfo, mainFunc);
+      }
+
       const action: ActionDescriptor = {
         fullPath,
         httpMethod: GetHttpMethodStr(actionInfo.httpMethod) as any,
         func: mainFunc,
+        needAuth: needAuth,
       };
 
       actions.push(action);
     });
     return actions;
+  }
+
+  protected GetPermissionCheckerAction(authInfo: AuthorizeInfo, func: (context: Context, next: Next) => Promise<any>) {
+    return async (context: Context, next: Next) => {
+      let isGranted: boolean;
+
+      if (!this._permissionChecker) {
+        isGranted = true;
+      } else {
+        const isGrantedTask = this._permissionChecker.IsGranted(context.state.user, authInfo);
+        if (isGrantedTask instanceof Promise) {
+          isGranted = await isGrantedTask;
+        } else {
+          isGranted = isGrantedTask;
+        }
+      }
+
+      if (!isGranted) {
+        context.response.status = 401;
+        throw new Error('Authentication Error');
+      } else {
+        return await func(context, next);
+      }
+    };
   }
 }

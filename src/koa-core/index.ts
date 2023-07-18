@@ -28,7 +28,11 @@ import {
 } from './src/router/Request';
 import { RequestQuery, RequestBody, GetActionParamsMetadata } from './src/router/RequestData';
 import { RouterInfo, GetRouterPath, GetRouterInfo, Router } from './src/router/Router';
-import { SWAGGER_BUILDER_INJECT_TOKEN, ISwaggerBuilder, SwaggerBuilder } from './src/swagger/SwaggerBuilder';
+import { AllowAnonymous, IsAllowAnonymous } from './src/auth/AllowAnonymous';
+import { AUTH_INJECT_TOKEN, AUTH_OPTIONS_INJECT_TOKEN, GetAuthOptions, IAuth, JwtAuth } from './src/auth/Auth';
+import { AUTHENTICATION_INJECT_TOKEN, IAuthentication, Authentication } from './src/auth/Authentication';
+import { AuthorizeInfo, Authorize, GetAuthInfo, SetAuthInfo } from './src/auth/Authorize';
+import { PERMISSION_CHECKER_INJECT_TOKEN, IPermissionChecker, PermissionChecker } from './src/auth/PermissionChecker';
 
 export {
   CONTROLLER_METADATA,
@@ -62,9 +66,23 @@ export {
   Router,
   GetRouterPath,
   GetRouterInfo,
-  SWAGGER_BUILDER_INJECT_TOKEN,
-  ISwaggerBuilder,
-  SwaggerBuilder,
+  AllowAnonymous,
+  IsAllowAnonymous,
+  AUTH_INJECT_TOKEN,
+  AUTH_OPTIONS_INJECT_TOKEN,
+  IAuth,
+  JwtAuth,
+  GetAuthOptions,
+  AUTHENTICATION_INJECT_TOKEN,
+  IAuthentication,
+  Authentication,
+  AuthorizeInfo,
+  Authorize,
+  GetAuthInfo,
+  SetAuthInfo,
+  PERMISSION_CHECKER_INJECT_TOKEN,
+  IPermissionChecker,
+  PermissionChecker,
   KoaCoreModule,
   Program,
 };
