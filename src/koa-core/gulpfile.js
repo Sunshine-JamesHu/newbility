@@ -13,14 +13,9 @@ function build(cb) {
   });
 }
 
-function cpSwaggerStaticFile(cb) {
-  const files = ['src/swagger/koa2-swagger-ui/index.hbs', 'src/swagger/koa2-swagger-ui/favicon.png', 'src/swagger/koa2-swagger-ui/swagger-ui/**/*'];
-  return src(files, { base: '.' }).pipe(dest('build'));
-}
-
 function cpIndex(cb) {
   const files = ['public/index.html'];
   return src(files, { base: '.' }).pipe(dest('build'));
 }
 
-exports.default = series(clean, build, parallel(cpSwaggerStaticFile, cpIndex));
+exports.default = series(clean, build, cpIndex);

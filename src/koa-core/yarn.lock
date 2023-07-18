@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.8":
-  version "0.2.8"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.8.tgz#e0c348a0057f28dab3e33cc825d0174fdb821669"
-  integrity sha512-xIgLo9DuitwSQwXSNGfGJmy/Cxp6VbA/grAlMG/8hZ1o9IoZDhRxSqfZ9kcjIjgz5gpVx9qU6U/EvWuoobJyMA==
+"@newbility/core@^0.2.12":
+  version "0.2.12"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.12.tgz#a6af68e90ee24ebedae5ddbb3a8c2de3e7051448"
+  integrity sha512-VHSpmqUpZUZo9a04QpnHiMIiaLLSOhCbIMR+dL4d75fI6wXPhpKp/MnozF0+V3bJU1/pzv+dWpmWfLTefp12/w==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -169,11 +169,6 @@
     "@types/keygrip" "*"
     "@types/koa-compose" "*"
     "@types/node" "*"
-
-"@types/lodash@^4.14.181":
-  version "4.14.182"
-  resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.182.tgz#05301a4d5e62963227eaafe0ce04dd77c54ea5c2"
-  integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
 
 "@types/mime@*":
   version "3.0.1"
@@ -1915,11 +1910,6 @@ load-json-file@^1.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
-
-lodash@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 log4js@^6.6.1:
   version "6.6.1"

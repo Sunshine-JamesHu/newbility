@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import { Program } from '@newbility/koa-core';
+// import { Program } from '@newbility/koa-core';
+import { Program } from '../modules/koa-core/Program';
 import { Startup } from './Startup';
 // import { UseNacosAsync } from '@newbility/nacos';
 

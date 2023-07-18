@@ -1,4 +1,4 @@
-import { container, inject, injectable } from 'tsyringe';
+import { InjectionToken, container, inject, injectable } from 'tsyringe';
 import { DefineMetadata, GetMetadata, GetMetadataKey } from '../metadata/Metadata';
 
 export enum ServiceLifetime {
@@ -90,7 +90,11 @@ export function IsAbstract(target: Function): boolean {
 
 export const Injectable = injectable;
 
-export const Inject = inject;
+// export const Inject = inject;
+
+// 由于框架未升级, 先使用该方法解决警告
+export const Inject: (token: InjectionToken<any>) => (target: any, propertyKey: string | symbol | undefined, parameterIndex: number) => any =
+  inject as any;
 
 export const Container = container;
 

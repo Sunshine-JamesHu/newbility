@@ -1,0 +1,32 @@
+{
+  "name": "@newbility/swagger",
+  "version": "0.2.12",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "keywords": [
+    "newbility"
+  ],
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@newbility/core": "^0.2.12",
+    "@newbility/koa-core": "^0.2.12",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.5",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
+    "@types/lodash": "^4.14.181",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "typescript": "^4.7.4"
+  }
+}

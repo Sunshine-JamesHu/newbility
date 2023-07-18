@@ -1,6 +1,6 @@
 {
   "name": "@newbility/database",
-  "version": "0.2.8",
+  "version": "0.2.12",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.8"
+    "@newbility/core": "^0.2.12"
   },
   "devDependencies": {
     "del": "^6.0.0",
