@@ -1,6 +1,6 @@
 {
   "name": "newbility-template",
-  "version": "0.2.11",
+  "version": "0.2.14",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -10,8 +10,8 @@
     "build": "gulp"
   },
   "dependencies": {
-    "@newbility/koa-core": "^0.2.12",
-    "@newbility/swagger": "^0.2.12"
+    "@newbility/koa-core": "^0.2.14",
+    "@newbility/swagger": "^0.2.14"
   },
   "devDependencies": {
     "@types/koa": "^2.13.6",
