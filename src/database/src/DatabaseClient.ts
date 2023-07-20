@@ -27,6 +27,20 @@ export interface IDatabaseClient extends IDisposable {
    * @param args SQL参数
    */
   ExecuteAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<ExecuteResult<TResult>>;
+
+  /**
+   * 分页查询
+   * @param sql SQL
+   * @param args SQL参数
+   */
+  QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>>;
+
+  /**
+   * 查询第一个
+   * @param sql SQL
+   * @param args SQL参数
+   */
+  QueryOneAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<TResult | undefined>;
 }
 
 export abstract class DatabaseClient implements IDatabaseClient {
@@ -49,6 +63,33 @@ export abstract class DatabaseClient implements IDatabaseClient {
     }
   }
 
+  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>> {
+    let pageQuerySql = sql.trimEnd();
+    if (sql.endsWith(';')) pageQuerySql = pageQuerySql.replace(/;$/, '');
+
+    const sqlParams = args[0];
+    if (sqlParams.limit !== undefined && sqlParams.limit !== null) {
+      pageQuerySql = `${pageQuerySql} LIMIT :limit`;
+    }
+
+    if (sqlParams.offset !== undefined && sqlParams.offset !== null) {
+      pageQuerySql = `${pageQuerySql} OFFSET :offset`;
+    }
+
+    return await this.ExecuteByObjArgsAsync(pageQuerySql, args);
+  }
+
+  async QueryOneAsync<TResult = any>(sql: string, ...args: any[]): Promise<TResult | undefined> {
+    let queryOneSql = sql.trimEnd();
+    if (sql.endsWith(';')) queryOneSql = queryOneSql.replace(/;$/, '');
+    queryOneSql = `${queryOneSql} LIMIT 1`;
+
+    let result = await this.ExecuteAsync(queryOneSql, args);
+    if (result && result.rowCount > 0) {
+      return result.rows[0];
+    }
+  }
+
   abstract Dispose(): void;
 
   protected abstract ExecuteByArrArgsAsync<TResult = any>(sql: string, args: Array<any>): Promise<ExecuteResult<TResult>>;
@@ -64,7 +105,7 @@ export abstract class DatabaseClient implements IDatabaseClient {
       const argVal = args[argKey];
       if (argVal === undefined) throw new NewbilityError(`Missing value for parameter ${argKey}`);
 
-      relaSqlArgs.push(argVal);
+      relaSqlArgs.push(argVal ?? null);
       relaSql = relaSql.replace(`:${argKey}`, this.GetSqlArgPlaceholder(argKey, relaSqlArgs.length - 1));
     }
 

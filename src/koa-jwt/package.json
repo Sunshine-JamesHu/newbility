@@ -1,6 +1,6 @@
 {
   "name": "@newbility/koa-jwt",
-  "version": "0.2.14",
+  "version": "0.2.16",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/koa-core": "^0.2.14",
+    "@newbility/koa-core": "^0.2.16",
     "koa-jwt": "^4.0.4"
   },
   "devDependencies": {

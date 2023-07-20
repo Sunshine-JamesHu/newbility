@@ -1,11 +1,11 @@
 import { DatabaseProvider, ExecuteResult, IDatabaseClient } from '@newbility/database';
-import { UsingAsync } from '@newbility/core';
+import { UsingAsync, IAsyncDisposable } from '@newbility/core';
 
 import { Pool, PoolConfig } from 'pg';
 import { PostgresOptions } from './PostgresOptions';
 import { PostgresClient } from './PostgresClient';
 
-export class PostgresProvider extends DatabaseProvider {
+export class PostgresProvider extends DatabaseProvider implements IAsyncDisposable {
   protected ConnPool: Pool;
   protected Options: PostgresOptions;
 
@@ -13,6 +13,10 @@ export class PostgresProvider extends DatabaseProvider {
     super('postgres');
     this.Options = options;
     this.ConnPool = this.GetConnPool(options);
+  }
+
+  async DisposeAsync(): Promise<void> {
+    await this.ConnPool.end();
   }
 
   async UseTransaction<TResult = void>(fn: (client: IDatabaseClient) => Promise<TResult>): Promise<TResult> {
@@ -31,10 +35,27 @@ export class PostgresProvider extends DatabaseProvider {
     });
   }
 
-  async ExecuteAsync<TResult = any>(sql: string, ...args: any): Promise<ExecuteResult<TResult>> {
+  async ExecuteAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<ExecuteResult<TResult>> {
     const client = await this.GetClientAsync();
     const result = await UsingAsync(client, async () => {
-      const execRes = await client.ExecuteAsync(sql, ...args);
+      const execRes = await client.ExecuteAsync(sql, args);
+      return execRes;
+    });
+    return result;
+  }
+
+  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>> {
+    const client = await this.GetClientAsync();
+    const result = await UsingAsync(client, async () => {
+      const execRes = await client.QueryPageAsync(sql, args);
+      return execRes;
+    });
+    return result;
+  }
+  async QueryOneAsync<TResult = any>(sql: string, ...args: any[]): Promise<TResult | undefined> {
+    const client = await this.GetClientAsync();
+    const result = await UsingAsync(client, async () => {
+      const execRes = await client.QueryOneAsync(sql, args);
       return execRes;
     });
     return result;
