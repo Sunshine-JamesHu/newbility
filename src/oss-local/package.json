@@ -1,6 +1,6 @@
 {
   "name": "@newbility/oss-local",
-  "version": "0.2.16",
+  "version": "0.2.18",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/oss-core": "^0.2.16",
+    "@newbility/oss-core": "^0.2.18",
     "moment": "^2.29.4"
   },
   "devDependencies": {

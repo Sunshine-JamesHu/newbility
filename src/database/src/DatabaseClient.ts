@@ -103,9 +103,7 @@ export abstract class DatabaseClient implements IDatabaseClient {
     for (const match of matchResult) {
       const argKey = match['0'].replace(':', '');
       const argVal = args[argKey];
-      if (argVal === undefined) throw new NewbilityError(`Missing value for parameter ${argKey}`);
-
-      relaSqlArgs.push(argVal ?? null);
+      relaSqlArgs.push(argVal);
       relaSql = relaSql.replace(`:${argKey}`, this.GetSqlArgPlaceholder(argKey, relaSqlArgs.length - 1));
     }
 

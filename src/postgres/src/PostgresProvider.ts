@@ -38,7 +38,7 @@ export class PostgresProvider extends DatabaseProvider implements IAsyncDisposab
   async ExecuteAsync<TResult = any>(sql: string, ...args: Array<any>): Promise<ExecuteResult<TResult>> {
     const client = await this.GetClientAsync();
     const result = await UsingAsync(client, async () => {
-      const execRes = await client.ExecuteAsync(sql, args);
+      const execRes = await client.ExecuteAsync(sql, ...args);
       return execRes;
     });
     return result;
@@ -55,7 +55,7 @@ export class PostgresProvider extends DatabaseProvider implements IAsyncDisposab
   async QueryOneAsync<TResult = any>(sql: string, ...args: any[]): Promise<TResult | undefined> {
     const client = await this.GetClientAsync();
     const result = await UsingAsync(client, async () => {
-      const execRes = await client.QueryOneAsync(sql, args);
+      const execRes = await client.QueryOneAsync(sql, ...args);
       return execRes;
     });
     return result;
