@@ -5,11 +5,12 @@ import { AllowAnonymous } from '../../modules/koa-core/auth/AllowAnonymous';
 import jwt from 'jsonwebtoken';
 import { GetAuthOptions } from '../../modules/koa-core/auth/Auth';
 import { Interceptor } from '../interceptor/Interceptor';
-import { TestInterceptor } from '../interceptor/TestInterceptor';
+import { TestInterceptor, TestInterceptor2 } from '../interceptor/TestInterceptor';
 
 @Injectable()
 @Transient()
 @Authorize()
+@Interceptor(TestInterceptor2)
 @Router({ desc: 'Auth测试' })
 export default class AuthController extends Controller {
   @HttpGet()

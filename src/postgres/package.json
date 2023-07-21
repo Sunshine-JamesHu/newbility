@@ -1,6 +1,6 @@
 {
   "name": "@newbility/postgres",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/database": "^0.2.22",
+    "@newbility/database": "^0.2.23",
     "pg": "^8.10.0"
   },
   "devDependencies": {

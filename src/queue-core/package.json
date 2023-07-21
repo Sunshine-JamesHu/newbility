@@ -1,6 +1,6 @@
 {
   "name": "@newbility/queue-core",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.22",
+    "@newbility/core": "^0.2.23",
     "async-lock": "^1.3.2"
   },
   "devDependencies": {

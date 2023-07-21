@@ -1,5 +1,4 @@
-import { Abstract, Container } from '../di/Dependency';
-import { DefineMetadata, GetMetadata, GetMetadataKey, GetMetadataKeys } from '../metadata/Metadata';
+import { Abstract, Container, DefineMetadata, GetMetadata, GetMetadataKey } from '@newbility/core';
 
 export interface IInterceptor {
   PreHandler(args: any): Promise<any>;
@@ -111,7 +110,7 @@ export function Interceptor(...interceptors: Array<IInterceptor | Function | str
       needOverwriteAction.forEach((element) => {
         const action = isAction ? descriptor.value : target.prototype[element];
         if (isAction) {
-          const metadatas = GetMetadataKeys(descriptor.value).map((key) => {
+          const metadatas = Reflect.getMetadataKeys(descriptor.value).map((key) => {
             return {
               key,
               data: GetMetadata(key, descriptor.value),
@@ -123,7 +122,7 @@ export function Interceptor(...interceptors: Array<IInterceptor | Function | str
           };
           RestoreMetadata(metadatas, descriptor.value);
         } else {
-          const metadatas = GetMetadataKeys(action).map((key) => {
+          const metadatas = Reflect.getMetadataKeys(action).map((key) => {
             return {
               key,
               data: GetMetadata(key, action),
