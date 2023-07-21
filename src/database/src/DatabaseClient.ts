@@ -33,7 +33,7 @@ export interface IDatabaseClient extends IDisposable {
    * @param sql SQL
    * @param args SQL参数
    */
-  QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>>;
+  QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<{ totalCount: number; data: TResult[] }>;
 
   /**
    * 查询第一个
@@ -63,25 +63,33 @@ export abstract class DatabaseClient implements IDatabaseClient {
     }
   }
 
-  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>> {
+  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<{ totalCount: number; data: TResult[] }> {
     let pageQuerySql = sql.trimEnd();
-    if (sql.endsWith(';')) pageQuerySql = pageQuerySql.replace(/;$/, '');
+    if (pageQuerySql.endsWith(';')) pageQuerySql = pageQuerySql.replace(/;$/, '');
 
-    const sqlParams = args[0];
-    if (sqlParams.limit !== undefined && sqlParams.limit !== null) {
+    const totalSql = `
+      SELECT count(*) from (${pageQuerySql}) as tmp;    
+    `;
+    const totalCountResult = await this.QueryOneAsync<{ count: number }>(totalSql);
+
+    if (args.limit !== undefined && args.limit !== null) {
       pageQuerySql = `${pageQuerySql} LIMIT :limit`;
     }
 
-    if (sqlParams.offset !== undefined && sqlParams.offset !== null) {
+    if (args.offset !== undefined && args.offset !== null) {
       pageQuerySql = `${pageQuerySql} OFFSET :offset`;
     }
 
-    return await this.ExecuteByObjArgsAsync(pageQuerySql, args);
+    const result = await this.ExecuteByObjArgsAsync(pageQuerySql, args);
+    return {
+      totalCount: totalCountResult?.count ?? 0,
+      data: result.rows,
+    };
   }
 
   async QueryOneAsync<TResult = any>(sql: string, ...args: any[]): Promise<TResult | undefined> {
     let queryOneSql = sql.trimEnd();
-    if (sql.endsWith(';')) queryOneSql = queryOneSql.replace(/;$/, '');
+    if (queryOneSql.endsWith(';')) queryOneSql = queryOneSql.replace(/;$/, '');
     queryOneSql = `${queryOneSql} LIMIT 1`;
 
     let result = await this.ExecuteAsync(queryOneSql, args);

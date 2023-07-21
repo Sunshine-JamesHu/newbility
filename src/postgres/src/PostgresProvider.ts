@@ -44,7 +44,7 @@ export class PostgresProvider extends DatabaseProvider implements IAsyncDisposab
     return result;
   }
 
-  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>> {
+  async QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<{ totalCount: number; data: TResult[] }> {
     const client = await this.GetClientAsync();
     const result = await UsingAsync(client, async () => {
       const execRes = await client.QueryPageAsync(sql, args);

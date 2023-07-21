@@ -21,7 +21,7 @@ export interface IDatabaseProvider extends IAsyncDisposable {
    * @param sql SQL
    * @param args SQL参数
    */
-  QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>>;
+  QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<{ totalCount: number; data: TResult[] }>;
 
   /**
    * 查询第一个
@@ -45,7 +45,7 @@ export abstract class DatabaseProvider implements IDatabaseProvider {
     this.ProviderType = providerType;
   }
 
-  abstract QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<ExecuteResult<TResult>>;
+  abstract QueryPageAsync<TResult = any>(sql: string, args: { [key: string]: any }): Promise<{ totalCount: number; data: TResult[] }>;
   
   abstract QueryOneAsync<TResult = any>(sql: string, ...args: any[]): Promise<TResult | undefined>;
 
