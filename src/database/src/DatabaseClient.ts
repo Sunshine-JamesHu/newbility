@@ -70,7 +70,7 @@ export abstract class DatabaseClient implements IDatabaseClient {
     const totalSql = `
       SELECT count(*) from (${pageQuerySql}) as tmp;    
     `;
-    const totalCountResult = await this.QueryOneAsync<{ count: number }>(totalSql);
+    const totalCountResult = await this.QueryOneAsync<{ count: number }>(totalSql, {});
 
     if (args.limit !== undefined && args.limit !== null) {
       pageQuerySql = `${pageQuerySql} LIMIT :limit`;
