@@ -4,7 +4,7 @@ const { series } = require('gulp');
 const child_process = require('child_process');
 
 const pubedModules = new Set();
-pubedModules.add('core'); // 发布出错在这里加上已经发布的,再次发布即可
+// pubedModules.add('core'); // 发布出错在这里加上已经发布的,再次发布即可
 
 function getPkgJson(pkgPath) {
   const json = fs.readFileSync(pkgPath);

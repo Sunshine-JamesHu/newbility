@@ -18,23 +18,6 @@
 
 请参照 `template` 文件夹中的 `README.md`
 
-如果你使用的 typescript5 的话,需要将在项目的根目录加入如下文件,用来消除一个错误.
-
-这是由于 tsyringe 库暂时并没有发布新版本来支持 ts5
-
-加入`tsyringe.types.d.ts`文件来临时消除错误
-
-```
-import * as tsyringe from 'tsyringe';
-
-// Overwrite wrong declaration from tryringe, support typescript 5.x
-// Remove this when library will update
-declare module 'tsyringe' {
-  declare function inject(
-    token: tsyringe.InjectionToken<any>
-  ): (target: any, propertyKey: string | symbol | undefined, parameterIndex: number) => any;
-}
-
 ```
 
 ## 功能
@@ -46,6 +29,7 @@ declare module 'tsyringe' {
 需要在`app.config.json`中加入如下配置
 
 ```
+
 {
   "databases": {
     "default": { // 这里的default是标识使用哪个Key做为唯一的Key,可以是任意值
@@ -77,6 +61,7 @@ declare module 'tsyringe' {
     }
   }
 }
+
 ```
 
 #### 使用说明

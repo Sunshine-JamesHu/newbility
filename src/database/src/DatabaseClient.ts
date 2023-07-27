@@ -92,7 +92,7 @@ export abstract class DatabaseClient implements IDatabaseClient {
     if (queryOneSql.endsWith(';')) queryOneSql = queryOneSql.replace(/;$/, '');
     queryOneSql = `${queryOneSql} LIMIT 1`;
 
-    let result = await this.ExecuteAsync(queryOneSql, args);
+    let result = await this.ExecuteAsync(queryOneSql, ...args);
     if (result && result.rowCount > 0) {
       return result.rows[0];
     }
