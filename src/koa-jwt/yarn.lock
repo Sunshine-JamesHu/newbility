@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.25":
-  version "0.2.25"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.25.tgz#4c53dc9ab6da70f8753a0e6fce7cfd14cc959eed"
-  integrity sha512-zsoiq4E57zT+oOxmObI94kuPg+VonHXj8/MQy27hHMtIondvPEtPuud47ynj5c6N7qg3cLeBrArODrUzYUx/Jg==
+"@newbility/core@^0.2.29":
+  version "0.2.29"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.29.tgz#79d93ce3bb452974feaf7a716e36f0927174d607"
+  integrity sha512-dvfucLQf8l02hd9PYmrUtKVjp5dmMe21Ls0Umtqr1I3PQGBwrsCqk5suUQqQuMEBzpNMTHwMwsHOqioBM3EZzQ==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -13,12 +13,12 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/koa-core@^0.2.25":
-  version "0.2.25"
-  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.25.tgz#9a5003361c1cb5e0e903c598d5744ccd559d3292"
-  integrity sha512-klwNyCEMfUVvPZJGL/Z9Kbe5jkX/VaW+m93m+wupos70jvV3VD+pHiy/U0G8IQRXE0to31kGgRs8BF3Y++hz2g==
+"@newbility/koa-core@^0.2.29":
+  version "0.2.29"
+  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.29.tgz#3ca485e331674b7cd0c896fef5777977a78f64ba"
+  integrity sha512-ofi35Rg42jL6frpSBARwVBMhvWnX31yRDsSrLJ6BCiAi2QpeloW3TSL55KuSvq5V327PrDxJdVAQlufzs4mHSA==
   dependencies:
-    "@newbility/core" "^0.2.25"
+    "@newbility/core" "^0.2.29"
     handlebars "^4.7.7"
     koa "^2.13.4"
     koa-body "^5.0.0"
@@ -121,6 +121,13 @@
   version "2.0.1"
   resolved "https://registry.npmjs.org/@types/http-errors/-/http-errors-2.0.1.tgz#20172f9578b225f6c7da63446f56d4ce108d5a65"
   integrity sha512-/K3ds8TRAfBvi5vfjuz8y6+GiAYBZ0x4tXv1Av6CWBWn0IlADc+ZX9pMq7oU0fNQPnBwIZl3rmeLp6SBApbxSQ==
+
+"@types/jsonwebtoken@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz#9eeb56c76dd555039be2a3972218de5bd3b8d83e"
+  integrity sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==
+  dependencies:
+    "@types/node" "*"
 
 "@types/keygrip@*":
   version "1.0.2"
@@ -1731,7 +1738,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonwebtoken@^9.0.0:
+jsonwebtoken@^9.0.0, jsonwebtoken@^9.0.1:
   version "9.0.1"
   resolved "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.1.tgz#81d8c901c112c24e497a55daf6b2be1225b40145"
   integrity sha512-K8wx7eJ5TPvEjuiVSkv167EVboBDv9PZdDoF7BgeQnBLVvZWW9clr2PsQHVJDTKaEIH5JBIwHujGcHp7GgI2eg==

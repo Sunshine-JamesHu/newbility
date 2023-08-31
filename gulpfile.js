@@ -3,8 +3,17 @@ const fs = require('fs');
 const { series } = require('gulp');
 const child_process = require('child_process');
 
+// 发布出错在这里加上已经发布的,再次发布即可
 const pubedModules = new Set();
-// pubedModules.add('core'); // 发布出错在这里加上已经发布的,再次发布即可
+// pubedModules.add('core'); 
+// pubedModules.add('http-client-core'); 
+// pubedModules.add('axios');
+// pubedModules.add('background-worker-core');
+// pubedModules.add('background-worker-cron');
+// pubedModules.add('database');
+// pubedModules.add('koa-core');
+
+
 
 function getPkgJson(pkgPath) {
   const json = fs.readFileSync(pkgPath);

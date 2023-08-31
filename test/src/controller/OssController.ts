@@ -17,8 +17,9 @@ export default class OssController extends Controller {
   @HttpGet()
   async GetFile(@RequestQuery('path') path: string): Promise<Buffer> {
     const mimeType = lookup(path) || 'application/octet-stream';
-    this.Context.set('Content-Type', mimeType);
-    this.Context.set('Content-Disposition', `filename=${path.substring(path.indexOf('/') + 1)}`);
+    const context = this.HttpContext.GetContext();
+    context.set('Content-Type', mimeType);
+    context.set('Content-Disposition', `filename=${path.substring(path.indexOf('/') + 1)}`);
     const res = await this._ossService.GetAsync(path);
     return res;
   }

@@ -15,7 +15,10 @@ export abstract class Authentication implements IAuthentication {
     return next().catch((err) => {
       if (err.status == 401) {
         context.status = 401;
-        context.body = '受保护的资源,请登录后重试~';
+        context.body = {
+          status: 401,
+          error: '受保护的资源,请登录后重试~',
+        };
       } else {
         throw err;
       }

@@ -1,11 +1,11 @@
-import { Injectable, Transient, UserFriendlyError } from '@newbility/core';
-import { HttpGet, Controller, RequestQuery, Router, HttpPost, RequestBody } from '@newbility/koa-core';
+import { CURRENT_USER_INJECT_TOKEN, ICurrentUser, Inject, Injectable, Transient, UserFriendlyError } from '@newbility/core';
+import { HttpGet, RequestQuery, Controller, Router, HttpPost, RequestBody } from '@newbility/koa-core';
+
 import { Authorize } from '../../modules/koa-core/auth/Authorize';
 import { AllowAnonymous } from '../../modules/koa-core/auth/AllowAnonymous';
-import jwt from 'jsonwebtoken';
-import { GetAuthOptions } from '../../modules/koa-core/auth/Auth';
 import { Interceptor } from '../interceptor/Interceptor';
 import { TestInterceptor, TestInterceptor2 } from '../interceptor/TestInterceptor';
+import { IJwtToken, JWT_TOKEN_INJECT_TOKEN } from '../../modules/koa-jwt/JwtToken';
 
 @Injectable()
 @Transient()
@@ -13,9 +13,20 @@ import { TestInterceptor, TestInterceptor2 } from '../interceptor/TestIntercepto
 @Interceptor(TestInterceptor2)
 @Router({ desc: 'Auth测试' })
 export default class AuthController extends Controller {
+  private readonly _jwtToken: IJwtToken;
+  private readonly _currentUser: ICurrentUser;
+  constructor(@Inject(JWT_TOKEN_INJECT_TOKEN) jwtToken: IJwtToken, @Inject(CURRENT_USER_INJECT_TOKEN) currentUser: ICurrentUser) {
+    super();
+    this._jwtToken = jwtToken;
+    this._currentUser = currentUser;
+  }
+
   @HttpGet()
   async GetUserInfo() {
-    return this.Context.state.user;
+    // const context = this.HttpContext.GetContext();
+    // return context.state.user;
+
+    return this._currentUser.GetUserInfo();
   }
 
   @HttpGet()
@@ -59,20 +70,46 @@ export default class AuthController extends Controller {
   @HttpPost()
   Login(@RequestBody() data: any) {
     if (data.userName === 'admin' && data.password === '123456') {
-      const options = GetAuthOptions();
-      const expiresIn = 2 * 60 * 60;
-      const token = jwt.sign(
+      // const options = GetAuthOptions();
+      // const expiresIn = 2 * 60 * 60;
+      // const token = jwt.sign(
+      //   {
+      //     userName: 'admin',
+      //     roles: ['admin'],
+      //   },
+      //   options.secret,
+      //   { expiresIn: expiresIn }
+      // );
+      // return {
+      //   token: token,
+      //   expiresIn: expiresIn,
+      // };
+
+      return this._jwtToken.GetJwtToken(
         {
           userName: 'admin',
           roles: ['admin'],
+          ext: {
+            id: '12345677',
+            age: 18,
+            dn: 'JamesHu',
+          },
         },
-        options.secret,
-        { expiresIn: expiresIn }
+        2 * 60 * 60
       );
-      return {
-        token: token,
-        expiresIn: expiresIn,
-      };
+    } else if (data.userName === 'admin1' && data.password === '123456') {
+      return this._jwtToken.GetJwtToken(
+        {
+          userName: 'admin1',
+          roles: ['admin'],
+          ext: {
+            id: '11111111111',
+            age: 14,
+            dn: '12121212121',
+          },
+        },
+        2 * 60 * 60
+      );
     }
     throw new UserFriendlyError('账号或者密码错误');
   }

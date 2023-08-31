@@ -17,6 +17,7 @@ import {
 } from '@newbility/core';
 
 import { IControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './controller/ControllerBuilder';
+import { run } from './context/HttpContextStorage';
 
 @Injectable()
 @DependsOn(CoreModule)
@@ -28,14 +29,12 @@ export class KoaCoreModule extends AppModule {
   constructor(
     @Inject(GetInjectToken('Sys:App')) app: Koa,
     @Inject(SETTING_INJECT_TOKEN) setting: ISettingManager,
-    @Inject(CTL_BUILDER_INJECT_TOKEN) ctlBuilder: IControllerBuilder,
-    
+    @Inject(CTL_BUILDER_INJECT_TOKEN) ctlBuilder: IControllerBuilder
   ) {
     super();
     this._app = app;
     this._setting = setting;
     this._ctlBuilder = ctlBuilder;
-    
   }
 
   public OnApplicationInitialization(): void {
@@ -51,6 +50,7 @@ export class KoaCoreModule extends AppModule {
     this.InitCompress();
     this.InitStaticResource();
     this.InitBody();
+    this.InitHttpContextStorage();
   }
 
   /**
@@ -106,6 +106,11 @@ export class KoaCoreModule extends AppModule {
         },
       })
     );
+  }
+
+  protected InitHttpContextStorage() {
+    const app = this._app;
+    app.use(run);
   }
 
   //#endregion

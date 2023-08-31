@@ -33,6 +33,10 @@ import { AUTH_INJECT_TOKEN, AUTH_OPTIONS_INJECT_TOKEN, GetAuthOptions, IAuth, Jw
 import { AUTHENTICATION_INJECT_TOKEN, IAuthentication, Authentication } from './src/auth/Authentication';
 import { AuthorizeInfo, Authorize, GetAuthInfo, SetAuthInfo } from './src/auth/Authorize';
 import { PERMISSION_CHECKER_INJECT_TOKEN, IPermissionChecker, PermissionChecker } from './src/auth/PermissionChecker';
+import { HttpContext, IHttpContext } from './src/context/HttpContext';
+import { CreateStorage } from './src/context/AsyncHooksStorage';
+import { run, useContext } from './src/context/HttpContextStorage';
+import { CurrentUser } from './src/context/CurrentUser';
 
 export {
   CONTROLLER_METADATA,
@@ -83,6 +87,12 @@ export {
   PERMISSION_CHECKER_INJECT_TOKEN,
   IPermissionChecker,
   PermissionChecker,
+  IHttpContext,
+  HttpContext,
+  CreateStorage,
+  run,
+  useContext,
+  CurrentUser,
   KoaCoreModule,
   Program,
 };

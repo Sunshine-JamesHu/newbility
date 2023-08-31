@@ -173,7 +173,7 @@ export class ControllerBuilder implements IControllerBuilder {
           });
         }
         const controllerIns: any = Container.resolve<IController>(controller as any);
-        controllerIns.SetContext(ctx); // 将Ctx丢进去
+        // controllerIns.SetContext(ctx); // 将Ctx丢进去
         const result = ctlAction.apply(controllerIns, args); // 执行函数
 
         if (result instanceof Promise) {

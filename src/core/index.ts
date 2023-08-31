@@ -47,6 +47,7 @@ import { IRunnable } from './src/sys/Runnable';
 import { IService, Service } from './src/service/Service';
 import { IInterceptor, InterceptorBase, Interceptor } from './src/interceptor/Interceptor';
 import { PromiseHelper } from './src/util/PromiseHelper';
+import { UserInfo, ICurrentUser, CURRENT_USER_INJECT_TOKEN } from './src/user/CurrentUser';
 
 export {
   Container,
@@ -119,4 +120,7 @@ export {
   InterceptorBase,
   Interceptor,
   PromiseHelper,
+  UserInfo,
+  ICurrentUser,
+  CURRENT_USER_INJECT_TOKEN,
 };
