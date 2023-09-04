@@ -10,6 +10,7 @@ import {
   LOGGER_INJECT_TOKEN,
   SETTING_INJECT_TOKEN,
   ISettingManager,
+  UserFriendlyError,
 } from '@newbility/core';
 import { GetAllControllers, IController, IsController } from './Controller';
 import { GetActionParamsMetadata } from '../router/RequestData';
@@ -216,7 +217,7 @@ export class ControllerBuilder implements IControllerBuilder {
 
       if (!isGranted) {
         context.response.status = 401;
-        throw new Error('Authentication Error');
+        throw new UserFriendlyError('Authentication Error', { detail: '权限不足' });
       } else {
         return await func(context, next);
       }
