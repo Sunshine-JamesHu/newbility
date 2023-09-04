@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@newbility/axios@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/axios/-/axios-0.2.32.tgz#04dda3a84faaac8c8fba22e53a68591dae67151b"
-  integrity sha512-y5DK1t51B+08fSuUqNNW5owaMkaB+vHpXhZqRQmMImAhuyIHChPH1m0KR4ispkOH3ZU6v6QoiwwxvX79qF9PPg==
+"@newbility/axios@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/axios/-/axios-0.2.33.tgz#6dedfa3cd76ff69dd3de4de0e8d6f97ecf6eeb41"
+  integrity sha512-YqWjuXmILw1rkg4Hr17OtUi7pvMWzpgqqn1PuoC4Q5t0djRtA9i4v/9FpuBEjwTRU25xfuPMhgmaRL1WHRtopA==
   dependencies:
-    "@newbility/http-client-core" "^0.2.32"
+    "@newbility/http-client-core" "^0.2.33"
     axios "^0.27.2"
     qs "^6.11.0"
 
-"@newbility/core@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.32.tgz#16a8a3738767956ea3c4506e8c007b7140a61ca7"
-  integrity sha512-UgIsaPnWP06nYUx6kYOUzX8Lk9UJduW8Y/dK/yKvK2D8veq73e0DxAYiqQoKfZCAOcmf0tf6fZPZ4vqBb5XZiQ==
+"@newbility/core@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.33.tgz#5c124b67440a769ba4d4b8056b93dc5ea0925670"
+  integrity sha512-DMHAlhflkhSMs6iWN3nGpeBx9pfpoJWlNzXM1UxeI0GKtxo8PUatKgRtoYMc1mWkeRWhYfvyl1ZGi+l4toQgjg==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -22,26 +22,26 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/database@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/database/-/database-0.2.32.tgz#acf5099869b42a29a6e41d1ff50179eafa4a380c"
-  integrity sha512-dH2kzuK0v3NTVT/L6bp2eiBGZDz+4pqKFQRaw6uHnMh/kliCkPLNnI3eGKM3a7MPDqmuVGevbq4tmPRtjMscgA==
+"@newbility/database@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/database/-/database-0.2.33.tgz#61e35fbd238c20020b0ed5396066d468d59d63af"
+  integrity sha512-vqEsf/7o6VkOoM+gLNZ/lohjK+vCCBRJZ+t06GLYl99ytbs0F7+CHHx0YC5ek3iF3Pdk3rUEdipTeeTRBoCGhg==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
 
-"@newbility/http-client-core@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/http-client-core/-/http-client-core-0.2.32.tgz#2ed270346799d9153b59167bf29438bdb22933f3"
-  integrity sha512-WxYB8235lhUU3S2fBKP6pktglnXSaAwt/y7O7ZCGJj71A/Ot/IdobAgSXiR/O5lqocJqu5P5O1f1Hw5HNpGmIw==
+"@newbility/http-client-core@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/http-client-core/-/http-client-core-0.2.33.tgz#24875fac7b54a6a11ab3e68191f994f64b6762cb"
+  integrity sha512-LwH/BX0BwzFQ+DrPS5ZIdiZEbqB983/yAvRFWrHyZfKGPIsdBVYmEj+2zYaayZgVKAZR49tMYUFkSqb2gObrgw==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
 
-"@newbility/koa-core@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.32.tgz#3ca9bde766ae917bc49ae27454729d77fe9d17cb"
-  integrity sha512-keNM89QBvI27heNvuFV05QG16MFVsGoBf60qBN2TZatGqXsu4h0a9IjxOgIiC8iI7FDkLOn+1esRN2dl4rW2Nw==
+"@newbility/koa-core@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.33.tgz#e1651c36a3394884b5006d4f0c990999f6662b57"
+  integrity sha512-XfI42jOrKqQGGM0xYViXOC7VE6rGnChn5a5oVTjTznX+NIq6G1lnwowpNsWVhC65XfS+KxRWBwoinyQrYV/UiQ==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
     handlebars "^4.7.7"
     koa "^2.13.4"
     koa-body "^5.0.0"
@@ -50,67 +50,67 @@
     koa-static "^5.0.0"
     koa2-cors "^2.0.6"
 
-"@newbility/minio@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/minio/-/minio-0.2.32.tgz#7d18c94fd4ca2f96b19f4b732071a4c36a58e685"
-  integrity sha512-PB6EWtvWDqoMYBn4K0gTK3psehwHFKmqGDmC5mBSo20+rAOm4nkQKkG/8eyOjVVpFFtbIxRzWWyn4l/hoLdkpg==
+"@newbility/minio@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/minio/-/minio-0.2.33.tgz#348da61223a2a72050a5d95998e8d5657640a598"
+  integrity sha512-GgSkhKAtJeQLKOO4UPC3YlVwjUuuF8Cm/wcf9Sf1V+JrP3u7nj3m7H/te0g3sPhXNBLc2mPWvzFS6C3kgcT7Lg==
   dependencies:
-    "@newbility/oss-core" "^0.2.32"
+    "@newbility/oss-core" "^0.2.33"
     minio "^7.0.30"
 
-"@newbility/mysql@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/mysql/-/mysql-0.2.32.tgz#1185d65050b294fb5532411ea03b85fdf66154ed"
-  integrity sha512-2r/NsWOGMewH2U9CrodNC7pEGsVslFEluGkAWd0uc9TrRw4nDAGdZH1yLIsXbzZ7DrOMQr+WpW/tMH2YHH69Cw==
+"@newbility/mysql@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/mysql/-/mysql-0.2.33.tgz#dbb97c512f0b9e7486da98b7967aa1207f16c646"
+  integrity sha512-Dro6u4wvYUARZ0ogJPVqqyB18LBU47Y/Ape9W7wqwRGlduDgrJkWcrqGYST93aJFmuBm5o2mbp6nWdYNmG1avA==
   dependencies:
-    "@newbility/database" "^0.2.32"
+    "@newbility/database" "^0.2.33"
     mysql "^2.18.1"
 
-"@newbility/nacos@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/nacos/-/nacos-0.2.32.tgz#6b3854cab05ef9746ab980eeef27a330ec482b8c"
-  integrity sha512-T4fuQubf9CM6x5/hp0GJBB06PGUmEeC5iqicQj4WYjkY+6JvQ7vDp1gOcaMUjdbV0YVCuebMxjBxlWpyoTU4Tw==
+"@newbility/nacos@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/nacos/-/nacos-0.2.33.tgz#69c88be28c9ebda73c4577fd69658840baa8f9b7"
+  integrity sha512-Q+JLxeZz/jiQkSPRiSnOFrPGCqDS8iskoZH+pghM229Xhho/N6Tj3bwZ7KYKJGN6I8p/rfad2csKLAB83DHeBQ==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
     nacos "^2.4.2"
 
-"@newbility/oss-core@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/oss-core/-/oss-core-0.2.32.tgz#82e88586396d64e2c8a4464589ad71ce6293262c"
-  integrity sha512-RqzEEfkbAOggHmsAeVeeP3MTMD/c7h5rMY+aIVqFkQZuW3F0/1myhVtiFyV3KAJGWpiKDmNyR2im8w07jpgwrA==
+"@newbility/oss-core@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/oss-core/-/oss-core-0.2.33.tgz#c40f169fba5200626d07af2ef4afb56f6d1b3855"
+  integrity sha512-NCQWIrLDxPx4XgFRVxKYdDU8MwWZycC5LyEuqp534LLnf1zjvot474YMe3TWlSWn0ew2YtZHzTRg/mNZAzu96g==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
 
-"@newbility/oss-local@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/oss-local/-/oss-local-0.2.32.tgz#4145c66ab55ca050e62a71e8a401c85cea541b77"
-  integrity sha512-suExUJ8K2loxtLjGhxuv7J6xzTJNJJHTZiivU4YWbfkfOSzqoyyQYcxzTvPc0n8GvizZ/39BoY/CniQ4B38GaQ==
+"@newbility/oss-local@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/oss-local/-/oss-local-0.2.33.tgz#f52d7744e30c7e2a211eec71da48dc76f6f94b20"
+  integrity sha512-UZScwjoeLH7D1Pq2KmiG0+8StrtAMdK12sKl2rFVGIwzMbVaR49+MqO9oOY/hnM/8uG+jtYfGcHNegL5DefbVQ==
   dependencies:
-    "@newbility/oss-core" "^0.2.32"
+    "@newbility/oss-core" "^0.2.33"
     moment "^2.29.4"
 
-"@newbility/postgres@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/postgres/-/postgres-0.2.32.tgz#16b8b0928e03978463e8f4bd79b845806192269e"
-  integrity sha512-fM5BmHiLYA9mcrEULula6VxVVwWWN2tNsvwvrAFqZG7rGfD7eg4FG9nqwM+93hz/McinDc04H0BdWIZBXA40dA==
+"@newbility/postgres@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/postgres/-/postgres-0.2.33.tgz#a222aef8d5fe51883acd9c011fefbbdf339cf76b"
+  integrity sha512-5dxlsQStvWGdyHvnajatKcC08qPuWkW5ZpZghz8PQQK41yzmxThPHvg6hTXF3CH++mOowM46aYalpPCPPS1ykg==
   dependencies:
-    "@newbility/database" "^0.2.32"
+    "@newbility/database" "^0.2.33"
     pg "^8.10.0"
 
-"@newbility/queue-core@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/queue-core/-/queue-core-0.2.32.tgz#b58f16ecb219f4a293c40a49cd286163b5f7915c"
-  integrity sha512-qI5BNgF4FyFNXanQTpSiE3oCu9lB/J4LoBHOWdHjZrNXwxIT3hckJ9+QQQoyENOuZI+3AoeaeHRTCHun0UJ5Hg==
+"@newbility/queue-core@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/queue-core/-/queue-core-0.2.33.tgz#05467f654205a85e33cea4498797307ab442c401"
+  integrity sha512-lBKJV07sHHbjIcFCJPwd0hC2suAluDd3Rq7v7+k7Taftg56idqGSDB4O8AknxHAv9W5zVkbTUtRXUL9KVqotBQ==
   dependencies:
-    "@newbility/core" "^0.2.32"
+    "@newbility/core" "^0.2.33"
     async-lock "^1.3.2"
 
-"@newbility/queue-kafka@^0.2.32":
-  version "0.2.32"
-  resolved "https://registry.npmjs.org/@newbility/queue-kafka/-/queue-kafka-0.2.32.tgz#7bc6c4640a04433f36a2f3baa48d4e9b12dd5990"
-  integrity sha512-5XqC0r9B8x3G9VHBs7DhZw2eh0aOCFvQNpov6U/rP9ievSmP5DmE2TN+Ok6DfpvcVtZc6QGb63+KdTqFr9DF6w==
+"@newbility/queue-kafka@^0.2.33":
+  version "0.2.33"
+  resolved "https://registry.npmjs.org/@newbility/queue-kafka/-/queue-kafka-0.2.33.tgz#3e1113dbb6ad7ac25bda120ed2ff5e974fe7894f"
+  integrity sha512-jMabUZ6qsGubtnBq7IXG/qtfR7RmBiVHYxLPthILEWFKbW/xXwuKComJ0g39vvNmZW9BABNlnKdqE40Rt0QA+A==
   dependencies:
-    "@newbility/queue-core" "^0.2.32"
+    "@newbility/queue-core" "^0.2.33"
     kafkajs "^2.2.0"
 
 "@tootallnate/once@1":

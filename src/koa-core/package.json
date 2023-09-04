@@ -1,6 +1,6 @@
 {
   "name": "@newbility/koa-core",
-  "version": "0.2.32",
+  "version": "0.2.33",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.32",
+    "@newbility/core": "^0.2.33",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
     "koa-router": "^12.0.0",
