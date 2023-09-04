@@ -179,9 +179,7 @@ var newbility = newbility || {};
     modalUxContent.onkeydown = function (e) {
       if (e.keyCode === 13) {
         //try to login when user presses enter on authorize modal
-        newbility.swagger.login().then(() => {
-          newbility.swagger.login();
-        });
+        newbility.swagger.login();
       }
     };
 
