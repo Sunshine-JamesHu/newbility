@@ -1,12 +1,13 @@
 {
-  "name": "@newbility/axios",
+  "name": "@newbility/socket",
   "version": "0.2.35",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
   "repository": "Sunshine-JamesHu/newbility",
   "keywords": [
-    "newbility"
+    "newbility",
+    "socket.io"
   ],
   "files": [
     "build"
@@ -16,15 +17,12 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/http-client-core": "^0.2.35",
-    "axios": "^0.27.2",
-    "qs": "^6.11.0"
+    "@newbility/core": "^0.2.35",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "typescript": "^4.7.4",
-    "@types/axios": "^0.14.0",
-    "@types/qs": "^6.9.7"
+    "typescript": "^4.7.4"
   }
 }

@@ -1,5 +1,5 @@
 import Koa from 'koa';
-
+import { Server, createServer } from 'http';
 import {
   Container,
   GetInjectToken,
@@ -96,23 +96,15 @@ export class Program implements IProgram {
     const port = this.GetPortSetting();
     const logger = this.GetLogger();
 
-    app.listen(port, () => {
+    this.RegisterProcessEvent(logger);
+
+    const httpServer = createServer(app.callback());
+
+    this.RegisterCompToHttpServer(httpServer);
+
+    httpServer.listen(port, () => {
       logger.LogInfo(`Server running on port ${port}`);
       this.OnServerStarted();
-    });
-
-    process.on('uncaughtException', (err: any) => {
-      logger.LogFatal('An uncapped exception occurred', err);
-    });
-
-    process.on('unhandledRejection', (err: any, promise: Promise<any>) => {
-      logger.LogFatal('An uncapped exception occurred from promise', err);
-    });
-
-    process.on('SIGINT', () => {
-      this.OnApplicationShutdown().then(() => {
-        process.exit(0);
-      });
     });
   }
 
@@ -124,9 +116,7 @@ export class Program implements IProgram {
     InitLogger(); // 初始化日志
   }
 
-  //#region 私有拓展
-
-  private async InitSysModule(): Promise<void> {
+  protected async InitSysModule(): Promise<void> {
     this.RegisterAppIns(); // 将APP塞入容器
 
     //#region 初始化配置文件
@@ -148,25 +138,44 @@ export class Program implements IProgram {
     InitGlobalError(this.GetApp()); // 全局异常捕获
   }
 
-  private GetLogger() {
+  protected GetLogger() {
     return Container.resolve<ILogger>(LOGGER_INJECT_TOKEN);
   }
 
-  private GetSettingManager() {
+  protected GetSettingManager() {
     return Container.resolve<ISettingManager>(SETTING_INJECT_TOKEN);
   }
 
-  private GetPortSetting(): number {
+  protected GetPortSetting(): number {
     const setting = this.GetSettingManager();
     const port = setting.GetConfig<number>('port');
     if (port && port > 0) return port;
     return 30000;
   }
 
-  private RegisterAppIns() {
+  protected RegisterAppIns() {
     const app = this.GetApp();
     Container.register(GetInjectToken('Sys:App'), { useValue: app });
   }
 
-  //#endregion
+  protected RegisterProcessEvent(logger?: ILogger) {
+    if (!logger) logger = this.GetLogger();
+    process.on('uncaughtException', (err: any) => {
+      logger?.LogFatal('An uncapped exception occurred', err);
+    });
+
+    process.on('unhandledRejection', (err: any, promise: Promise<any>) => {
+      logger?.LogFatal('An uncapped exception occurred from promise', err);
+    });
+
+    process.on('SIGINT', () => {
+      this.OnApplicationShutdown().then(() => {
+        process.exit(0);
+      });
+    });
+  }
+
+  protected RegisterCompToHttpServer(httpServer: Server) {
+    // 在这里添加 HttpServer的其他组件,比如 Socket
+  }
 }

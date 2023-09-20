@@ -1,6 +1,6 @@
 {
   "name": "@newbility/test",
-  "version": "0.2.33",
+  "version": "0.2.34",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -15,18 +15,18 @@
     "start": "nodemon --inspect --watch \"./src/**/*.ts\" --watch \"./modules/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
   },
   "dependencies": {
-    "@newbility/axios": "^0.2.33",
-    "@newbility/core": "^0.2.33",
-    "@newbility/http-client-core": "^0.2.33",
-    "@newbility/koa-core": "^0.2.33",
-    "@newbility/minio": "^0.2.33",
-    "@newbility/mysql": "^0.2.33",
-    "@newbility/nacos": "^0.2.33",
-    "@newbility/oss-core": "^0.2.33",
-    "@newbility/oss-local": "^0.2.33",
-    "@newbility/postgres": "^0.2.33",
-    "@newbility/queue-core": "^0.2.33",
-    "@newbility/queue-kafka": "^0.2.33",
+    "@newbility/axios": "^0.2.34",
+    "@newbility/core": "^0.2.34",
+    "@newbility/http-client-core": "^0.2.34",
+    "@newbility/koa-core": "^0.2.34",
+    "@newbility/minio": "^0.2.34",
+    "@newbility/mysql": "^0.2.34",
+    "@newbility/nacos": "^0.2.34",
+    "@newbility/oss-core": "^0.2.34",
+    "@newbility/oss-local": "^0.2.34",
+    "@newbility/postgres": "^0.2.34",
+    "@newbility/queue-core": "^0.2.34",
+    "@newbility/queue-kafka": "^0.2.34",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/koa": "^2.13.6",
     "@types/koa-compress": "^4.0.3",
@@ -42,7 +42,8 @@
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
     "mysql": "^2.18.1",
-    "qs": "^6.11.0"
+    "qs": "^6.11.0",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

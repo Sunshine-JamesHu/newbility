@@ -34,6 +34,7 @@ import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN } from '../modules/swagge
 import { SwaggerModule } from '../modules/swagger/SwaggerModule';
 import { KoaJwtModule } from '../modules/koa-jwt/KoaJwtModule';
 import { AUTH_INJECT_TOKEN, IAuth } from '../modules/koa-core/auth/Auth';
+import { SocketModule } from '../modules/socket/SocketModule';
 
 @Injectable()
 @ModulePath(__dirname)
@@ -49,7 +50,8 @@ import { AUTH_INJECT_TOKEN, IAuth } from '../modules/koa-core/auth/Auth';
   CronBackgroundWorkerModule,
   PostgresModule,
   MysqlModule,
-  KoaJwtModule
+  KoaJwtModule,
+  SocketModule
 )
 export class Startup extends AppModule {
   public OnPreApplicationInitialization(): void {
