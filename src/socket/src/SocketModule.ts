@@ -18,7 +18,7 @@ export class SocketModule extends AppModule {
       const socketServer = GetSocketServer();
       const map: any = {};
       hubs.forEach((hub: any) => {
-        console.log(hub.constructor.name);
+        // console.log(hub.constructor.name);
 
         let ns = 'default';
         if (hub.Namespace) ns = hub.Namespace;
