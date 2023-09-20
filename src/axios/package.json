@@ -1,6 +1,6 @@
 {
   "name": "@newbility/axios",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/http-client-core": "^0.2.35",
+    "@newbility/http-client-core": "^0.2.36",
     "axios": "^0.27.2",
     "qs": "^6.11.0"
   },

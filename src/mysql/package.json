@@ -1,6 +1,6 @@
 {
   "name": "@newbility/mysql",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/database": "^0.2.35",
+    "@newbility/database": "^0.2.36",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
