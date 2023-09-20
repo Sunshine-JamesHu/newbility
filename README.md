@@ -497,7 +497,7 @@ export default class OssController extends Controller {
     const mimeType = lookup(path) || 'application/octet-stream';
     this.Context.set('Content-Type', mimeType);
     this.Context.set('Content-Disposition', `filename=${path.substring(path.indexOf('/') + 1)}`);
-    const res = await this.\_ossService.GetAsync(path);
+    const res = await this._ossService.GetAsync(path);
     return res;
   }
 
@@ -513,7 +513,7 @@ export default class OssController extends Controller {
 
   @HttpDelete()
   async DeleteFile(@RequestQuery('path') path: string): Promise<void> {
-    await this.\_ossService.RemoveAsync(path);
+    await this._ossService.RemoveAsync(path);
   }
 }
 
