@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.37":
-  version "0.2.37"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.37.tgz#bf79500783ef651fd5be311b5d6612599781bf43"
-  integrity sha512-9CevnnZB1WvSUU2EJTgLgxJUafCF+rC6TW6wyU1sGNMRjSsst0fGHBTpajECHsXciLYEpEBGO4mpd0olAoYm/g==
+"@newbility/core@^0.2.38":
+  version "0.2.38"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.38.tgz#5e9416a1dd8c006aca01bcc8a1ccf6d181878f52"
+  integrity sha512-62A31sjm6DcP89k7H+KhANEcDUYu+JgDNMZk+QIIpV3ewyN408a1pT93UURwntTKnBG31tlwicE/Y0KgBw30NQ==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -13,12 +13,12 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/database@^0.2.37":
-  version "0.2.37"
-  resolved "https://registry.npmjs.org/@newbility/database/-/database-0.2.37.tgz#11c57b9d2556da00251c67745f4ea1a75a9562b3"
-  integrity sha512-xtWkefllz27vPsabUdcSzdR/dPjdLue06NJTN90q7FyRdMCaoSCIk4gOnsfat96iVau1xfbutznUnAnnCC+m5A==
+"@newbility/database@^0.2.38":
+  version "0.2.38"
+  resolved "https://registry.npmjs.org/@newbility/database/-/database-0.2.38.tgz#09043808f02b4b33fa07a25fb451a07bbe30dfd8"
+  integrity sha512-M+j2LOXP2vS4xg4EyNzhGfsoY5AMoEKFbO3OBaLuYcQ9tdf1Xq6RyE7hT6nSf79GtyQL55QPuZtaJkp9ulP1KA==
   dependencies:
-    "@newbility/core" "^0.2.37"
+    "@newbility/core" "^0.2.38"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

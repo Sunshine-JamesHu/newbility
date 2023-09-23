@@ -1,4 +1,4 @@
-import { SOCKET_HUB_INJECT_TOKEN, ISocketHub, SocketHub, Receive, GetReceiveTopic } from './src/SocketHub';
+import { SOCKET_HUB_INJECT_TOKEN, ISocketHub, SocketHub, Receive, GetReceiveTopic, AuthSocketHub } from './src/SocketHub';
 import { SocketModule } from './src/SocketModule';
 import { CreateSocketServer, GetSocketServer, AttachToServer } from './src/SocketServer';
 export {
@@ -6,6 +6,7 @@ export {
   SOCKET_HUB_INJECT_TOKEN,
   ISocketHub,
   SocketHub,
+  AuthSocketHub,
   Receive,
   GetReceiveTopic,
   CreateSocketServer,
