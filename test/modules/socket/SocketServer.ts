@@ -4,14 +4,15 @@ import { Server } from 'http';
 
 const SOCKET_SERVER_INJECT_TOKEN: string = GetInjectToken('Sys:SocketServer');
 
-export function CreateSocketServer() {
+export function CreateSocketServer(options?: Partial<ServerOptions>) {
   if (!Container.isRegistered(SOCKET_SERVER_INJECT_TOKEN)) {
     const settingManager = Container.resolve<ISettingManager>(SETTING_INJECT_TOKEN);
     const enabled = settingManager.GetConfig<boolean>('cors:enable');
-    const options: Partial<ServerOptions> = {
-      path: '/socket',
-    };
-    if (enabled) options.cors = { origin: '*' }; // 跨域
+
+    if (!options) {
+      options = { path: '/socket' };
+      if (enabled) options.cors = { origin: '*' }; // 跨域
+    }
     const server = new SocketServer(options);
     Container.register(SOCKET_SERVER_INJECT_TOKEN, { useValue: server }); // 注册到容器中
   }

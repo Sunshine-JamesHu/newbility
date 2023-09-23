@@ -1,15 +1,16 @@
 import { Socket } from 'socket.io';
 import { Injectable, Singleton } from '@newbility/core';
-import { Receive, SocketHub } from '../../modules/socket/SocketHub';
+import { AuthSocketHub, Receive, SocketHub } from '../../modules/socket/SocketHub';
 
 @Injectable()
 export class TestSocketHub extends SocketHub {
   constructor() {
-    super('/test');
+    super();
   }
 
   @Receive()
   public Message(socket: Socket, data: any) {
+    console.log(this.Namespace);
     console.log('[Message]收到消息', data);
   }
 
@@ -20,6 +21,23 @@ export class TestSocketHub extends SocketHub {
 
   @Receive('aaaa')
   private AAA(socket: Socket, data: any) {
+    console.log('[AAA]收到消息', data);
+  }
+}
+
+@Injectable()
+export class AuthTestSocketHub extends AuthSocketHub {
+  constructor() {
+    super('/auth');
+  }
+
+  protected GetAuthSecret(): string {
+    return '1234567891';
+  }
+
+  @Receive('auth')
+  private AAA(socket: Socket, data: any) {
+    console.log('[AAA]当前用户为', socket.data.user);
     console.log('[AAA]收到消息', data);
   }
 }

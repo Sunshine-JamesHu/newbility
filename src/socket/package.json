@@ -1,6 +1,6 @@
 {
   "name": "@newbility/socket",
-  "version": "0.2.36",
+  "version": "0.2.37",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -17,10 +17,12 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.36",
+    "@newbility/core": "^0.2.37",
+    "jsonwebtoken": "^9.0.2",
     "socket.io": "^4.7.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.3",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "typescript": "^4.7.4"

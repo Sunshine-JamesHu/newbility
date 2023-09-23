@@ -1,66 +1,47 @@
 import { Injectable, AppModule, ModulePath, DependsOn, CoreModule, Container } from '@newbility/core';
 import { CreateSocketServer, GetSocketServer } from './SocketServer';
 import { GetReceiveTopic, ISocketHub, SOCKET_HUB_INJECT_TOKEN } from './SocketHub';
-import { Socket } from 'socket.io';
-import { EventEmitter } from 'stream';
+import { Namespace, Server as SocketServer } from 'socket.io';
 
 @ModulePath(__dirname)
 @Injectable()
 @DependsOn(CoreModule)
 export class SocketModule extends AppModule {
   OnApplicationInitialization(): void {
-    CreateSocketServer();
+    this.InitSocketConn();
   }
 
-  OnPostApplicationInitialization(): void {
+  protected InitSocketConn() {
     if (Container.isRegistered(SOCKET_HUB_INJECT_TOKEN)) {
+      CreateSocketServer();
       const hubs = Container.resolveAll<ISocketHub>(SOCKET_HUB_INJECT_TOKEN);
       const socketServer = GetSocketServer();
-      const map: any = {};
-      hubs.forEach((hub: any) => {
-        // console.log(hub.constructor.name);
 
-        let ns = 'default';
-        if (hub.Namespace) ns = hub.Namespace;
+      for (let index = 0; index < hubs.length; index++) {
+        const hub = hubs[index];
 
-        if (!map[ns]) map[ns] = {};
-        const nsMap = map[ns];
+        let serverOrNsp: SocketServer | Namespace = socketServer;
+        if (hub.Namespace) serverOrNsp = socketServer.of(hub.Namespace);
 
-        // 获取所有公有函数
+        hub.Init(serverOrNsp);
+
         const props = Object.getOwnPropertyNames(hub.constructor.prototype);
-        for (let index = 0; index < props.length; index++) {
-          const prop = props[index];
-          if (prop === 'constructor' || typeof hub[prop] !== 'function') continue;
-          const topic = GetReceiveTopic(hub[prop]);
-          if (!topic) continue;
+        serverOrNsp.on('connection', (socket) => {
+          hub.OnConnection(socket);
+          for (let index = 0; index < props.length; index++) {
+            const actionKey = props[index];
+            const action = (hub as any)[actionKey];
+            if (actionKey === 'constructor' || typeof action !== 'function') continue;
 
-          nsMap[topic] = hub[prop];
-        }
-      });
+            const topic = GetReceiveTopic(action);
+            if (!topic) continue;
 
-      for (const ns in map) {
-        if (Object.prototype.hasOwnProperty.call(map, ns)) {
-          let server: EventEmitter = socketServer;
-          if (ns !== 'default') {
-            server = socketServer.of(ns);
+            socket.on(topic, (data) => {
+              return (hub as any)[actionKey](socket, data); // 必要写法,否则会丢失this指向
+            });
           }
-          server.on('connection', (socket) => {
-            this.OnConnectioned(socket);
-            for (const topic in map[ns]) {
-              if (Object.prototype.hasOwnProperty.call(map[ns], topic)) {
-                socket.on(topic, (data: any) => {
-                  const func = map[ns][topic];
-                  func(socket, data);
-                });
-              }
-            }
-          });
-        }
+        });
       }
     }
-  }
-
-  protected OnConnectioned(socket: Socket) {
-    // 重写这个函数,用来添加连接之后的其他操作
   }
 }
