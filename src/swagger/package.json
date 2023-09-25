@@ -1,6 +1,6 @@
 {
   "name": "@newbility/swagger",
-  "version": "0.2.38",
+  "version": "0.2.40",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,8 +16,8 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.38",
-    "@newbility/koa-core": "^0.2.38",
+    "@newbility/core": "^0.2.40",
+    "@newbility/koa-core": "^0.2.40",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

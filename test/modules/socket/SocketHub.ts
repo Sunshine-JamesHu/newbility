@@ -45,7 +45,7 @@ export abstract class SocketHub implements ISocketHub {
 
 @Abstract()
 export abstract class AuthSocketHub extends SocketHub implements ISocketHub {
-  protected Auth(socket: Socket): Promise<void> | void {
+  protected async Auth(socket: Socket): Promise<void> {
     let token: string | undefined = socket.handshake.auth.token;
     if (!token) token = socket.handshake.headers['authorization'];
     if (!token) {
@@ -64,28 +64,17 @@ export abstract class AuthSocketHub extends SocketHub implements ISocketHub {
       }
     });
 
-    task.then((data) => {
-      socket.data.user = data;
-    });
-
-    return task;
+    const user = await task;
+    socket.data.user = user;
   }
 
   protected abstract GetAuthSecret(): string;
 
   Init(serverOrNsp: Server | Namespace): void {
-    serverOrNsp.use((socket, next) => {
+    serverOrNsp.use(async (socket, next) => {
       try {
-        const task = this.Auth(socket);
-        if (task instanceof Promise) {
-          task
-            .then(() => {
-              next();
-            })
-            .catch((err) => {
-              next(err as any);
-            });
-        }
+        await this.Auth(socket);
+        next();
       } catch (error) {
         next(error as any);
       }
