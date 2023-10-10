@@ -14,7 +14,7 @@ interface ActionParams {
   type: any;
 }
 
-export function RequestQuery(paramName?: string, type?: string[]) {
+export function RequestQuery(paramName?: string, type?: string) {
   return (target: any, key: string, index: number) => {
     const paramTypes = GetMetadata('design:paramtypes', target, key);
     const params = GetActionParamsMetadata(target[key]);

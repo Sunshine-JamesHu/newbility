@@ -188,7 +188,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
         const actionParams = GetActionParamsMetadata(action);
         if (actionParams) {
           actionParams.forEach((actionParam) => {
-            const actionParamType = actionParam.type.name.toLowerCase();
+            const actionParamType = actionParam.type.toLowerCase();
             if (actionParam.in === 'body') {
               parameters.push({
                 name: 'data',

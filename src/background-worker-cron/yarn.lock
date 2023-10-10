@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"@newbility/background-worker-core@^0.2.40":
-  version "0.2.40"
-  resolved "https://registry.npmjs.org/@newbility/background-worker-core/-/background-worker-core-0.2.40.tgz#926ac16497deac0b27b8861e50252a1ea006b72a"
-  integrity sha512-0PbMoBJxa6SKrZLptqyoCIFsS1GlrrRDrf7cAliFjozZa0Ug6BNP1rlV6c6oKu7hNzG4V5OiEWORtR3bfKvfcw==
+"@newbility/background-worker-core@^0.2.41":
+  version "0.2.41"
+  resolved "https://registry.npmjs.org/@newbility/background-worker-core/-/background-worker-core-0.2.41.tgz#d84d09027461071178451faccaf9e17861976f28"
+  integrity sha512-OPPz+FoHmirG3xQTqqKQQCXntKwdWXrnOBNtZD5yy0Jfe4+WsTI4EG7eCbqjNCWzq1RvnFnMRBFMDjo5wHYC7w==
   dependencies:
-    "@newbility/core" "^0.2.40"
+    "@newbility/core" "^0.2.41"
 
-"@newbility/core@^0.2.40":
-  version "0.2.40"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.40.tgz#4283ac91387f28ae995175b29eb951047f48e68a"
-  integrity sha512-L2DjBUV3oogCK7zUFSmiHVFh5mOuRhnqtnSA+6ljb4K0Q1z3Fc8xSHN2PVI8ASAccutxYFWXcUjlyDNpyVNRqA==
+"@newbility/core@^0.2.41":
+  version "0.2.41"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.41.tgz#69994194f4985107ce0261dbebe7ae74d4a37f61"
+  integrity sha512-slT3JBkrJELlsiEMxr4ifRIye3laXcoBD+Uh4q7X+DA7nWdpXH3pMpFFZDIWTIxLTgwQNaPe3TiaJ09dHznr4w==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"

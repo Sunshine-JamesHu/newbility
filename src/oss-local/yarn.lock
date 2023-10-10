@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.40":
-  version "0.2.40"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.40.tgz#4283ac91387f28ae995175b29eb951047f48e68a"
-  integrity sha512-L2DjBUV3oogCK7zUFSmiHVFh5mOuRhnqtnSA+6ljb4K0Q1z3Fc8xSHN2PVI8ASAccutxYFWXcUjlyDNpyVNRqA==
+"@newbility/core@^0.2.41":
+  version "0.2.41"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.41.tgz#69994194f4985107ce0261dbebe7ae74d4a37f61"
+  integrity sha512-slT3JBkrJELlsiEMxr4ifRIye3laXcoBD+Uh4q7X+DA7nWdpXH3pMpFFZDIWTIxLTgwQNaPe3TiaJ09dHznr4w==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -13,12 +13,12 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/oss-core@^0.2.40":
-  version "0.2.40"
-  resolved "https://registry.npmjs.org/@newbility/oss-core/-/oss-core-0.2.40.tgz#e1161eaa7695f4c279b83355ffb404cacac498aa"
-  integrity sha512-qgg80Qcrub6LA6EtxJpb4v+OK6DO+MpXRMGKXQa8sNT7onsu3USqrTYh1ptIHFlvcYLF/DubfxKznQTmianzMg==
+"@newbility/oss-core@^0.2.41":
+  version "0.2.41"
+  resolved "https://registry.npmjs.org/@newbility/oss-core/-/oss-core-0.2.41.tgz#0eb8236635d7a04ca34264baa547fabbbd1d73ea"
+  integrity sha512-fSEZDNphdaosiNnE03r6xP11bI4a3f0DpO/KcRM8crAiCvPZVMB6v93qn4m+G4su4lxC33+M5vfxBBi6HBbw3g==
   dependencies:
-    "@newbility/core" "^0.2.40"
+    "@newbility/core" "^0.2.41"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
