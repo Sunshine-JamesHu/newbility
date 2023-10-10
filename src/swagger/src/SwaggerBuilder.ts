@@ -33,7 +33,7 @@ interface SwaggerParameter {
   name: string;
   in: 'query' | 'body';
   required?: boolean;
-  type: 'array' | 'string' | 'number' | 'object';
+  type: 'array' | 'string' | 'number' | 'object' | string;
   collectionFormat?: 'multi' | 'ssv' | string;
 }
 
@@ -188,7 +188,6 @@ export class SwaggerBuilder implements ISwaggerBuilder {
         const actionParams = GetActionParamsMetadata(action);
         if (actionParams) {
           actionParams.forEach((actionParam) => {
-            const actionParamType = actionParam.type.toLowerCase();
             if (actionParam.in === 'body') {
               parameters.push({
                 name: 'data',
@@ -201,6 +200,14 @@ export class SwaggerBuilder implements ISwaggerBuilder {
               if (actionParam.key) {
                 key = actionParam.key;
               }
+
+              let actionParamType: string = 'object';
+              if (typeof actionParam.type === 'string') {
+                actionParamType = actionParam.type.toLowerCase();
+              } else {
+                actionParamType = actionParam.type.name.toLowerCase();
+              }
+
               parameters.push({
                 in: 'query',
                 name: key,

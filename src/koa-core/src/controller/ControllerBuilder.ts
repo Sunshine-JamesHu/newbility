@@ -164,7 +164,14 @@ export class ControllerBuilder implements IControllerBuilder {
                 data = queryData[element.key];
 
                 // 单独处理Array
-                if (element.type.name.toLowerCase() === 'array' && !Array.isArray(data)) {
+                let pType: string = 'object';
+                if (typeof element.type === 'string') {
+                  pType = element.type;
+                } else {
+                  pType = element.type.name.toLowerCase();
+                }
+
+                if (pType === 'array' && !Array.isArray(data)) {
                   data = [data];
                 }
               }
