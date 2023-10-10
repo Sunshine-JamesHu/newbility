@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.42":
-  version "0.2.42"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.42.tgz#01dc829bd08cea5711a96a615ecbfff4d0674f9b"
-  integrity sha512-1OF9vpU90xJPYMVv1zDw5P77eisBhXrz3XLd3TXPuLYlgzSI4dlPnxE4CPRVexh437rWIzt5RmbrqAUDaD1XSQ==
+"@newbility/core@^0.2.43":
+  version "0.2.43"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.43.tgz#e85391a80926d1c18785f6003e31c4f42c798d0c"
+  integrity sha512-zSnIeYHYojC5LISFzywVhOFDUwgdhcPlw2ptbU1iJZJsy5XKYwcBi7ZeGzZuKtf9Zy1jYUhVTb8dQ7ud2ftvbg==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -13,12 +13,12 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/koa-core@^0.2.42":
-  version "0.2.42"
-  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.42.tgz#008b10a9b4f7507346732742c3c31ff1f5abafef"
-  integrity sha512-Z/+yveZV4bZuWkjK2Jid15C6EqbM+rgNW4Vg/8tdG4xhfruP9Osi9whk55lYy2j0jqVQeGpi8WXPL7R90zIEeA==
+"@newbility/koa-core@^0.2.43":
+  version "0.2.43"
+  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.43.tgz#3d6efbee772a40d0942803e19f5176872483ce3a"
+  integrity sha512-giv6zZozoR0CVQABr2dcvLh/aj2teP9//XkjQfI/HLlpIbExaleq0a/F/awgMvXc8mHRBhPfU2Wso+ZDfSGPWg==
   dependencies:
-    "@newbility/core" "^0.2.42"
+    "@newbility/core" "^0.2.43"
     handlebars "^4.7.7"
     koa "^2.13.4"
     koa-body "^5.0.0"
