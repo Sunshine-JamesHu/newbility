@@ -200,14 +200,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
               if (actionParam.key) {
                 key = actionParam.key;
               }
-
-              let actionParamType: string = 'object';
-              if (typeof actionParam.type === 'string') {
-                actionParamType = actionParam.type.toLowerCase();
-              } else {
-                actionParamType = actionParam.type.name.toLowerCase();
-              }
-
+              const actionParamType = actionParam.type.name.toLowerCase();
               parameters.push({
                 in: 'query',
                 name: key,

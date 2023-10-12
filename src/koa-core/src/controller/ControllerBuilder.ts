@@ -87,20 +87,19 @@ export class ControllerBuilder implements IControllerBuilder {
         }
       });
 
-      // 无须鉴权的接口
-      this._app.use(notAuthRouter.routes());
-      this._app.use(notAuthRouter.allowedMethods());
+      const router = new Router();
+      router.use(notAuthRouter.routes(), notAuthRouter.allowedMethods());
 
-      // 鉴权中间件
-
+      const authMiddlewares: any[] = [authRouter.routes(), authRouter.allowedMethods()];
       if (this._authentication) {
-        this._app.use((ctx, next) => this._authentication?.UnAuthorized(ctx, next)); // 未授权自定义返回
-        this._app.use((ctx, next) => this._authentication?.Authentication(ctx, next));
+        authMiddlewares.unshift((ctx: any, next: any) => this._authentication?.Authentication(ctx, next));
+        authMiddlewares.unshift((ctx: any, next: any) => this._authentication?.UnAuthorized(ctx, next));
       }
+      router.use(...authMiddlewares);
 
       // 需要鉴权的接口
-      this._app.use(authRouter.routes());
-      this._app.use(authRouter.allowedMethods());
+      this._app.use(router.routes());
+      this._app.use(router.allowedMethods());
     }
   }
 
@@ -164,14 +163,7 @@ export class ControllerBuilder implements IControllerBuilder {
                 data = queryData[element.key];
 
                 // 单独处理Array
-                let pType: string = 'object';
-                if (typeof element.type === 'string') {
-                  pType = element.type;
-                } else {
-                  pType = element.type.name.toLowerCase();
-                }
-
-                if (pType === 'array' && !Array.isArray(data)) {
+                if (element.type.name.toLowerCase() === 'array' && !Array.isArray(data)) {
                   data = [data];
                 }
               }
@@ -223,7 +215,7 @@ export class ControllerBuilder implements IControllerBuilder {
       }
 
       if (!isGranted) {
-        throw new UserFriendlyError('Authentication Error', { detail: '权限不足' });
+        throw new UserFriendlyError('Permission denied', { detail: '权限不足' });
       } else {
         return await func(context, next);
       }

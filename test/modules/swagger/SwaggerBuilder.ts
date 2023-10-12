@@ -181,7 +181,6 @@ export class SwaggerBuilder implements ISwaggerBuilder {
         const actionParams = GetActionParamsMetadata(action);
         if (actionParams) {
           actionParams.forEach((actionParam) => {
-            const actionParamType = actionParam.type.name.toLowerCase();
             if (actionParam.in === 'body') {
               parameters.push({
                 name: 'data',
@@ -190,6 +189,7 @@ export class SwaggerBuilder implements ISwaggerBuilder {
                 collectionFormat: 'multi',
               });
             } else if (actionParam.in === 'query') {
+              const actionParamType = actionParam.type.name.toLowerCase();
               let key = 'query';
               if (actionParam.key) {
                 key = actionParam.key;

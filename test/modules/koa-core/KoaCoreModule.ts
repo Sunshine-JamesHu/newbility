@@ -1,7 +1,9 @@
-import Koa from 'koa';
+import Koa, { Context, Next } from 'koa';
 import koaBody from 'koa-body';
 import koaCompress from 'koa-compress';
 import koaStatic from 'koa-static';
+import koaMount from 'koa-mount';
+import koaCompose from 'koa-compose';
 import { AddCors, CorsOptions } from './cors/Cors';
 import { run } from './context/HttpContextStorage';
 
@@ -15,9 +17,11 @@ import {
   ModulePath,
   DependsOn,
   CoreModule,
+  Container,
 } from '@newbility/core';
 
 import { IControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './controller/ControllerBuilder';
+import { AUTHENTICATION_INJECT_TOKEN, IAuthentication } from './auth/Authentication';
 
 @Injectable()
 @DependsOn(CoreModule)
@@ -86,7 +90,38 @@ export class KoaCoreModule extends AppModule {
    */
   protected InitStaticResource() {
     const app = this._app;
-    app.use(koaStatic(`${__dirname}/../public`, { maxage: 1000 * 60 * 60 }));
+    let staticCfg = this._setting.GetConfig<{ [key: string]: { dir: string; auth?: boolean; options?: any } }>('static');
+
+    if (!staticCfg) staticCfg = {};
+    if (!staticCfg.default) staticCfg.default = { dir: `${__dirname}/../public`, options: { maxage: 1000 * 60 * 60 } };
+
+    let authentication: IAuthentication | undefined;
+    if (Container.isRegistered(AUTHENTICATION_INJECT_TOKEN)) {
+      authentication = Container.resolve<IAuthentication>(AUTHENTICATION_INJECT_TOKEN);
+    }
+    for (const key in staticCfg) {
+      if (Object.prototype.hasOwnProperty.call(staticCfg, key)) {
+        const sCfg = staticCfg[key];
+        if (key === 'default') {
+          app.use(koaStatic(sCfg.dir, sCfg.options));
+        } else {
+          if (sCfg.auth && authentication) {
+            const authStaticMiddleware = koaCompose([
+              (ctx, next) => {
+                return authentication?.UnAuthorized(ctx, next);
+              },
+              (ctx, next) => {
+                return authentication?.Authentication(ctx, next);
+              },
+              koaStatic(sCfg.dir, sCfg.options),
+            ]);
+            app.use(koaMount(`/${key}`, authStaticMiddleware));
+          } else {
+            app.use(koaMount(`/${key}`, koaStatic(sCfg.dir, sCfg.options)));
+          }
+        }
+      }
+    }
   }
 
   /**

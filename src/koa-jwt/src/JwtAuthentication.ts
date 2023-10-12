@@ -5,15 +5,10 @@ import { Authentication, AUTHENTICATION_INJECT_TOKEN, GetAuthOptions } from '@ne
 
 @Singleton(AUTHENTICATION_INJECT_TOKEN)
 export class JwtAuthentication extends Authentication {
-  private readonly _unlessPaths = [/^\/swagger/, /^\/favicon/]; // swagger被放在受保护的资源后方
-  constructor() {
-    super();
-  }
-
   async Authentication(context: Context, next: Next): Promise<any> {
     const options = GetAuthOptions();
     if (options && options.secret) {
-      const func = jwt(options).unless({ path: [...this._unlessPaths] });
+      const func = jwt(options);
       return func(context, next);
     } else {
       return await next();

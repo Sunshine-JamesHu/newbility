@@ -14,11 +14,11 @@ interface ActionParams {
   type: any;
 }
 
-export function RequestQuery(paramName?: string, type?: string) {
+export function RequestQuery(paramName?: string) {
   return (target: any, key: string, index: number) => {
     const paramTypes = GetMetadata('design:paramtypes', target, key);
     const params = GetActionParamsMetadata(target[key]);
-    params.unshift({ in: 'query', key: paramName, index: index, type: type ?? paramTypes[index] });
+    params.unshift({ in: 'query', key: paramName, index: index, type: paramTypes[index] });
     DefineMetadata(METADATA_ACTION_PARAMS, params, target[key]);
   };
 }

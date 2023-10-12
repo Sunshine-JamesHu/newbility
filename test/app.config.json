@@ -21,6 +21,15 @@
   "swagger": {
     "enabled": true
   },
+  "static": {
+    "default": {
+      "dir": "public"
+    },
+    "log": {
+      "auth": true,
+      "dir": "logs"
+    }
+  },
   "apiPrefix": "api",
   "cors": {
     "enable": true

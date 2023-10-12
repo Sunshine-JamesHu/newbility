@@ -1,6 +1,6 @@
 # Newbility
 
-一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态，使用纯后端语意开发。支持依赖反准，模块化等后端标准功能。
+一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态，使用纯后端语意开发。支持依赖反转，模块化等后端标准功能。
 
 # 功能
 
@@ -216,6 +216,29 @@ export default class HomeController extends Controller {
   }
 }
 
+```
+
+### 静态目录映射
+
+在配置文件中加入如下配置即可进行静态目录映射
+
+默认的 public 配置如果不进行覆盖,是使用框架的`public`目录
+
+其中的 key 是路由前缀, 如果使用`default`作为 Key, 默认就不会带上任何前缀, `auth` 标记资源是否需要进行鉴权, `dir` 代表需要映射的目录, `options`为 koa-static 的`options`配置
+
+```
+  "static": {
+    "default": {
+      "dir": "public"
+    },
+    "log": {
+      "auth": true,
+      "dir": "logs",
+      "options":{
+        "maxage": 3600000
+      }
+    }
+  }
 ```
 
 ## Newbility 组件

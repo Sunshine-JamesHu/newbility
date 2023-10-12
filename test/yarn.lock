@@ -243,6 +243,13 @@
   dependencies:
     "@types/koa" "*"
 
+"@types/koa-compose@^3.2.6":
+  version "3.2.6"
+  resolved "https://registry.npmjs.org/@types/koa-compose/-/koa-compose-3.2.6.tgz#17a077786d0ac5eee04c37a7d6c207b3252f6de9"
+  integrity sha512-PHiciWxH3NRyAaxUdEDE1NIZNfvhgtPlsdkjRPazHC6weqt90Jr0uLhIQs+SDwC8HQ/jnA7UQP6xOqGFB7ugWw==
+  dependencies:
+    "@types/koa" "*"
+
 "@types/koa-compress@^4.0.3":
   version "4.0.3"
   resolved "https://registry.npmjs.org/@types/koa-compress/-/koa-compress-4.0.3.tgz#62060c6a1feda55c41e294f3abc4e089c8e322b7"
@@ -257,6 +264,13 @@
   integrity sha512-XSVz27M0HaJ0EcB5/PoaUlXpM2JClnF3kH/VmuDk2tr3frYqPkoBmxwZz+vHXykNO22Q6JA3Tcmgo4e8Z8Qhsg==
   dependencies:
     koa-jwt "*"
+
+"@types/koa-mount@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/@types/koa-mount/-/koa-mount-4.0.3.tgz#4d2f88de2a2b713f59c846e0583678447b40eb5b"
+  integrity sha512-WXhyitlW5B6zW31cKZO+RBl38afLmO9847M8PaKmcnO5tqGJy/+XcH5N/69Nsp+vKvFXhDOY9GM5uF34HrWgrw==
+  dependencies:
+    "@types/koa" "*"
 
 "@types/koa-router@^7.4.4":
   version "7.4.4"
@@ -895,7 +909,7 @@ date-format@^4.0.13:
   resolved "https://registry.npmmirror.com/date-format/-/date-format-4.0.13.tgz#87c3aab3a4f6f37582c5f5f63692d2956fa67890"
   integrity sha512-bnYCwf8Emc3pTD8pXnre+wfnjGtfi5ncMDKy7+cWZXbmRAsdWkOQHrfC1yz/KiwP5thDp2kCHWYWKBX4HP1hoQ==
 
-debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
+debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4, debug@~4.3.1, debug@~4.3.2:
   version "4.3.4"
   resolved "https://registry.npmmirror.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -1837,7 +1851,7 @@ koa-body@^5.0.0:
 
 koa-compose@^4.1.0:
   version "4.1.0"
-  resolved "https://registry.npmmirror.com/koa-compose/-/koa-compose-4.1.0.tgz#507306b9371901db41121c812e923d0d67d3e877"
+  resolved "https://registry.npmjs.org/koa-compose/-/koa-compose-4.1.0.tgz#507306b9371901db41121c812e923d0d67d3e877"
   integrity sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==
 
 koa-compress@^5.1.0:
@@ -1872,6 +1886,14 @@ koa-jwt@*, koa-jwt@^4.0.4:
     jsonwebtoken "^9.0.0"
     koa-unless "^1.0.7"
     p-any "^2.1.0"
+
+koa-mount@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/koa-mount/-/koa-mount-4.0.0.tgz#e0265e58198e1a14ef889514c607254ff386329c"
+  integrity sha512-rm71jaA/P+6HeCpoRhmCv8KVBIi0tfGuO/dMKicbQnQW/YJntJ6MnnspkodoA4QstMVEZArsCphmd0bJEtoMjQ==
+  dependencies:
+    debug "^4.0.1"
+    koa-compose "^4.1.0"
 
 koa-router@^12.0.0:
   version "12.0.0"
