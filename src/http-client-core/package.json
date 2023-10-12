@@ -15,12 +15,12 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/core": "^0.2.43"
+    "@newbility/core": "^0.2.44"
   },
   "devDependencies": {
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "typescript": "^4.7.4"
   },
-  "version": "0.2.43"
+  "version": "0.2.44"
 }

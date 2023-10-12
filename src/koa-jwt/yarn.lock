@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@newbility/core@^0.2.43":
-  version "0.2.43"
-  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.43.tgz#e85391a80926d1c18785f6003e31c4f42c798d0c"
-  integrity sha512-zSnIeYHYojC5LISFzywVhOFDUwgdhcPlw2ptbU1iJZJsy5XKYwcBi7ZeGzZuKtf9Zy1jYUhVTb8dQ7ud2ftvbg==
+"@newbility/core@^0.2.44":
+  version "0.2.44"
+  resolved "https://registry.npmjs.org/@newbility/core/-/core-0.2.44.tgz#3a0189d46aad205ef5c4d3515d905125f28edab3"
+  integrity sha512-WaH4fDz6sFJkWXb/1e0Lu200R3qbc2aBu9+jmtE9GPktJ7TPPSWuNVn+yWHNsv1D4uOshLdXycMrE2U9X80M2Q==
   dependencies:
     json5 "^2.2.1"
     log4js "^6.6.1"
@@ -13,16 +13,18 @@
     tsyringe "^4.7.0"
     uuid "^8.3.2"
 
-"@newbility/koa-core@^0.2.43":
-  version "0.2.43"
-  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.43.tgz#3d6efbee772a40d0942803e19f5176872483ce3a"
-  integrity sha512-giv6zZozoR0CVQABr2dcvLh/aj2teP9//XkjQfI/HLlpIbExaleq0a/F/awgMvXc8mHRBhPfU2Wso+ZDfSGPWg==
+"@newbility/koa-core@^0.2.44":
+  version "0.2.44"
+  resolved "https://registry.npmjs.org/@newbility/koa-core/-/koa-core-0.2.44.tgz#46e135598511347ed46de60674732169b848349d"
+  integrity sha512-xWTPI0/0Eu4AC5Z87Lom1dLjdkSUjGtTVt1ATXlf6RsdDMdfpX3kWf6msl2Q5jh4PbiX+e05eczONqTORUk/Gg==
   dependencies:
-    "@newbility/core" "^0.2.43"
+    "@newbility/core" "^0.2.44"
     handlebars "^4.7.7"
     koa "^2.13.4"
     koa-body "^5.0.0"
+    koa-compose "^4.1.0"
     koa-compress "^5.1.0"
+    koa-mount "^4.0.0"
     koa-router "^12.0.0"
     koa-static "^5.0.0"
     koa2-cors "^2.0.6"
@@ -712,7 +714,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
+debug@^4.0.1, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.npmmirror.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -1846,6 +1848,14 @@ koa-jwt@*, koa-jwt@^4.0.4:
     jsonwebtoken "^9.0.0"
     koa-unless "^1.0.7"
     p-any "^2.1.0"
+
+koa-mount@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/koa-mount/-/koa-mount-4.0.0.tgz#e0265e58198e1a14ef889514c607254ff386329c"
+  integrity sha512-rm71jaA/P+6HeCpoRhmCv8KVBIi0tfGuO/dMKicbQnQW/YJntJ6MnnspkodoA4QstMVEZArsCphmd0bJEtoMjQ==
+  dependencies:
+    debug "^4.0.1"
+    koa-compose "^4.1.0"
 
 koa-router@^12.0.0:
   version "12.0.0"

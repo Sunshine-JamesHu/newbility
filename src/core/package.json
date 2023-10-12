@@ -1,6 +1,6 @@
 {
   "name": "@newbility/core",
-  "version": "0.2.43",
+  "version": "0.2.44",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
