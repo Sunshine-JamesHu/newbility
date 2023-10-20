@@ -9,7 +9,6 @@ import {
   IsController,
 } from './src/controller/Controller';
 import { IControllerBuilder, ActionDescriptor, ControllerBuilder, CTL_BUILDER_INJECT_TOKEN } from './src/controller/ControllerBuilder';
-import { AddCors } from './src/cors/Cors';
 import { InitGlobalError } from './src/error/Error';
 import { KoaCoreModule } from './src/KoaCoreModule';
 import { Program } from './src/Program';
@@ -37,6 +36,7 @@ import { HttpContext, IHttpContext } from './src/context/HttpContext';
 import { CreateStorage } from './src/context/AsyncHooksStorage';
 import { run, useContext } from './src/context/HttpContextStorage';
 import { CurrentUser } from './src/context/CurrentUser';
+import { IMiddlewareInitializer, MIDDLEWARE_INIT_INJECT_TOKEN } from './src/middleware/MiddlewareInitializer';
 
 export {
   CONTROLLER_METADATA,
@@ -50,7 +50,6 @@ export {
   IControllerBuilder,
   ActionDescriptor,
   ControllerBuilder,
-  AddCors,
   InitGlobalError,
   HttpMethod,
   ActionInfo,
@@ -92,6 +91,8 @@ export {
   CreateStorage,
   run,
   useContext,
+  IMiddlewareInitializer,
+  MIDDLEWARE_INIT_INJECT_TOKEN,
   CurrentUser,
   KoaCoreModule,
   Program,

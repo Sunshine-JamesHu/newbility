@@ -5,15 +5,15 @@ const child_process = require('child_process');
 
 // 发布出错在这里加上已经发布的,再次发布即可
 const pubedModules = new Set();
-// pubedModules.add('core'); 
-// pubedModules.add('http-client-core'); 
+// pubedModules.add('core');
+// pubedModules.add('http-client-core');
 // pubedModules.add('axios');
 // pubedModules.add('background-worker-core');
 // pubedModules.add('background-worker-cron');
 // pubedModules.add('database');
 // pubedModules.add('koa-core');
-
-
+// pubedModules.add('koa-jwt');
+// pubedModules.add('oss-core');
 
 function getPkgJson(pkgPath) {
   const json = fs.readFileSync(pkgPath);
@@ -105,7 +105,7 @@ function buildTestModule(cb) {
   console.log(`Build Module [test]`);
   changeModuleVersion('./test/package.json', version);
   child_process.exec(`cd test && yarn --registry https://registry.npmjs.org`, (error) => {
-    if (!error) cb();
+    cb(error);
   });
 }
 

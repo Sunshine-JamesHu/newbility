@@ -1,6 +1,6 @@
 {
   "name": "newbility-template",
-  "version": "0.2.40",
+  "version": "0.2.46",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",

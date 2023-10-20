@@ -1,6 +1,6 @@
 {
   "name": "@newbility/background-worker-cron",
-  "version": "0.2.44",
+  "version": "0.2.46",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/background-worker-core": "^0.2.44",
+    "@newbility/background-worker-core": "^0.2.46",
     "cron": "^2.2.0"
   },
   "devDependencies": {

@@ -36,4 +36,17 @@ export default class RequestController extends Controller {
       detail: text,
     });
   }
+
+  @HttpPost()
+  ErrorTest2(@RequestBody() data: any) {
+    throw new NewbilityError('主动抛出错误', {
+      detail: '主动抛出一个错误',
+    });
+  }
+
+  @HttpPost()
+  ErrorTest3(@RequestBody() data: any) {
+    const obj: any = {};
+    obj.a.b = 18;
+  }
 }
