@@ -5,7 +5,7 @@ const child_process = require('child_process');
 
 // 发布出错在这里加上已经发布的,再次发布即可
 const pubedModules = new Set();
-// pubedModules.add('core');
+pubedModules.add('core');
 // pubedModules.add('http-client-core');
 // pubedModules.add('axios');
 // pubedModules.add('background-worker-core');

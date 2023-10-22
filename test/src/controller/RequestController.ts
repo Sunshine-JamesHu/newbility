@@ -1,5 +1,6 @@
 import { HttpGet, HttpPost, Controller, RequestBody, RequestQuery, Router } from '@newbility/koa-core';
-import { Injectable, Transient, NewbilityError, UserFriendlyError, UserFriendlyErrorData } from '@newbility/core';
+import { Injectable, Transient, NewbilityError, UserFriendlyError, UserFriendlyErrorData, Container } from '@newbility/core';
+import { ITestService } from '../service/TestService';
 
 @Injectable()
 @Transient()
@@ -48,5 +49,11 @@ export default class RequestController extends Controller {
   ErrorTest3(@RequestBody() data: any) {
     const obj: any = {};
     obj.a.b = 18;
+  }
+
+  @HttpGet()
+  GetTest2() {
+    const svc = Container.resolve<ITestService>('TestService');
+    return svc.Test();
   }
 }

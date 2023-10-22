@@ -6,6 +6,7 @@ import {
   Injectable,
   IsAbstract,
   IsMultipleRegister,
+  NeedReplaceService,
   ServiceLifetime,
   Singleton,
 } from './Dependency';
@@ -38,8 +39,11 @@ export class ServiceLoader implements IServiceLoader {
       const isAbstract = IsAbstract(service);
       if (isAbstract) return; // 抽象类不进行注册
 
-      const isRegistered = Container.isRegistered(injectInfo.token);
+      let isRegistered = Container.isRegistered(injectInfo.token);
       const isMultipleRegister = IsMultipleRegister(service);
+
+      const needReplace = NeedReplaceService(service); // 需要替换服务
+      if (needReplace) isRegistered = false;
 
       if (isRegistered && !isMultipleRegister) return;
 

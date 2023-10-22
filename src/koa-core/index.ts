@@ -36,7 +36,7 @@ import { HttpContext, IHttpContext } from './src/context/HttpContext';
 import { CreateStorage } from './src/context/AsyncHooksStorage';
 import { run, useContext } from './src/context/HttpContextStorage';
 import { CurrentUser } from './src/context/CurrentUser';
-import { IMiddlewareInitializer, MIDDLEWARE_INIT_INJECT_TOKEN } from './src/middleware/MiddlewareInitializer';
+import { IMiddlewareInitializer, MIDDLEWARE_INIT_INJECT_TOKEN, MiddlewareInitializer } from './src/middleware/MiddlewareInitializer';
 
 export {
   CONTROLLER_METADATA,
@@ -92,6 +92,7 @@ export {
   run,
   useContext,
   IMiddlewareInitializer,
+  MiddlewareInitializer,
   MIDDLEWARE_INIT_INJECT_TOKEN,
   CurrentUser,
   KoaCoreModule,
