@@ -23,6 +23,6 @@
     "@types/mysql": "^2.15.21",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "typescript": "^4.7.4"
+    "typescript": "^5.2.2"
   }
 }
