@@ -1,9 +1,10 @@
 {
-  "name": "newbility-template",
+  "name": "@newbility/template",
   "version": "0.2.46",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
+  "private": true,
   "repository": "Sunshine-JamesHu/newbility",
   "scripts": {
     "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\"",

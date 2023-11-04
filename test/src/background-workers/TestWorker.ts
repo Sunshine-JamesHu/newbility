@@ -1,6 +1,6 @@
 import { Singleton } from '@newbility/core';
-import { BackgroundWorker } from '../../modules/background-worker-core/BackgroundWorker';
-import { Scheduler } from '../../modules/background-worker-core/BackgroundWorkerScheduler';
+import { BackgroundWorker } from '@newbility/background-worker-core';
+import { Scheduler } from '@newbility/background-worker-core';
 
 @Scheduler({ cron: '0/5 * * * * *' })
 @Singleton()

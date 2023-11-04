@@ -1,11 +1,7 @@
-import { CURRENT_USER_INJECT_TOKEN, ICurrentUser, Inject, Injectable, Transient, UserFriendlyError } from '@newbility/core';
-import { HttpGet, RequestQuery, Controller, Router, HttpPost, RequestBody } from '@newbility/koa-core';
-
-import { Authorize } from '../../modules/koa-core/auth/Authorize';
-import { AllowAnonymous } from '../../modules/koa-core/auth/AllowAnonymous';
-import { Interceptor } from '../interceptor/Interceptor';
+import { CURRENT_USER_INJECT_TOKEN, ICurrentUser, Inject, Injectable, Transient, UserFriendlyError, Interceptor } from '@newbility/core';
+import { HttpGet, RequestQuery, Controller, Router, HttpPost, RequestBody, Authorize, AllowAnonymous } from '@newbility/koa-core';
+import { IJwtToken, JWT_TOKEN_INJECT_TOKEN } from '@newbility/koa-jwt';
 import { TestInterceptor, TestInterceptor2 } from '../interceptor/TestInterceptor';
-import { IJwtToken, JWT_TOKEN_INJECT_TOKEN } from '../../modules/koa-jwt/JwtToken';
 
 @Injectable()
 @Transient()

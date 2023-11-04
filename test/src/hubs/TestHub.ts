@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 import { Injectable, Singleton } from '@newbility/core';
-import { AuthSocketHub, Receive, SocketHub } from '../../modules/socket/SocketHub';
+import { AuthSocketHub, Receive, SocketHub } from '@newbility/socket';
 
 @Injectable()
 export class TestSocketHub extends SocketHub {
