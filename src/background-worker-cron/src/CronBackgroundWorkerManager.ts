@@ -39,7 +39,6 @@ export class CronBackgroundWorkerManager extends BackgroundWorkerManager {
       async () => {
         try {
           const workerIns = Container.resolve<IBackgroundWorker>(worker as any);
-          console.log('worker->', worker.name);
           await workerIns.DoWorkAsync();
         } catch (error: any) {
           this.Logger.LogError(error?.message, error);
