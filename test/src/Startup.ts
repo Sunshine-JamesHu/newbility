@@ -33,6 +33,7 @@ import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN, SwaggerModule } from '@n
 import { KoaJwtModule } from '@newbility/koa-jwt';
 import { AUTH_INJECT_TOKEN, IAuth } from '@newbility/koa-core';
 import { SocketModule } from '@newbility/socket';
+import { BackgroundJobModule } from '@newbility/background-job-core';
 
 @Injectable()
 @ModulePath(__dirname)
@@ -46,6 +47,7 @@ import { SocketModule } from '@newbility/socket';
   QueueKafkaModule,
   AxiosModule,
   CronBackgroundWorkerModule,
+  BackgroundJobModule,
   PostgresModule,
   MysqlModule,
   KoaJwtModule,

@@ -13,7 +13,8 @@
     "build"
   ],
   "scripts": {
-    "start": "nodemon --inspect --watch \"./src/**/*.ts\" --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
+    "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\"",
+    "build": "tsc"
   },
   "dependencies": {
     "@newbility/axios": "^0.2.47",
@@ -30,7 +31,8 @@
     "@newbility/queue-kafka": "^0.2.47",
     "@newbility/socket": "^0.2.47",
     "@newbility/background-worker-core": "^0.2.47",
-    "@newbility/background-worker-cron": "^0.2.47"
+    "@newbility/background-worker-cron": "^0.2.47",
+    "@newbility/background-job-core": "^0.2.47"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",

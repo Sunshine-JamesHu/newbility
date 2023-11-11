@@ -1,0 +1,26 @@
+{
+  "name": "@newbility/background-job-core",
+  "version": "0.2.47",
+  "main": "build/index.js",
+  "author": "jameshu",
+  "license": "MIT",
+  "repository": "Sunshine-JamesHu/newbility",
+  "keywords": [
+    "newbility"
+  ],
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "gulp",
+    "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "@newbility/core": "^0.2.47"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "typescript": "^5.2.2"
+  }
+}
