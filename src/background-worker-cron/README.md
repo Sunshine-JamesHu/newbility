@@ -1,3 +1,3 @@
-### @newbility/background-job-cron
+### @newbility/background-worker-cron
 
-Background-Job Cron实现
+Background-Worker 使用 Cron 实现

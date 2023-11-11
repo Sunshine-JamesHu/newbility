@@ -5,6 +5,7 @@
   "author": "jameshu",
   "license": "MIT",
   "repository": "Sunshine-JamesHu/newbility",
+  "private": true,
   "keywords": [
     "newbility"
   ],
@@ -12,7 +13,8 @@
     "build"
   ],
   "scripts": {
-    "start": "nodemon --inspect --watch \"./src/**/*.ts\" --watch \"./modules/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\""
+    "start": "nodemon --inspect --watch \"./src/**/*.ts\" -e ts --exec \"node\" -r ts-node/register \"./src/App.ts\"",
+    "build": "tsc"
   },
   "dependencies": {
     "@newbility/axios": "^0.2.47",
@@ -27,6 +29,12 @@
     "@newbility/postgres": "^0.2.47",
     "@newbility/queue-core": "^0.2.47",
     "@newbility/queue-kafka": "^0.2.47",
+    "@newbility/socket": "^0.2.47",
+    "@newbility/background-worker-core": "^0.2.47",
+    "@newbility/background-worker-cron": "^0.2.47",
+    "@newbility/background-job-core": "^0.2.47"
+  },
+  "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",
     "@types/koa": "^2.13.6",
     "@types/koa-compress": "^4.0.3",
@@ -35,19 +43,6 @@
     "@types/koa-static": "^4.0.2",
     "@types/koa2-cors": "^2.0.2",
     "@types/lodash": "^4.14.195",
-    "axios": "^0.27.2",
-    "cron": "^2.2.0",
-    "jsonwebtoken": "^9.0.2",
-    "koa-compose": "^4.1.0",
-    "koa-jwt": "^4.0.4",
-    "koa-mount": "^4.0.0",
-    "lodash": "^4.17.21",
-    "mime-types": "^2.1.35",
-    "mysql": "^2.18.1",
-    "qs": "^6.11.0",
-    "socket.io": "^4.7.2"
-  },
-  "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/cron": "^2.0.0",
     "@types/koa-compose": "^3.2.6",
@@ -57,6 +52,6 @@
     "@types/pg": "^8.6.6",
     "@types/qs": "^6.9.7",
     "nodemon": "^2.0.19",
-    "typescript": "^4.7.4"
+    "typescript": "^5.2.2"
   }
 }

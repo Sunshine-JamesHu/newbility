@@ -1,5 +1,5 @@
 {
-  "name": "@newbility/oss-local",
+  "name": "@newbility/background-job-core",
   "version": "0.2.47",
   "main": "build/index.js",
   "author": "jameshu",
@@ -16,8 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/oss-core": "^0.2.47",
-    "moment": "^2.29.4"
+    "@newbility/core": "^0.2.47"
   },
   "devDependencies": {
     "del": "^6.0.0",

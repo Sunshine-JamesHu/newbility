@@ -11,8 +11,7 @@ import {
   ISettingManager,
   SETTING_INJECT_TOKEN,
 } from '@newbility/core';
-// import { KoaCoreModule } from '@newbility/koa-core';
-import { KoaCoreModule } from '../modules/koa-core/KoaCoreModule';
+import { KoaCoreModule } from '@newbility/koa-core';
 
 import { OssCoreModule, UseOssProvider } from '@newbility/oss-core';
 import { LocalOssModule, OSS_KEY as LOCAL_OSS_KEY } from '@newbility/oss-local';
@@ -23,18 +22,18 @@ import { QueueCoreModule, IQueueFactory, QUEUE_FACTORY_INJECT_TOKEN } from '@new
 import { QueueKafkaModule } from '@newbility/queue-kafka';
 import { Queue2EventHandler } from './events/QueueEventHandler';
 import { AxiosModule } from '@newbility/axios';
-import { CronBackgroundWorkerModule } from '../modules/background-worker-cron/CronBackgroundWorkerModule';
-import { PostgresModule } from '../modules/postgres/PostgresModule';
-import { MysqlModule } from '../modules/mysql/MysqlModule';
+import { CronBackgroundWorkerModule } from '@newbility/background-worker-cron';
+import { PostgresModule } from '@newbility/postgres';
+import { MysqlModule } from '@newbility/mysql';
 
 // import { PostgresModule } from '@newbility/postgres';
 // import { MysqlModule } from '@newbility/mysql';
 
-import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN } from '../modules/swagger/SwaggerBuilder';
-import { SwaggerModule } from '../modules/swagger/SwaggerModule';
-import { KoaJwtModule } from '../modules/koa-jwt/KoaJwtModule';
-import { AUTH_INJECT_TOKEN, IAuth } from '../modules/koa-core/auth/Auth';
-import { SocketModule } from '../modules/socket/SocketModule';
+import { ISwaggerBuilder, SWAGGER_BUILDER_INJECT_TOKEN, SwaggerModule } from '@newbility/swagger';
+import { KoaJwtModule } from '@newbility/koa-jwt';
+import { AUTH_INJECT_TOKEN, IAuth } from '@newbility/koa-core';
+import { SocketModule } from '@newbility/socket';
+import { BackgroundJobModule } from '@newbility/background-job-core';
 
 @Injectable()
 @ModulePath(__dirname)
@@ -48,6 +47,7 @@ import { SocketModule } from '../modules/socket/SocketModule';
   QueueKafkaModule,
   AxiosModule,
   CronBackgroundWorkerModule,
+  BackgroundJobModule,
   PostgresModule,
   MysqlModule,
   KoaJwtModule,
