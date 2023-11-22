@@ -62,8 +62,8 @@ export function InitSettingManager() {
   if (Container.isRegistered(SETTING_INJECT_TOKEN)) return; // 已经初始化将不再进行初始化
   try {
     let appConfig = '';
-    if (process.env.Config_FILE && fs.existsSync(process.env.Config_FILE)) {
-      appConfig = fs.readFileSync(process.env.Config_FILE, 'utf-8');
+    if (process.env.CONFIG_FILE && fs.existsSync(process.env.CONFIG_FILE)) {
+      appConfig = fs.readFileSync(process.env.CONFIG_FILE, 'utf-8');
     } else {
       appConfig = fs.readFileSync('./app.config.json', 'utf-8');
     }
@@ -72,7 +72,7 @@ export function InitSettingManager() {
   } catch (error) {
     console.warn('App配置为空,采用默认配置');
     SetConfig({
-      port: 30000,
+      port: 28000,
     });
   }
   Container.registerSingleton<ISettingManager>(SETTING_INJECT_TOKEN, SettingManager); // 直接注入到容器中

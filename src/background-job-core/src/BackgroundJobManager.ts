@@ -30,7 +30,7 @@ export class BackgroundJobManager implements IBackgroundJobManager {
         this.Logger.LogError(`[${jobId}]后台任务执行失败`, error);
       }
     });
-
+ 
     return jobId;
   }
 }
