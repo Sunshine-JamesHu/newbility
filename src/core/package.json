@@ -1,6 +1,6 @@
 {
   "name": "@newbility/core",
-  "version": "0.2.48",
+  "version": "0.2.49",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "json5": "^2.2.1",
     "log4js": "^6.6.1",
     "reflect-metadata": "^0.1.13",
-    "tsyringe": "^4.7.0",
+    "tsyringe": "^4.8.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

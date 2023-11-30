@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #a4d7e1;
+        overflow: hidden;
+      }
+      h1 {
+        font-family: sans-serif;
+        font-size: 10vmin;
+        color: #f5f5f5;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        bottom: 34vmin;
+        position: relative;
+      }
+      h1::before,
+      h1::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        margin: 10px;
+        border-radius: 50%;
+        background: #f5f5f5;
+      }
+
+      h5 {
+        font-family: sans-serif;
+        font-size: 2vmin;
+        color: #f5f5f5;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        bottom: 34vmin;
+        position: relative;
+      }
+      h5::before,
+      h5::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        margin: 10px;
+        border-radius: 50%;
+        background: #f5f5f5;
+      }
+
+      /* Shiba blinking animation */
+      @keyframes blinking {
+        0%,
+        50%,
+        80% {
+          background: linear-gradient(#221b1b 100%, transparent 100%);
+        }
+        60%,
+        100% {
+          background: linear-gradient(transparent 23%, #221b1b 23%, transparent 30%);
+        }
+      }
+      /* Shiba design */
+      .shiba-head {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #face {
+        position: absolute;
+        top: 20vmin;
+        width: 65vmin;
+        height: 50vmin;
+        border-radius: 50% 50% 40% 40%;
+        background: #f6edcf;
+      }
+      .ears {
+        width: 25vmin;
+        height: 20vmin;
+        background: #f0c9c9;
+        border-radius: 20%;
+        border: 10px solid #f6edcf;
+      }
+      #ear-left {
+        position: relative;
+        left: -20vmin;
+        top: 20vmin;
+      }
+      #ear-right {
+        position: relative;
+        left: 20vmin;
+        top: 0vmin;
+        transform: rotateZ(-180deg);
+      }
+      #sniff-white-1 {
+        top: -8vmin;
+        width: 45vmin;
+        height: 15vmin;
+        border-radius: 50%;
+        background: #f5f5f5;
+        position: relative;
+      }
+      #sniff-white-2 {
+        top: -28vmin;
+        width: 25vmin;
+        height: 15vmin;
+        border-radius: 50%;
+        background: #f5f5f5;
+        position: relative;
+      }
+      .brows {
+        width: 10vmin;
+        height: 4vmin;
+        border-radius: 50%;
+        background: #fff;
+      }
+      #brow-left {
+        position: relative;
+        top: -3vmin;
+        left: -15vmin;
+        transform: rotateZ(-30deg);
+      }
+      #brow-right {
+        position: relative;
+        top: -7vmin;
+        left: 15vmin;
+        transform: rotateZ(30deg);
+      }
+      .eyes {
+        width: 4vmin;
+        height: 4vmin;
+        border-radius: 50%;
+        background: #221b1b;
+        animation: blinking 4s;
+        animation-iteration-count: infinite;
+      }
+      #eye-left {
+        position: relative;
+        top: -1vmin;
+        left: -15vmin;
+      }
+      #eye-right {
+        position: relative;
+        top: -5vmin;
+        left: 15vmin;
+      }
+      .eye-light {
+        width: 1vmin;
+        height: 0.9vmin;
+        border-radius: 50%;
+        background: #f6edcf;
+      }
+      #eye-light-left1 {
+        position: relative;
+        top: -10vmin;
+        left: -16vmin;
+        transform: rotateZ(-30deg);
+      }
+      #eye-light-right1 {
+        position: relative;
+        top: -9vmin;
+        left: 16vmin;
+        transform: rotateZ(30deg);
+      }
+      #nose {
+        position: relative;
+        top: -38vmin;
+        left: 0vmin;
+        width: 8vmin;
+        height: 4vmin;
+        border-radius: 50%;
+        background: #221b1b;
+      }
+      #mouth-up {
+        position: relative;
+        top: -40vmin;
+        left: 0vmin;
+        width: 0.5vmin;
+        height: 4vmin;
+        border-radius: 30%;
+        background: #221b1b;
+      }
+      .mouth {
+        width: 10vmin;
+        height: 10vmin;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: 0 5px 0 #221b1b;
+      }
+      #mouth-left {
+        position: relative;
+        top: -47vmin;
+        left: -5vmin;
+        transform: rotateY(-180deg);
+      }
+      #mouth-right {
+        position: relative;
+        top: -57vmin;
+        left: 5vmin;
+        box-shadow: 0 5px 0 #221b1b;
+      }
+    </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="favicon.jpg" />
+    <title>Newbility</title>
+  </head>
+
+  <body>
+    <div class="whole-shiba">
+      <div class="shiba-head">
+        <div class="ears" id="ear-left"></div>
+        <div class="ears" id="ear-right"></div>
+        <div id="face"></div>
+        <div class="brows" id="brow-left"></div>
+        <div class="brows" id="brow-right"></div>
+        <div class="eyes" id="eye-left"></div>
+        <div class="eyes" id="eye-right"></div>
+        <div class="eye-light" id="eye-light-right1"></div>
+        <div class="eye-light" id="eye-light-left1"></div>
+        <div id="sniff-white-1"></div>
+        <div id="sniff-white-2"></div>
+        <div id="nose"></div>
+        <div id="mouth-up"></div>
+        <div class="mouth" id="mouth-left"></div>
+        <div class="mouth" id="mouth-right"></div>
+      </div>
+    </div>
+    <div></div>
+    <h1>Newbility</h1>
+    <h5>Bear from <a style="margin-left: 8px" href="https://codepen.io/marija-hajnal/pen/KKVQQOg">marija-hajnal</a></h5>
+  </body>
+</html>

@@ -11,8 +11,8 @@
     "build": "gulp"
   },
   "dependencies": {
-    "@newbility/koa-core": "^0.2.48",
-    "@newbility/swagger": "^0.2.48"
+    "@newbility/koa-core": "^0.2.49",
+    "@newbility/swagger": "^0.2.49"
   },
   "devDependencies": {
     "@types/koa": "^2.13.6",

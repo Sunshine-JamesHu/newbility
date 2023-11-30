@@ -1,31 +1,52 @@
-# Newbility
+<div align="center" style="background:#FDE5C9;margin-bottom:4px">
+  <img src="./assets/newbility_horizontal.svg" />
+</div>
 
-一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态，使用纯后端语意开发。支持依赖反转，模块化等后端标准功能。
+[![nodejs](https://img.shields.io/badge/nodejs-v16.17.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![npm](https://img.shields.io/badge/npm-8.15.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![tsyringe](https://img.shields.io/badge/tsyringe-4.8.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![koa2](https://img.shields.io/badge/koa2-2.13.4-blue)](https://github.com/Sunshine-JamesHu/newbility) [![download](https://img.shields.io/badge/download-2.3M-green)](https://github.com/Sunshine-JamesHu/newbility)
 
-# 功能
+一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态。使用纯后端语意开发，支持依赖反转，模块化等后端标准功能。框架由完全模块化的各组件构成，并提供提供可随意替换重写的插件接口，允许重写任意框架模块，并支持自定义的模块。
 
-- 简单且易于使用的 Controller 和 Router
-- 强大的依赖注入，支持依赖反转，接口注入等
-- 无须配置的 Swagger 文档
-- 简单易用的日志组件
-- QueueManager 管道处理器 (支持`kafka`,`mqtt`)
-- HttpClient 简单易用的 Http 请求器(使用 `axios实现`)
-- Cache (支持 `MemoryCache`, `redis`)
-- BackgroundWorker 后台工作者(使用 `corn` 实现)
-- Oss 存储支持(支持`local`,`minio`)
-- Socket 实时通讯支持(使用`socket.io`实现)
-- Database 数据库支持(支持 `mysql`, `postgres`)
-- 配置中心支持 (支持 `nacos`, `consul`)
-
-# 模板程序
+## 模板程序
 
 请参照 `template` 文件夹中的 `README.md`
 
-## 基础功能
+## newbility 模块
+
+### 安装模块
+
+```
+npm install @newbility/<module>
+```
+
+### 模块列表
+
+| 模块列表                                                                                                                                                             | 模块描述                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| [![core](https://img.shields.io/badge/@newbility-core-green)](https://www.npmjs.com/package/@newbility/core)                                                         | 框架核心模块              |
+| [![koa-core](https://img.shields.io/badge/@newbility-koa--core-green)](https://www.npmjs.com/package/@newbility/koa-core)                                            | Koa 核心模块              |
+| [![koa-jwt](https://img.shields.io/badge/@newbility-koa--jwt-green)](https://www.npmjs.com/package/@newbility/koa-jwt)                                               | Koa-Jwt 鉴权模块          |
+| [![socket](https://img.shields.io/badge/@newbility-socket-green)](https://www.npmjs.com/package/@newbility/socket)                                                   | Socket 连接模块           |
+| [![swagger](https://img.shields.io/badge/@newbility-swagger-green)](https://www.npmjs.com/package/@newbility/swagger)                                                | SwaggerApi 实现模块       |
+| [![nacos](https://img.shields.io/badge/@newbility-nacos-green)](https://www.npmjs.com/package/@newbility/nacos)                                                      | nacos 配置中心            |
+| [![database](https://img.shields.io/badge/@newbility-database-green)](https://www.npmjs.com/package/@newbility/database)                                             | 关系库抽象模块            |
+| [![mysql](https://img.shields.io/badge/@newbility-mysql-green)](https://www.npmjs.com/package/@newbility/mysql)                                                      | Mysql 实现模块            |
+| [![postgres](https://img.shields.io/badge/@newbility-postgres-green)](https://www.npmjs.com/package/@newbility/postgres)                                             | Postgres 实现模块         |
+| [![queue-core](https://img.shields.io/badge/@newbility-queue--core-green)](https://www.npmjs.com/package/@newbility/queue-core)                                      | Queue 抽象模块            |
+| [![queue-kafka](https://img.shields.io/badge/@newbility-queue--kafka-green)](https://www.npmjs.com/package/@newbility/queue--kafka)                                  | Kafka 实现模块            |
+| [![oss-core](https://img.shields.io/badge/@newbility-oss--core-green)](https://www.npmjs.com/package/@newbility/oss-core)                                            | Oss 抽象模块              |
+| [![oss-local](https://img.shields.io/badge/@newbility-oss--local-green)](https://www.npmjs.com/package/@newbility/oss-local)                                         | 本地存实现模块            |
+| [![minio](https://img.shields.io/badge/@newbility-minio-green)](https://www.npmjs.com/package/@newbility/minio)                                                      | Minio 实现模块            |
+| [![background-worker-core](https://img.shields.io/badge/@newbility-background--worker--core-green)](https://www.npmjs.com/package/@newbility/background-worker-core) | 后台工作者抽象模块        |
+| [![background-worker-cron](https://img.shields.io/badge/@newbility-background--worker--cron-green)](https://www.npmjs.com/package/@newbility/background-worker-cron) | Cron 后台工作者实现模块   |
+| [![http-client-core](https://img.shields.io/badge/@newbility-http--client--core-green)](https://www.npmjs.com/package/@newbility/http-client-core)                   | HttpClient 抽象模块       |
+| [![axios](https://img.shields.io/badge/@newbility-axios-green)](https://www.npmjs.com/package/@newbility/axios)                                                      | HttpClient-Axios 实现模块 |
+| [![background-job-core](https://img.shields.io/badge/@newbility-background--job--core-green)](https://www.npmjs.com/package/@newbility/background-job-core)          | 后台任务模块              |
+
+## 核心功能
 
 ### 依赖注入
 
-Newbility 支持依赖注入，为了解耦与模块化，不使用常用的 Class 直接进行注册与获取，而是使用不可变字符串进行依赖注入的 Key 进行注入；（当然，你要是喜欢 Class 直接注入，框架也是允许的）
+Newbility 支持依赖注入，为了解耦与模块化，不使用常用的 Class 直接进行注册与获取，而是使用不可变字符串进行依赖注入的 Key 进行注入。（当然，你要是喜欢 Class 直接注入，框架也是允许的）
 
 高级用法参考 `tsyringe` 的官方文档
 
@@ -597,3 +618,7 @@ export class TestSocketHub extends SocketHub {
 ```
 GetSocketServer() // 这个函数可以获得Server的实例
 ```
+
+## License
+
+[Apache License 2.0](LICENSE)

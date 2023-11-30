@@ -9,5 +9,10 @@
   },
   "cors": {
     "enable": true
+  },
+  "static": {
+    "default": {
+      "dir": "public"
+    }
   }
 }
