@@ -1,24 +1,22 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "Node 17",
-    "compilerOptions": {
-        "lib": ["es2020"],
-        "module": "commonjs",
-        "target": "es2020",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        // "suppressImplicitAnyIndexErrors": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declaration": true
-    },
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts",
-        "build/**/*"
-    ]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 17",
+  "compilerOptions": {
+    "lib": ["es2020"],
+    "module": "commonjs",
+    "target": "es2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    // "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "rootDir": ".",
+    "outDir": "build"
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "build/**/*"]
 }

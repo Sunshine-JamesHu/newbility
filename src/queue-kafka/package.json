@@ -1,6 +1,6 @@
 {
   "name": "@newbility/queue-kafka",
-  "version": "0.2.49",
+  "version": "0.2.50",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "pub": "gulp && npm publish --scope=@newbility --access public --registry https://registry.npmjs.org"
   },
   "dependencies": {
-    "@newbility/queue-core": "^0.2.49",
+    "@newbility/queue-core": "^0.2.50",
     "kafkajs": "^2.2.0"
   },
   "devDependencies": {

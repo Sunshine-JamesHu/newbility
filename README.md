@@ -8,7 +8,7 @@
 
 ## 文档地址
 
-[Newbility文档地址](http://120.55.162.201:28000/)
+[Newbility 文档地址](http://120.55.162.201:28000/)
 
 ## 模板程序
 
@@ -264,6 +264,51 @@ export default class HomeController extends Controller {
       }
     }
   }
+```
+
+### 缓存
+
+缓存分为两种，内存缓存`IMemoryCache`和分布式缓存`IDistributedCache`，其中分布式缓存必须有支持库才能运行，否则就使用内存缓存
+
+其中内存缓存使用 LRU,分布式使用 Redis
+
+使用 redis 缓存的时候需要引用 `@newbility/redis`，并在启动模块中依赖`RedisModule`,才能够正常使用。
+
+```
+@Inject(MEMORY_CACHE_INJECT_TOKEN) private readonly _memCache: IMemoryCache,
+@Inject(DISTRIBUTED_CACHE_INJECT_TOKEN) private readonly _disCache: IDistributedCache
+```
+
+内存缓存配置项
+
+```
+{
+  "cache":{
+    "max": 5000 // 最大缓存条数
+    "maxSize": 500000 // 最大缓存值大小，所谓的内存占用
+    "ttl": 12000000 // 默认缓存时间
+  }
+}
+
+```
+
+redis 缓存配置项
+其中如果是集群的话，`nodes`项设置为数组即可
+
+```
+{
+  "redis": {
+    "nodes": {
+      "host": "192.168.1.82",
+      "port": 6379
+    },
+    "options": {
+      "db": 6,
+      "password": "123456"
+    }
+  }
+}
+
 ```
 
 ## Newbility 组件

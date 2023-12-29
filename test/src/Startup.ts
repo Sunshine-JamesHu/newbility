@@ -34,6 +34,7 @@ import { KoaJwtModule } from '@newbility/koa-jwt';
 import { AUTH_INJECT_TOKEN, IAuth } from '@newbility/koa-core';
 import { SocketModule } from '@newbility/socket';
 import { BackgroundJobModule } from '@newbility/background-job-core';
+import { RedisModule } from '@newbility/redis';
 
 @Injectable()
 @ModulePath(__dirname)
@@ -51,7 +52,8 @@ import { BackgroundJobModule } from '@newbility/background-job-core';
   PostgresModule,
   MysqlModule,
   KoaJwtModule,
-  SocketModule
+  SocketModule,
+  RedisModule
 )
 export class Startup extends AppModule {
   public OnPreApplicationInitialization(): void {

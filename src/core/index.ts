@@ -48,6 +48,11 @@ import { IService, Service } from './src/service/Service';
 import { IInterceptor, InterceptorBase, Interceptor } from './src/interceptor/Interceptor';
 import { PromiseHelper } from './src/util/PromiseHelper';
 import { UserInfo, ICurrentUser, CURRENT_USER_INJECT_TOKEN } from './src/user/CurrentUser';
+import { Cache } from './src/cache/Cache';
+import { IMemoryCache, LRUCache, MEMORY_CACHE_INJECT_TOKEN } from './src/cache/memory/MemoryCache';
+import { IDistributedCache, DefaultDistributedCache, DISTRIBUTED_CACHE_INJECT_TOKEN } from './src/cache/distributed/DistributedCache';
+import { CacheEntryOptions } from './src/cache/options/CacheEntryOptions';
+import { CacheOptions } from './src/cache/options/CacheOptions';
 
 export {
   Container,
@@ -123,4 +128,13 @@ export {
   UserInfo,
   ICurrentUser,
   CURRENT_USER_INJECT_TOKEN,
+  Cache,
+  CacheOptions,
+  CacheEntryOptions,
+  MEMORY_CACHE_INJECT_TOKEN,
+  IMemoryCache,
+  LRUCache,
+  DISTRIBUTED_CACHE_INJECT_TOKEN,
+  IDistributedCache,
+  DefaultDistributedCache,
 };

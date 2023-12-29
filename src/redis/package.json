@@ -1,12 +1,14 @@
 {
-  "name": "@newbility/nacos",
+  "name": "@newbility/redis",
   "version": "0.2.50",
   "main": "build/index.js",
   "author": "jameshu",
   "license": "MIT",
   "repository": "Sunshine-JamesHu/newbility",
   "keywords": [
-    "newbility"
+    "newbility",
+    "cache",
+    "redis"
   ],
   "files": [
     "build"
@@ -17,7 +19,7 @@
   },
   "dependencies": {
     "@newbility/core": "^0.2.50",
-    "nacos": "^2.4.2"
+    "ioredis": "^5.3.2"
   },
   "devDependencies": {
     "del": "^6.0.0",
