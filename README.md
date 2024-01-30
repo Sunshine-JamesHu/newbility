@@ -4,7 +4,7 @@
 
 [![nodejs](https://img.shields.io/badge/nodejs-v16.17.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![npm](https://img.shields.io/badge/npm-8.15.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![tsyringe](https://img.shields.io/badge/tsyringe-4.8.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![koa2](https://img.shields.io/badge/koa2-2.13.4-blue)](https://github.com/Sunshine-JamesHu/newbility) [![download](https://img.shields.io/badge/download-2.3M-green)](https://github.com/Sunshine-JamesHu/newbility)
 
-一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态。使用纯后端语意开发，支持依赖反转，模块化等后端标准功能。框架由完全模块化的各组件构成，并提供提供可随意替换重写的插件接口，允许重写任意框架模块，并支持自定义的模块。
+一个基于 Koa2 的 NodeJS 服务端程序，拥有完整的 Koa 生态。使用纯后端语意开发，支持依赖反转，模块化等后端标准功能。框架由完全模块化的各组件构成，并提供可随意替换重写的插件接口，允许重写任意框架模块，支持各种自定义的模块。
 
 ## 文档地址
 
