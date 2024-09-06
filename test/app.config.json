@@ -28,6 +28,13 @@
     "log": {
       "auth": true,
       "dir": "logs"
+    },
+    "logs": {
+      "auth": false,
+      "dir": "logs",
+      "options":{
+        "maxage":360000
+      }
     }
   },
   "apiPrefix": "api",

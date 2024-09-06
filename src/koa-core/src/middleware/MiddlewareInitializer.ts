@@ -118,7 +118,8 @@ export class MiddlewareInitializer implements IMiddlewareInitializer {
     let staticCfg = this.Setting.GetConfig<{ [key: string]: { dir: string; auth?: boolean; options?: any } }>('static');
 
     if (!staticCfg) staticCfg = {};
-    if (!staticCfg.default) staticCfg.default = { dir: `${__dirname}/../public`, options: { maxage: 1000 * 60 * 60 } };
+    if (!staticCfg.default) staticCfg.default = { dir: `${__dirname}/../public` };
+    if (!staticCfg.default.options) staticCfg.default.options = { maxage: 1000 * 60 * 60 };
 
     let authentication: IAuthentication | undefined;
     if (Container.isRegistered(AUTHENTICATION_INJECT_TOKEN)) {

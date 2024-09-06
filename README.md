@@ -1,5 +1,5 @@
 <div align="center" style="background:#FDE5C9;margin-bottom:4px">
-  <img src="http://120.55.162.201:28000/imgs/horizontal.svg" />
+  <img src="https://nw.ahzm.top/imgs/horizontal.svg" />
 </div>
 
 [![nodejs](https://img.shields.io/badge/nodejs-v16.17.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![npm](https://img.shields.io/badge/npm-8.15.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![tsyringe](https://img.shields.io/badge/tsyringe-4.8.0-blue)](https://github.com/Sunshine-JamesHu/newbility) [![koa2](https://img.shields.io/badge/koa2-2.13.4-blue)](https://github.com/Sunshine-JamesHu/newbility) [![download](https://img.shields.io/badge/download-2.3M-green)](https://github.com/Sunshine-JamesHu/newbility)
@@ -8,7 +8,7 @@
 
 ## 文档地址
 
-[Newbility 文档地址](http://120.55.162.201:28000/)
+[Newbility 文档地址](https://nw.ahzm.top/)
 
 ## 模板程序
 
